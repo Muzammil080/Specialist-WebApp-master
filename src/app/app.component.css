@@ -1,0 +1,144 @@
+#progress {
+    width: 300px;
+    height: 200px;
+    border: 1px solid black;
+    position: absolute;
+    bottom: 0;
+}
+
+.spacer {
+    height: 20px;
+}
+nav.navbar.fixed-top.navbar-light.navbar-vm {
+    background-color: #00aecd;
+    padding: 0 20px;
+    min-height: 75px;
+    color: #fff;
+}
+@media (max-width: 575px) {
+    li.nav-item {
+        display: -webkit-inline-box;
+        padding: 5px;
+    }
+
+    ul.navbar-nav.ml-auto {
+        display: -webkit-inline-box;
+        padding: 10px;
+    }
+    .nav-title-box.clearfix {
+        margin-top: 5px;
+    }
+}
+
+a.nav-link i {
+    font-size: 32px;
+    display: block;
+    text-align: center;
+}
+
+a.nav-link span.item-name {
+    font-size: 11px;
+}
+
+a.nav-link span.item-name,
+a.nav-link i {
+    color: #fff;
+}
+.selectedtab {
+    background-color: #fff !important;
+}
+
+.selectedtab span {
+    color: #00aecd !important;
+}
+
+.selectedtab span.count-bubble {
+    color: #fff !important;
+}
+.selectedtab span.name-thumb {
+    color: #fff !important;
+}
+
+.selectedtab i {
+    color: #00aecd !important;
+}
+
+a.nav-link {
+    width: 66px;
+    text-align: center;
+    height: 75px;
+    position: relative;
+    cursor: pointer;
+}
+
+a.nav-link:hover {
+    background-color: #fff;
+}
+.offlineshow {
+    z-index: 5;
+    width: 360px;
+    height: 60px;
+    position: fixed;
+    bottom: 10px;
+    left: 10px;
+    text-align: center;
+    display: block;
+}
+a.nav-link:hover span.item-name,
+a.nav-link:hover i {
+    color: #00aecd;
+}
+.count-bubble {
+    position: absolute;
+    height: 24px;
+    font-size: 13px;
+    background-color: #ff2c55;
+    color: #fff;
+    line-height: 24px;
+    padding: 0 4px;
+    min-width: 24px;
+    text-align: center;
+    border-radius: 12px;
+    font-weight: 500;
+    right: 2px;
+    top: 5px;
+}
+
+.nav-title-box i {
+    float: left;
+    font-size: 50px;
+    vertical-align: middle;
+}
+
+.nav-title-box {
+    width: 80%;
+    /* cursor: pointer; */
+}
+.name-thumb {
+    cursor: pointer;
+}
+.titleblock {
+    float: right;
+    width: calc(100% - 60px);
+}
+
+.name {
+    font-size: 25px;
+    line-height: 30px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.place {
+    font-size: 15px;
+    line-height: 18px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+span.item-name {
+    display: inline-flex;
+    display: inline-block;
+}

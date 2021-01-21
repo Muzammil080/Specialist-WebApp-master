@@ -1,0 +1,14 @@
+<div *ngIf="uiElementData && form" class="checkboxField" [formGroup]="form">
+
+      <!-- <input type="checkbox"  
+          [formControlName]="uiElementData.bindTo" [id]="uiElementData.name"/>  -->
+
+      <!--Caption, if available-->
+      <!-- <label *ngIf="uiElementData.caption" [for]="uiElementData.name">
+            {{uiElementData.caption}}
+        </label> -->
+
+
+      <mat-checkbox [formControlName]="uiElementData.bindTo">{{uiElementData.caption}}</mat-checkbox>
+
+</div>

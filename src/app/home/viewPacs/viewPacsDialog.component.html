@@ -1,0 +1,65 @@
+<div style="padding: 20px">
+<div *ngIf="!showError">
+    <div class="connecting-icon-box">
+        <i class="material-icons">
+            laptop_mac
+        </i>
+    </div>
+    <div class="connecting-icon-box" style="visibility: visible">
+        <div
+            *ngIf="viewPacsDisabled"
+            id="connecting1"
+            class="material-icons-animation"
+        >
+            <div class="loader">Loading...</div>
+        </div>
+        <i *ngIf="!viewPacsDisabled" class="material-icons connecting-line">
+            maximize
+        </i>
+    </div>
+    <div class="connecting-icon-box">
+        <i class="icon_vm_pacs icon-big-bold"></i>
+    </div>
+
+    <div style="width: 100%;clear: both;">
+        <h6
+            *ngIf="viewPacsDisabled"
+            style="text-align: center; color: lightgray;"
+        >
+            Checking PACS availability
+        </h6>
+        <!-- <h6 style="text-align: center; color: lightgray;">Conntecting to PACS server</h6> -->
+    </div>
+    <br />
+</div>
+
+<div *ngIf="showError">
+    <br />
+    <h6 style="text-align: center;">
+        We were unable to find PACS for this request
+    </h6>
+    <br />
+</div>
+
+<button
+    tabindex="-1"
+    style="width:58%; font-size:1.3em;"
+    type="button"
+    mat-raised-button
+    color="primary"
+    (click)="dialogRef.close(false)"
+>
+    Close
+</button>
+<button
+    tabindex="-1"
+    [disabled]="viewPacsDisabled"
+    style="width:40%; float:right;font-size:1.3em;"
+    type="button"
+    mat-raised-button
+    color="warn"
+    (click)="dialogRef.close(true)"
+>
+    View
+</button>
+</div>

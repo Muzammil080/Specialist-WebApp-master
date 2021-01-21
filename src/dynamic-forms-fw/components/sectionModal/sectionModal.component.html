@@ -1,0 +1,27 @@
+<div style="padding: 20px 20px 0 20px;">
+    <div style="margin: auto; " [hidden]="hiddenLoader">
+        <mat-spinner [diameter]="100" style="margin: auto;"></mat-spinner>
+    </div>
+    <form-section
+        [sectionData]="selectedSection"
+        (onDataReceived)="sectionDataReceived($event)"
+        [hidden]="!hiddenLoader"
+    ></form-section>
+</div>
+<div mat-dialog-actions>
+    <div
+        class="text-right full-width"
+        [hidden]="hiddenSaveLoader"
+        style="padding: 0 20px 20px 20px;"
+    >
+        <mat-spinner [diameter]="40" style="margin: auto;"></mat-spinner>
+    </div>
+    <div class="text-right full-width" [hidden]="!hiddenSaveLoader">
+        <div class="float-right" style="padding: 0 20px 20px 20px;">
+            <button mat-button (click)="onNoClick()">Cancel</button>
+            <button mat-button color="primary" (click)="onYesClick()">
+                Save
+            </button>
+        </div>
+    </div>
+</div>

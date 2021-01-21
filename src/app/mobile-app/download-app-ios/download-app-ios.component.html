@@ -1,0 +1,34 @@
+<div class="flex-container">
+    <div class="auth-card">
+        <div id="Loadingpage">
+            <div class="text-center">
+                <div class="ptl pbm capt-cont">
+                    To continue with your visit on iOS, please download our app from Apple store.
+                </div>
+                <div class="pts">
+                    <div class="auth-card-btn-box">
+                        <a [href]="appstoreUrl">
+                            <img class="w-50" src="./assets/img/downloadiosapp.png">
+                        </a>
+                    </div>
+                    <div class="auth-card-btn-box">
+                        <!-- <a [href]="url" class="btn-vm-auth">I Already Have the App</a> -->
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div>
+
+
+<div class="footer">
+    <div class="copyright">
+        <p style="text-align: center; margin-left: 9%;"> &copy; {{ currentDate | date: "yyyy" }} VeeMed Inc </p>
+        <p>Version {{version}}</p>
+    </div>
+</div>
+
+<a [href]="url" #urlLink class="btn-vm-auth" [hidden]="true">I Already Have the App</a>

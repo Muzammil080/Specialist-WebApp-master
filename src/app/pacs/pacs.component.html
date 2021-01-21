@@ -1,0 +1,52 @@
+<div id="pacsbox" class="clearfix pacs-box">
+    <div class="pacs-left">
+        <!-- <div style="height: 75px"> </div> -->
+        <div class="mainpanel">
+            <div class="left-panel">
+                <p style="float: left;">Study</p>
+                <div style="float: right;">
+                    <button
+                        id="resetPacsState"
+                        class="list-btn-round light resetPacsState"
+                        (click)="resetPacsState()"
+                    >
+                        <i id="camIcon" class="icon_vm_refresh"></i>
+                    </button>
+                </div>
+                <div style="clear: both;"></div>
+                <ul>
+                    <li
+                        *ngFor="let s of patientStudies; let i = index"
+                        [class]="s.disabled ? 'left-panel-disabled' : ''"
+                        (click)="getSeries(s)"
+                    >
+                        {{ s.Description ? s.Description : 'Study ' + (i + 1) }}
+                    </li>
+                </ul>
+            </div>
+            <div *ngIf="showMsgBox" class="msgBoxContainer">
+                <div class="msgBox">
+                    <div class="innerMsgBox">
+                        <span>Please select a study from the left panel</span>
+                    </div>
+                </div>
+            </div>
+            <div class="imgbox">
+                <div
+                    [hidden]="showLoader"
+                    class="pacs_viewer"
+                    id="pacs_viewer"
+                ></div>
+                <div *ngIf="showLoader" style="margin-top: 30vh ">
+                    <div class="text-center">
+                        <div class="ptl pbm">
+                            <span class="vm-loader"></span>
+                            <br />
+                            <h6>PACS viewer is loading please wait...</h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

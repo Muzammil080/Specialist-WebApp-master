@@ -1,0 +1,8 @@
+.publishing {
+    z-index: 2;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 200px !important;
+    height: 150px !important;
+  }

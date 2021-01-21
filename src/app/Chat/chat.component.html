@@ -1,0 +1,12 @@
+<br>
+<div class="tab-container-box">
+
+        <mat-tab-group *ngIf="Chat || DeferredMsgs" (selectedTabChange)="tabChange($event)">
+                <mat-tab *ngIf="Chat"  label="Chats">
+                        <specialist-chat *ngIf="!deferredLoad"></specialist-chat>
+                </mat-tab>
+                <mat-tab *ngIf="DeferredMsgs" label="Deferred Messages">
+                        <defer-chat *ngIf="deferredLoad" ></defer-chat>
+                </mat-tab>
+        </mat-tab-group>
+</div>

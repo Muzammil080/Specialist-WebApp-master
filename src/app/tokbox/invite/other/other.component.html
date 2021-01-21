@@ -1,0 +1,168 @@
+<mat-dialog-content>
+    <div class="container"  [hidden]="isLoading">
+        <form [formGroup]="otherForm">
+            <div class="row">
+                <div class="col">
+                    <h1>Invite Guest</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Name</mat-label>
+                        <input
+                            type="text"
+                            required
+                            formControlName="name"
+                            matInput
+                            placeholder=""
+                            maxlength="32"
+                        />
+                        <mat-error
+                            *ngIf="
+                                otherForm.get('name').invalid &&
+                                (otherForm.get('name').dirty ||
+                                    otherForm.get('name').touched)
+                            "
+                        >
+                            <span *ngIf="otherForm.get('name').errors.required">
+                                Name is required.
+                            </span>
+                            <span
+                                *ngIf="otherForm.get('name').errors.maxlength"
+                            >
+                                Name must be less than 32 characters.
+                            </span>
+                            <span *ngIf="otherForm.get('name').errors.pattern">
+                                Enter a proper value.
+                            </span>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width"  [floatLabel]="'always'">
+                        <mat-label>Phone Number</mat-label>
+
+                        <input
+                            type="text"
+                            required
+                            ng2TelInput
+                                [ng2TelInputOptions]="{
+                                    initialCountry: 'us',
+                                    autoPlaceholder: 'off'
+                                }"
+                                (countryChange)="onCountryChange($event)"
+                                (intlTelInputObject)="telInputPhoneNo($event)"
+                                (ng2TelOutput)="getNumber($event)"
+                            formControlName="phoneNumber"
+                            matInput
+                            placeholder=""
+                            [textMask]="{ mask: mask }"
+                            maxlength="32"
+                        />
+                        <mat-error
+                            *ngIf="
+                                otherForm.get('phoneNumber').invalid &&
+                                (otherForm.get('phoneNumber').dirty ||
+                                    otherForm.get('phoneNumber').touched)
+                            "
+                        >
+                            Enter a valid phone number.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Email</mat-label>
+                        <input
+                            type="text"
+                            formControlName="email"
+                            matInput
+                            placeholder=""
+                            maxlength="32"
+                        />
+                        <mat-error
+                            *ngIf="
+                                otherForm.get('email').invalid &&
+                                (otherForm.get('email').dirty ||
+                                    otherForm.get('email').touched)
+                            "
+                        >
+                            <span
+                                *ngIf="otherForm.get('email').errors.required"
+                            >
+                                Email is required.
+                            </span>
+                            <span
+                                *ngIf="otherForm.get('email').errors.maxlength"
+                            >
+                                Email must be less than 32 characters.
+                            </span>
+                            <span *ngIf="otherForm.get('email').errors.pattern">
+                                Enter a proper value.
+                            </span>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-select
+                            placeholder="Guest"
+                            [(value)]="relationName"
+                            disableOptionCentering
+                            formControlName="relation"
+                        >
+                            <mat-option
+                                *ngFor="let relation of relations"
+                                [value]="relation.relation"
+                            >
+                                {{ relation.relation }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button
+                        mat-raised-button
+                        color="primary"
+                        (click)="inviteOther()"
+                        [disabled]="otherForm.invalid"
+                    >
+                        Invite
+                    </button>
+                    <button
+                    type="reset"
+                    style="display: none;"
+                    #rBtn
+                >
+                    Clear
+                </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="Loadingpage" [hidden]="!isLoading">
+        <div class="text-center">
+            <div class="ptl pbm">
+                <span class="vm-loader"></span>
+            </div>
+            <div class="pts loading-txt">Please Wait...</div>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions [hidden]="isLoading">
+    <button mat-raised-button color="primary" [mat-dialog-close]="false">
+        Done
+    </button>
+</mat-dialog-actions>

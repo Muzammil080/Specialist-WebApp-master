@@ -1,0 +1,13 @@
+<div id="toast"  class="toast-container">
+<div class="toast-card">
+ <!-- <h5 class="toast-title">Allow</h5> -->
+
+ <p class="toast-message">
+    {{participantName | titlecase}} is waiting to join
+ </p>
+</div>
+<div class="text-center">
+    <button class="allow-btn" mat-button (click) = "allowParticipant()">Allow</button>
+    <button mat-button class="cancel-btn" color="warn" (click) = "cancelInvite()">Deny</button>
+</div>
+</div>

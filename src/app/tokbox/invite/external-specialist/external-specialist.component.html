@@ -1,0 +1,161 @@
+<mat-dialog-content>
+    <div class="container"  *ngIf="!isLoading">
+        <form [formGroup]="externalSpecForm">
+            <div class="row">
+                <div class="col">
+                    <h1>Invite External Specialist</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Name</mat-label>
+                        <input
+                            type="text"
+                            required
+                            formControlName="name"
+                            matInput
+                            placeholder=""
+                            maxlength="32"
+                        />
+                        <mat-error
+                            *ngIf="
+                                externalSpecForm.get('name').invalid &&
+                                (externalSpecForm.get('name').dirty ||
+                                    externalSpecForm.get('name').touched)
+                            "
+                        >
+                            <span
+                                *ngIf="
+                                    externalSpecForm.get('name').errors.required
+                                "
+                            >
+                                Name is required.
+                            </span>
+                            <span
+                                *ngIf="
+                                    externalSpecForm.get('name').errors
+                                        .maxlength
+                                "
+                            >
+                                Name must be less than 32 characters.
+                            </span>
+                            <span
+                                *ngIf="
+                                    externalSpecForm.get('name').errors.pattern
+                                "
+                            >
+                                Enter a proper value.
+                            </span>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-label>Email</mat-label>
+                        <input
+                            type="text"
+                            required
+                            formControlName="email"
+                            matInput
+                            placeholder=""
+                            maxlength="32"
+                        />
+                        <mat-error
+                            *ngIf="
+                                externalSpecForm.get('email').invalid &&
+                                (externalSpecForm.get('email').dirty ||
+                                    externalSpecForm.get('email').touched)
+                            "
+                        >
+                            <span
+                                *ngIf="
+                                    externalSpecForm.get('email').errors
+                                        .required
+                                "
+                            >
+                                Email is required.
+                            </span>
+                            <span
+                                *ngIf="
+                                    externalSpecForm.get('email').errors
+                                        .maxlength
+                                "
+                            >
+                                Email must be less than 32 characters.
+                            </span>
+                            <span
+                                *ngIf="
+                                    externalSpecForm.get('email').errors.pattern
+                                "
+                            >
+                                Enter a proper value.
+                            </span>
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width"  [floatLabel]="'always'">
+                        <mat-label>Phone Number</mat-label>
+                        <input
+                            type="text"
+                            required
+                            formControlName="phoneNumber"
+                            ng2TelInput
+                                [ng2TelInputOptions]="{
+                                    initialCountry: 'us',
+                                    autoPlaceholder: 'off'
+                                }"
+                                (countryChange)="onCountryChange($event)"
+                                (intlTelInputObject)="telInputPhoneNo($event)"
+                                (ng2TelOutput)="getNumber($event)"
+                            matInput
+                            placeholder=""
+                            [textMask]="{ mask: mask }"
+                            maxlength="32"
+                        />
+                        <mat-error
+                            *ngIf="
+                                externalSpecForm.get('phoneNumber').invalid &&
+                                (externalSpecForm.get('phoneNumber').dirty ||
+                                    externalSpecForm.get('phoneNumber').touched)
+                            "
+                        >
+                            Enter a valid phone number.
+                        </mat-error>
+                    </mat-form-field>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <button
+                        mat-raised-button
+                        color="primary"
+                        (click)="inviteExternalSpecialist()"
+                        [disabled]="externalSpecForm.invalid"
+                    >
+                        Invite
+                    </button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="Loadingpage" *ngIf="isLoading">
+        <div class="text-center">
+            <div class="ptl pbm">
+                <span class="vm-loader"></span>
+            </div>
+            <div class="pts loading-txt">Please Wait...</div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions [hidden]="isLoading">
+    <button mat-raised-button color="primary" [mat-dialog-close]="false">
+        Done
+    </button>
+</mat-dialog-actions>

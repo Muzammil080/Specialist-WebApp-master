@@ -1,0 +1,627 @@
+<div class="container">
+    <br />
+    <mat-tab-group>
+        <mat-tab label="Profile">
+            <div class="inercontainer" [style.display]="inercontainer">
+                <span class="edit" (click)="onedit()">
+                    <!-- <mat-icon class="material-icons">ic_mode_edit</mat-icon> -->
+                    Edit
+                </span>
+                <table>
+                    <h5>Personal Information</h5>
+                    <tr>
+                        <th valign="top">Full Name</th>
+                        <td valign="top">{{ fullname }}</td>
+                    </tr>
+                    <tr>
+                        <th valign="top">Email</th>
+                        <td valign="top">{{ email }}</td>
+                    </tr>
+                    <tr>
+                        <th valign="top">Mobile Number</th>
+                        <td valign="top">{{ mobileNumber }}</td>
+                    </tr>
+                </table>
+
+                <table style="float: right;" *ngIf="user.isSpecialist">
+                    <h5>Specialist Information</h5>
+
+                    <tr>
+                        <th valign="top">Dea Number</th>
+                        <td valign="top">{{ deaNumber }}</td>
+                    </tr>
+                    <tr>
+                        <th valign="top">Npi Number</th>
+                        <td valign="top">{{ npiNumber }}</td>
+                    </tr>
+                    <tr>
+                        <th valign="top">Licensed States</th>
+                        <td valign="top">{{ licensedStates }}</td>
+                    </tr>
+                    <tr>
+                        <th valign="top">Practice Group</th>
+                        <td valign="top">{{ practiceGroup }}</td>
+                    </tr>
+                    <tr>
+                        <th valign="top">Time Zone</th>
+                        <td valign="top">{{ timeZoneDescription }}</td>
+                    </tr>
+                    <tr>
+                        <th valign="top">Speciality Name</th>
+                        <td valign="top">{{ specialityName }}</td>
+                    </tr>
+                </table>
+
+                <table [class]="user.isSpecialist ? '' : 'notSpecialist'">
+                    <h5>Location</h5>
+                    <tr>
+                        <th valign="top">Address</th>
+                        <td valign="top">
+                            <span>{{ address }}</span>
+                            <br />
+                            <span>{{ address1 }}</span>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <th valign="top">Country</th>
+                        <td valign="top">{{ countryName }}</td>
+                    </tr>
+                    <tr>
+                        <th valign="top">State</th>
+                        <td valign="top">{{ stateName }}</td>
+                    </tr>
+                    <tr>
+                        <th valign="top">City</th>
+                        <td valign="top">{{ cityName }}</td>
+                    </tr>
+                    <tr>
+                        <th valign="top">Zip code</th>
+                        <td valign="top">{{ zipCode }}</td>
+                    </tr>
+                </table>
+            </div>
+            <div class="inercontaineredit" [style.display]="inercontaineredit">
+                <div id="" [style.display]="Loadininfogpage">
+                    <div class="text-center">
+                        <div class="ptl pbm">
+                            <span class="vm-loader"></span>
+                        </div>
+                        <div class="pts loading-txt">Please Wait...</div>
+                    </div>
+                </div>
+                <form
+                    *ngIf="Loadininfogpage == 'none'"
+                    id="completeionform"
+                    [formGroup]="formupdate"
+                >
+                    <h5>Personal Information</h5>
+                    <div class="row" style="margin-top: 30px;">
+                        <div class="col-md-4">
+                            <mat-form-field
+                                flex
+                                class="registration-form-full-width"
+                            >
+                                <input
+                                    matInput
+                                    placeholder="First Name"
+                                    type="text"
+                                    maxlength="50"
+                                    [(ngModel)]="user.firstName"
+                                    formControlName="firstName"
+                                />
+                                <mat-error
+                                    *ngIf="
+                                        formupdate.get('firstName').invalid &&
+                                        (formupdate.get('firstName').dirty ||
+                                            formupdate.get('firstName').touched)
+                                    "
+                                >
+                                    First name is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field
+                                flex
+                                class="registration-form-full-width"
+                            >
+                                <input
+                                    matInput
+                                    placeholder="Last Name"
+                                    type="text"
+                                    [(ngModel)]="user.lastName"
+                                    formControlName="lastName"
+                                    maxlength="50"
+                                />
+                                <mat-error
+                                    *ngIf="
+                                        formupdate.get('lastName').invalid &&
+                                        (formupdate.get('lastName').dirty ||
+                                            formupdate.get('lastName').touched)
+                                    "
+                                >
+                                    Last name is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-4">
+                            <mat-form-field
+                                flex
+                                class="registration-form-full-width"
+                            >
+                                <span matPrefix>+1 &nbsp;</span>
+
+                                <input
+                                    matInput
+                                    placeholder="Mobile Number"
+                                    [textMask]="{ mask: mask }"
+                                    type="tel"
+                                    [(ngModel)]="user.mobileNumber"
+                                    formControlName="mobileNumber"
+                                />
+                                <mat-error
+                                    *ngIf="
+                                        formupdate
+                                            .get('mobileNumber')
+                                            .hasError('required') &&
+                                        (formupdate.get('mobileNumber').dirty ||
+                                            formupdate.get('mobileNumber')
+                                                .touched)
+                                    "
+                                >
+                                    Mobile number is required.
+                                </mat-error>
+                                <mat-error
+                                    *ngIf="
+                                        (formupdate
+                                            .get('mobileNumber')
+                                            .hasError('pattern') ||
+                                            formupdate
+                                                .get('mobileNumber')
+                                                .hasError('whitespace')) &&
+                                        (formupdate.get('mobileNumber').dirty ||
+                                            formupdate.get('mobileNumber')
+                                                .touched)
+                                    "
+                                >
+                                    Mobile number is not valid
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <address-component
+                            *ngIf="addressData"
+                            style="width: 96%; margin-left: auto; margin-right: auto;"
+                            [data]="addressData"
+                            (onDataReceived)="addressOnDataReceived($event)"
+                        ></address-component>
+                    </div>
+                    <h5 *ngIf="user.isSpecialist">Specialist Information</h5>
+                    <div
+                        class="row"
+                        style="margin-top: 30px;"
+                        *ngIf="user.isSpecialist"
+                    >
+                        <div class="col-md-6">
+                            <mat-form-field
+                                flex
+                                class="registration-form-full-width"
+                            >
+                                <input
+                                    matInput
+                                    placeholder="DEA Number"
+                                    type="text"
+                                    maxlength="50"
+                                    [(ngModel)]="userspecialist.deaNumber"
+                                    formControlName="deaNumber"
+                                />
+                                <mat-error
+                                    *ngIf="
+                                        formupdate.get('lastName').invalid &&
+                                        (formupdate.get('deaNumber').dirty ||
+                                            formupdate.get('deaNumber').touched)
+                                    "
+                                >
+                                    DEA Number is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6">
+                            <mat-form-field
+                                flex
+                                class="registration-form-full-width"
+                            >
+                                <input
+                                    matInput
+                                    placeholder="NPI Number"
+                                    type="text"
+                                    maxlength="24"
+                                    [(ngModel)]="npiNumber"
+                                    formControlName="npiNumber"
+                                />
+                                <mat-error
+                                    *ngIf="
+                                        formupdate
+                                            .get('npiNumber')
+                                            .hasError('pattern') &&
+                                        (formupdate.get('npiNumber').dirty ||
+                                            formupdate.get('npiNumber').touched)
+                                    "
+                                >
+                                    Only alphabets numbers and (-) are allowed
+                                </mat-error>
+                                <mat-error
+                                    *ngIf="
+                                        formupdate
+                                            .get('npiNumber')
+                                            .hasError('required') &&
+                                        (formupdate.get('npiNumber').dirty ||
+                                            formupdate.get('npiNumber').touched)
+                                    "
+                                >
+                                    Npi Number is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field
+                                flex
+                                class="registration-form-full-width"
+                            >
+                                <input
+                                    matInput
+                                    placeholder="Practice Group"
+                                    type="text"
+                                    maxlength="50"
+                                    [(ngModel)]="userspecialist.practiceGroup"
+                                    formControlName="practiceGroup"
+                                />
+                                <mat-error
+                                    *ngIf="
+                                        formupdate.get('practiceGroup')
+                                            .invalid &&
+                                        (formupdate.get('practiceGroup')
+                                            .dirty ||
+                                            formupdate.get('practiceGroup')
+                                                .touched)
+                                    "
+                                >
+                                    Practice Group is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6">
+                            <mat-form-field
+                                flex
+                                class="registration-form-full-width"
+                            >
+                                <mat-select
+                                    placeholder="Licensed States"
+                                    [compareWith]="compareFn"
+                                    [(ngModel)]="licensedStatesaddremovelist"
+                                    formControlName="licensedStates"
+                                    multiple
+                                    (openedChange)="openedChange($event)"
+                                    (selectionChange)="
+                                        addremovelicensedStates()
+                                    "
+                                >
+                                    <mat-select-trigger>
+                                        {{
+                                            licensedStatesaddremovelist
+                                                ? licensedStatesaddremovelist[0]
+                                                      ?.stateName
+                                                : ''
+                                        }}
+                                        <span
+                                            *ngIf="
+                                                licensedStatesaddremovelist?.length >
+                                                1
+                                            "
+                                            class="additional-selection"
+                                        >
+                                            (+{{
+                                                licensedStatesaddremovelist.length -
+                                                    1
+                                            }}
+                                            more)
+                                        </span>
+                                    </mat-select-trigger>
+                                    <span
+                                        *ngFor="
+                                            let multipleLicensedStates of multipleLicensedStates;
+                                            let i = index
+                                        "
+                                    >
+                                        <div
+                                            [class]="
+                                                licensedStatesaddremovelist?.length >
+                                                0
+                                                    ? 'col-md-6'
+                                                    : 'col-md-12'
+                                            "
+                                            style="float: left"
+                                        >
+                                            <mat-option
+                                                [value]="multipleLicensedStates"
+                                            >
+                                                {{
+                                                    multipleLicensedStates.stateName
+                                                }}</mat-option
+                                            >
+                                        </div>
+                                        <div
+                                            class="col-md-6"
+                                            style="float: right"
+                                            *ngIf="licensedStatesaddremovelist"
+                                        >
+                                            <div
+                                                *ngFor="
+                                                    let sl of licensedStatesaddremovelist
+                                                "
+                                            >
+                                                <mat-form-field
+                                                    floatPlaceholder="never"
+                                                    hideRequiredMarker
+                                                    style="font-size: 0.85em"
+                                                    flex
+                                                    class="registration-form-full-width"
+                                                    *ngIf="
+                                                        multipleLicensedStates.stateName ==
+                                                        sl.stateName
+                                                    "
+                                                >
+                                                    <input
+                                                        id="licensenumber"
+                                                        name="licensenumber"
+                                                        #licensenumber="ngModel"
+                                                        autocomplete="off"
+                                                        matInput
+                                                        placeholder="{{
+                                                            multipleLicensedStates.stateName +
+                                                                ' License Number'
+                                                        }}"
+                                                        maxlength="50"
+                                                        type="text"
+                                                        [(ngModel)]="
+                                                            sl.licenceNumber
+                                                        "
+                                                        [ngModelOptions]="{
+                                                            standalone: true
+                                                        }"
+                                                        required
+                                                        (keydown)="
+                                                            $event.stopPropagation()
+                                                        "
+                                                        pattern="[A-Za-z0-9]+((-+)[A-Za-z0-9]*)*"
+                                                    />
+                                                    <mat-error
+                                                        *ngIf="
+                                                            licensenumber.invalid &&
+                                                            (licensenumber.dirty ||
+                                                                licensenumber.touched)
+                                                        "
+                                                    >
+                                                        <div
+                                                            *ngIf="
+                                                                licensenumber
+                                                                    .errors
+                                                                    .required;
+                                                                    else invalidError
+                                                            "
+                                                        >
+                                                            License number is
+                                                            required.
+                                                        </div>
+                                                        <ng-template #invalidError>Alpha numeric values and '-' allowed</ng-template>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div style="clear: both"></div>
+                                    </span>
+                                </mat-select>
+                                <mat-error
+                                    *ngIf="
+                                        formupdate
+                                            .get('licensedStates')
+                                            .hasError('required') &&
+                                        (formupdate.get('licensedStates')
+                                            .dirty ||
+                                            formupdate.get('licensedStates')
+                                                .touched)
+                                    "
+                                >
+                                    Licensed state with valid license number is
+                                    required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+
+                    <div class="auth-card-btn-box text-center">
+                        <div class="text-center">
+                            <button
+                                type="button"
+                                (click)="updateUserInfo()"
+                                [style.cursor]="
+                                    !formupdate.valid || !addressForm
+                                        ? 'not-allowed'
+                                        : 'pointer'
+                                "
+                                [disabled]="!formupdate.valid || !addressForm"
+                                class="btn-vm-auth"
+                            >
+                                Update
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="auth-card-btn-box2 text-center">
+                        <span class="back text-center" (click)="goback()">
+                            Go back</span
+                        >
+                    </div>
+                </form>
+            </div>
+        </mat-tab>
+        <mat-tab label="Quality Metrics">
+            <user-management-quality-metrics></user-management-quality-metrics>
+        </mat-tab>
+        <mat-tab label="Payment">
+            <user-management-payments></user-management-payments>
+        </mat-tab>
+        <mat-tab label="Change Password" *ngIf="user.userType.toLowerCase() != 'ad'">
+            <ng-template mat-tab-label>
+                Change Password
+            </ng-template>
+            <br />
+            <br />
+            <div class="inercontainer2">
+                <div id="Loadingpage" [style.display]="Loadingpage">
+                    <div class="text-center">
+                        <div class="ptl pbm">
+                            <span class="vm-loader"></span>
+                        </div>
+                        <div class="pts loading-txt">Please Wait...</div>
+                    </div>
+                </div>
+
+                <form [formGroup]="form" [style.display]="Loadingbox">
+                    <div class="auth-card-fields">
+                        <div class="questionbox">
+                            <mat-form-field style="width: 100%;">
+                                <input
+                                    matInput
+                                    placeholder="Current Password"
+                                    type="password"
+                                    maxlength="20"
+                                    [(ngModel)]="passold"
+                                    formControlName="passold"
+                                />
+                                <mat-error
+                                    *ngIf="
+                                        form
+                                            .get('passold')
+                                            .hasError('required') &&
+                                        (form.get('passold').dirty ||
+                                            form.get('passold').touched)
+                                    "
+                                >
+                                    Current Password is required.
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field
+                                style="width: 100%; margin-top: 11px;"
+                            >
+                                <input
+                                    matInput
+                                    placeholder="New Password"
+                                    type="password"
+                                    maxlength="20"
+                                    [(ngModel)]="pass"
+                                    formControlName="pass"
+                                />
+
+                                <span
+                                    *ngIf="
+                                        !form
+                                            .get('pass')
+                                            .hasError('required') &&
+                                        form.hasError('matchnew') &&
+                                        (form.get('pass').dirty ||
+                                            form.get('pass').touched)
+                                    "
+                                    matSuffix
+                                    style="color:red;font-size:8pt"
+                                    >New Password cannot be same as Current
+                                    Password</span
+                                >
+                                <span
+                                    *ngIf="!form.hasError('matchnew')"
+                                    matSuffix
+                                >
+                                    <ng2-password-strength-bar
+                                        [passwordToCheck]="pass"
+                                    >
+                                    </ng2-password-strength-bar>
+                                </span>
+
+                                <mat-error
+                                    *ngIf="
+                                        form.get('pass').hasError('required') &&
+                                        (form.get('pass').dirty ||
+                                            form.get('pass').touched)
+                                    "
+                                >
+                                    New Password is required.
+                                </mat-error>
+                                <mat-error
+                                    *ngIf="
+                                        form.get('pass').hasError('pattern') &&
+                                        (form.get('pass').dirty ||
+                                            form.get('pass').touched)
+                                    "
+                                >
+                                    Password should be between 8-20 characters
+                                    with 1 Uppercase letter and 1 number.
+                                </mat-error>
+                            </mat-form-field>
+                            <mat-form-field
+                                style="width: 100%; margin-top: 11px;"
+                            >
+                                <input
+                                    matInput
+                                    placeholder="Confirm Password"
+                                    type="password"
+                                    maxlength="20"
+                                    [(ngModel)]="passconfirm"
+                                    formControlName="passconfirm"
+                                />
+                                <span
+                                    *ngIf="
+                                        form.hasError('nomatch') &&
+                                        (form.get('passconfirm').dirty &&
+                                            form.get('passconfirm').touched)
+                                    "
+                                    matSuffix
+                                    style="color:red;font-size:8pt"
+                                    >Not Matched</span
+                                >
+                                <mat-error
+                                    *ngIf="
+                                        form
+                                            .get('passconfirm')
+                                            .hasError('required') &&
+                                        (form.get('passconfirm').dirty ||
+                                            form.get('passconfirm').touched)
+                                    "
+                                >
+                                    Confirm password is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                    <div class="auth-card-btn-box text-center">
+                        <div class="text-center">
+                            <button
+                                type="button"
+                                (click)="changepass()"
+                                [style.cursor]="
+                                    !form.valid ? 'not-allowed' : 'pointer'
+                                "
+                                [disabled]="!form.valid"
+                                class="btn-vm-auth"
+                            >
+                                Change Password
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </mat-tab>
+    </mat-tab-group>
+</div>

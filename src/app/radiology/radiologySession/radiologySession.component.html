@@ -1,0 +1,87 @@
+<nav id="navbar" class="navbar navbar-expand-lg fixed-top navbar-light navbar-vm">
+        <div class="nav-title-box clearfix">
+                <i class="icon_vm_document"></i>
+                <div class="dropdown">
+                        <div class="titleblock">
+                                <div class="name">{{request?.patientName}}</div>
+                                <div class="place">{{request?.submittedBy}}</div>
+                        </div>
+                        <div class="dropdown-content" style="padding:20px;">
+                                <table>
+                                        <tr>
+                                                <th style="color:#00aecd; border-top:0px;">
+                                                        <i class="icon_vm_document" style="    font-size: 2em;
+                                                        margin-top: -3px;
+                                                        margin-right: 5px;">
+                                                        </i>
+                                                        Patient info
+                                                </th>
+                                                <br>
+                                        </tr>
+                                        <tr>
+                                                <td style="color:#00aecd">DOB:</td>
+                                                <td>{{request?.dob ? ( (request?.dob | date:'MMM d, y') +' (Age: ' + request?.age + ')') : 'Unknown'}}
+                                                </td>
+
+                                                <!-- <td>{{request?.dob ? ( (request?.dob | date:'MMM d, y') +' (Age: ' + Age + ')') : 'Unknown'}}</td> -->
+                                        </tr>
+                                        <tr>
+                                                <td style="color:#00aecd">Sex:</td>
+                                                <td>{{request?.gender}}</td>
+                                        </tr>
+                                        <tr>
+                                                <td style="color:#00aecd">MRN:</td>
+                                                <td>{{request?.mrn}}</td>
+                                        </tr>
+                                        <tr>
+                                                <td style="color:#00aecd">Priority:</td>
+                                                <td>{{request?.priority}}</td>
+                                        </tr>
+
+                                </table>
+                        </div>
+                </div>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                        <li *ngIf="!pacsDeleted" class="nav-item">
+                                <a   class="nav-link" (click)="onPacs()">
+                                        <i class="icon_vm_pacs"></i>
+                                        <span class="item-name">PACS</span>
+                                </a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link" (click)="onNotes()">
+                                        <i class="icon_vm_document"></i>
+                                        <span class="item-name">Reports</span>
+                                </a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link" (click)="onExit()">
+                                        <i class="icon_vm_logout"></i>
+                                        <span class="item-name">Exit</span>
+                                </a>
+                        </li>
+
+                </ul>
+        </div>
+</nav>
+<div *ngIf="showLoader && pageNum != 1" style="margin-top: 30vh ">
+        <div class="text-center">
+                <div class="ptl pbm">
+                        <span class="vm-loader"></span>
+                        <br>
+                        <h6>PACS viewer is loading please wait...</h6>
+                </div>
+
+        </div>
+</div>
+<pacs  *ngIf="showPacs"  [hidden]="pageNum != 0 || showLoader" (refeshPacs)="refresh()"></pacs>
+
+<div [hidden]="pageNum != 1 " class="notebox" *ngIf="dynamicNotesData">
+        <dynamic-notes [data]="dynamicNotesData"></dynamic-notes>
+</div>

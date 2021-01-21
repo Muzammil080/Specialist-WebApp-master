@@ -1,0 +1,52 @@
+<mat-dialog-content>
+    <div class="container" *ngIf="!isLoading">
+        <form [formGroup]="languageForm">
+            <div class="row">
+                <div class="col">
+                    <h1>Invite Interpreter</h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <mat-form-field class="full-width">
+                        <mat-select
+                            placeholder="Select Language"
+                            [(value)]="languageId"
+                            disableOptionCentering
+                            formControlName="language"
+                        >
+                            <mat-option
+                                *ngFor="let language of supportedLanguages"
+                                [value]="language.id"
+                            >
+                                {{ language.language }}
+                            </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <div id="Loadingpage" *ngIf="isLoading">
+        <div class="text-center">
+            <div class="ptl pbm">
+                <span class="vm-loader"></span>
+            </div>
+            <div class="pts loading-txt">Please Wait...</div>
+        </div>
+    </div>
+</mat-dialog-content>
+<mat-dialog-actions [hidden]="isLoading">
+    <button mat-raised-button color="warn" [mat-dialog-close]="false">
+        Cancel
+    </button>
+    <button
+        mat-raised-button
+        color="primary"
+        (click)="inviteInterpreter()"
+        [disabled]="languageForm.invalid"
+    >
+        Invite
+    </button>
+</mat-dialog-actions>

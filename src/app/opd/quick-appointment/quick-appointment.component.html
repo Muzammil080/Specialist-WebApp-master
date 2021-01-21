@@ -1,0 +1,258 @@
+<div class="container" style="overflow: visible">
+    <header>
+        <div class="dialog-box-heading">
+            <h1>Quick Appointment</h1>
+        </div>
+    </header>
+    <Section class="quickApptSection">
+        <div class="mb-3 mt-2">
+            <form [formGroup]="patientInfoForm">
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field>
+                            <mat-label>First Name</mat-label>
+                            <input
+                                type="text"
+                                required
+                                formControlName="firstName"
+                                matInput
+                                placeholder=""
+                                maxlength="64"
+                            />
+                            <mat-error
+                                *ngIf="
+                                    patientInfoForm.get('firstName').invalid &&
+                                    (patientInfoForm.get('firstName').dirty ||
+                                        patientInfoForm.get('firstName')
+                                            .touched)
+                                "
+                            >
+                                <span
+                                    *ngIf="
+                                        patientInfoForm.get('firstName').errors
+                                            .required
+                                    "
+                                >
+                                    First Name is required.
+                                </span>
+                                <span
+                                    *ngIf="
+                                        patientInfoForm.get('firstName').errors
+                                            .maxlength
+                                    "
+                                >
+                                    First Name must be less than 65 characters.
+                                </span>
+                                <span
+                                    *ngIf="
+                                        patientInfoForm.get('firstName').errors
+                                            .pattern
+                                    "
+                                >
+                                    Enter a proper value.
+                                </span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                    <div class="col">
+                        <mat-form-field>
+                            <mat-label>Last Name</mat-label>
+                            <input
+                                type="text"
+                                required
+                                formControlName="lastName"
+                                matInput
+                                placeholder=""
+                                maxlength="64"
+                            />
+                            <mat-error
+                                *ngIf="
+                                    patientInfoForm.get('lastName').invalid &&
+                                    (patientInfoForm.get('lastName').dirty ||
+                                        patientInfoForm.get('lastName').touched)
+                                "
+                            >
+                                <span
+                                    *ngIf="
+                                        patientInfoForm.get('lastName').errors
+                                            .required
+                                    "
+                                >
+                                    Last Name is required.
+                                </span>
+                                <span
+                                    *ngIf="
+                                        patientInfoForm.get('lastName').errors
+                                            .maxLength
+                                    "
+                                >
+                                    Last Name must be less than 65 characters.
+                                </span>
+                                <span
+                                    *ngIf="
+                                        patientInfoForm.get('lastName').errors
+                                            .pattern
+                                    "
+                                >
+                                    Enter a proper value.
+                                </span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field [floatLabel]="'always'">
+                            <mat-label>Phone Number</mat-label>
+                            <input
+                                type="text"
+                                required
+                                formControlName="phoneNumber"
+                                ng2TelInput
+                                [ng2TelInputOptions]="{
+                                    initialCountry: 'us',
+                                    autoPlaceholder: 'off'
+                                }"
+                                (countryChange)="onCountryChange($event)"
+                                (intlTelInputObject)="telInputPhoneNo($event)"
+                                (ng2TelOutput)="getNumber($event)"
+                                matInput
+                                [textMask]="{ mask: mask }"
+                                autocomplete="off"
+                                placeholder=""
+                            />
+                            <mat-error
+                                *ngIf="
+                                    patientInfoForm.get('phoneNumber')
+                                        .invalid &&
+                                    (patientInfoForm.get('phoneNumber').dirty ||
+                                        patientInfoForm.get('phoneNumber')
+                                            .touched)
+                                "
+                            >
+                                Enter a valid phone number.
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                    <div class="col">
+                        <mat-form-field>
+                            <mat-label>Email</mat-label>
+                            <input
+                                type="email"
+                                formControlName="email"
+                                matInput
+                                placeholder=""
+                                maxlength="128"
+                            />
+                            <mat-error
+                                *ngIf="
+                                    patientInfoForm.get('email').invalid &&
+                                    (patientInfoForm.get('email').dirty ||
+                                        patientInfoForm.get('email').touched)
+                                "
+                            >
+                                <!-- <span
+                                    *ngIf="
+                                        patientInfoForm.get('email').errors
+                                            .required
+                                    "
+                                >
+                                    Email is required.
+                                </span> -->
+                                <span
+                                    *ngIf="
+                                        patientInfoForm.get('email').errors
+                                            .maxlength
+                                    "
+                                >
+                                    Email must be less than 129 characters.
+                                </span>
+                                <span
+                                    *ngIf="
+                                        patientInfoForm.get('email').errors
+                                            .pattern
+                                    "
+                                >
+                                    Enter a valid email address
+                                </span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field class="full-width">
+                            <mat-label>Patient Time Zone</mat-label>
+                            <mat-select formControlName="timezone" (selectionChange)="onTimezoneChanged($event)">
+                                <mat-option value="{{t.strValue}}" *ngFor="let t of timezones">{{t.name}}</mat-option>
+                            </mat-select>
+                            <mat-error
+                            *ngIf="
+                            patientInfoForm.get('timezone')
+                                    .invalid &&
+                                (patientInfoForm.get('timezone')
+                                    .dirty ||
+                                    patientInfoForm.get('timezone')
+                                        .touched)
+                            "
+                        >
+                            Please select a time zone.
+                        </mat-error>
+                        </mat-form-field>
+                    </div>
+
+                </div>
+                <div class="row">
+                    <div class="col">
+                        <mat-form-field>
+                            <mat-label>Reason</mat-label>
+                            <textarea
+                                required
+                                matInput
+                                formControlName="reason"
+                                maxlength="255"
+                            ></textarea>
+                            <mat-error
+                                *ngIf="
+                                patientInfoForm.get('reason').invalid &&
+                                    (patientInfoForm.get('reason').dirty ||
+                                    patientInfoForm.get('reason').touched)
+                                "
+                            >
+                                <span
+                                    *ngIf="
+                                    patientInfoForm.get('reason').errors
+                                            .required
+                                    "
+                                >
+                                    Required
+                                </span>
+                                <span
+                                    *ngIf="
+                                    patientInfoForm.get('reason').errors
+                                            .maxlength
+                                    "
+                                >
+                                    Reason must be less than 256 characters.
+                                </span>
+                            </mat-error>
+                        </mat-form-field>
+                    </div>
+                </div>
+            </form>
+
+            <button mat-raised-button color="primary" #submitButton (click) = "createQuickAppointment()"  class="mr-4" >
+                Create
+            </button>
+            <button mat-raised-button (click)="dialogRef.close(false)">
+                Close
+            </button>
+        </div>
+    </Section>
+
+</div>

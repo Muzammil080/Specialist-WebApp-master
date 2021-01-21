@@ -1,0 +1,128 @@
+.logo-box img {
+    width: 17rem;
+}
+
+.logo-box {
+    margin-bottom: 3.5rem;
+    text-align: center
+}
+
+.logo-box embed {
+    width: 250px;
+}
+
+.auth-card {
+   width: 450px;
+    /* margin: 2rem auto 1rem; */
+}
+.auth-card-fields {
+    border: 1px solid #ccc;
+}
+.auth-card-btn-box {
+    text-align: center;
+    padding: 30px;
+}
+
+.input-wrap .vm-input {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    font-size: 20px;
+    color: #414141;
+}
+.input-wrap:last-child .vm-input {
+    border-bottom: none;
+}
+
+.input-wrap {
+    padding: 0 15px;
+}
+
+.vm-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #b2b2b2;
+}
+.vm-input::-moz-placeholder { /* Firefox 19+ */
+    color: #b2b2b2;
+}
+.vm-input:-ms-input-placeholder { /* IE 10+ */
+    color: #b2b2b2;
+
+}
+.vm-input:-moz-placeholder { /* Firefox 18- */
+    color: #b2b2b2;
+}
+.auth-card-btn-box .btn-vm-auth {
+    border: 1px solid #929292;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 19px;
+    font-size: 17px;
+    color: #00aecc;
+    padding: 0 35px;
+    line-height: 36px;
+    height: 38px;
+}
+
+.auth-card-btn-box .btn-vm-auth:hover {
+    background-color: #00aecc;
+    color: #fff;
+    border-color: #00aecc;
+}
+
+.auth-card-btn-box .btn-vm-clear {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 19px;
+    font-size: 17px;
+    color: #929292;
+    padding: 0 35px;
+    line-height: 36px;
+    height: 38px;
+}
+
+.auth-card-btn-box .btn-vm-clear:hover {
+    background-color: #f5f5f5;
+    color: #00aecc;
+}
+
+/* Loader */
+.loading-txt {
+    color: #929292;
+    font-size: 20px;
+}
+
+.copyright
+{
+    position: relative;
+    top: 25px;
+    color: lightgrey;
+}
+
+/* new css */
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: calc(100vh - 50px);
+    /* background-color: DodgerBlue; */
+  }
+
+  /* .flex-container>div {
+    background-color: #f1f1f1;
+    color: white;
+    width: 450px;
+    height: 100px;
+  } */
+
+  .footer {
+    height: 50px;
+}
+
+.capt-cont {
+    font-size: 22px;
+    color: #333;
+    font-weight: 500;
+}

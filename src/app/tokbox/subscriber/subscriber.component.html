@@ -1,0 +1,15 @@
+<div *ngIf="showName()" class="name text-left">
+    <span>{{name}} </span>
+</div>
+<div *ngIf="showcustomUi()" class="controls" (click)="$event.stopPropagation()">
+    <button mat-button #mic class="list-btn-round" [ngClass] = "{'light': !isMicMuted, 'dark': isMicMuted}" (click) = "micToggle()" >
+        <i  [ngClass] = "{'icon_vm_mic': !isMicMuted, 'icon_vm_mute': isMicMuted}"></i>
+    </button>
+    <button mat-button #video class="list-btn-round" [ngClass] = "{'light': !isVideoOff, 'dark' :isVideoOff}" (click) = "videoToggle()">
+        <i [ngClass] = "{'icon_vm_video': !isVideoOff, 'icon_vm_video_disable' :isVideoOff}"></i>
+    </button>
+    <button mat-button class="list-btn-round light" (click) = "block()">
+        <i class="material-icons">person_remove</i>
+    </button>
+</div>
+<div #subscriberDiv id="subscriber" class="subscriber" [ngClass] = "{'kart': isKart , 'strokeOn' : isStrokeON()}"></div>

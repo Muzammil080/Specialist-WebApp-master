@@ -1,0 +1,76 @@
+<div style="float: right; margin-right: 10px;">
+    <!-- <a class="nav-link" (click)="logout()"><i class="icon_vm_logout"></i><span class="item-name">Logout</span></a> -->
+</div>
+<div style="clear: both;"></div>
+<div>
+    <div class="container-fluid" *ngIf="!showCompletationForm">
+        <div class="reg-card">
+            <div class="logo-box">
+                <embed src="assets/img/svg/logo.svg" />
+            </div>
+            <!-- For verification page -->
+            <div id="Verificationpage" [style.display]="Verificationpage">
+                <div class="auth-card-fields pal">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <mat-card-title>Verification Code</mat-card-title>
+                        </div>
+                        <br /><br />
+                        <div class="col-md-12">
+                            <mat-card-content>
+                                <mat-form-field
+                                    class="verification-form-full-width"
+                                >
+                                    <input
+                                        matInput
+                                        placeholder="Enter Verification Code"
+                                        type="text"
+                                        (keyup.enter)="verify()"
+                                        [(ngModel)]="verificationCode"
+                                    />
+                                </mat-form-field>
+                                <mat-error>
+                                    {{ failedResponse }}
+                                </mat-error>
+                            </mat-card-content>
+                        </div>
+                    </div>
+                </div>
+                <div class="auth-card-btn-box text-center">
+                    <div class="text-center">
+                        <button
+                            class="btn-vm-auth"
+                            [disabled]="disableButton"
+                            (click)="verify()"
+                        >
+                            Verify Code
+                        </button>
+                        <button
+                            class="btn-vm-auth"
+                            [disabled]="timeLeft != 0"
+                            (click)="resend()"
+                        >
+                            Resend Code
+                            <span *ngIf="timeLeft !== 0">
+                                ({{ timeLeft }})
+                            </span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <!-- For Loading page -->
+            <div id="Loadingpage" [style.display]="Loadingpage">
+                <div class="text-center">
+                    <div class="ptl pbm">
+                        <span class="vm-loader"></span>
+                    </div>
+                    <div class="pts loading-txt">Please Wait...</div>
+                </div>
+            </div>
+            <!-- -->
+        </div>
+    </div>
+    <div *ngIf="showCompletationForm">
+        <reg-completation [user]="successResponse"></reg-completation>
+    </div>
+</div>

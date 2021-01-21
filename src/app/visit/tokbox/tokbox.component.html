@@ -1,0 +1,376 @@
+<nav
+    id="navbar"
+    class="navbar navbar-expand-lg fixed-top navbar-light navbar-vm"
+>
+    <div class="nav-title-box clearfix">
+        <i class="icon_vm_endpoints"></i>
+        <div class="titleblock">
+            <!-- <div class="name">{{ endpointFacilityName }}</div>
+            <div class="place">{{ endpointName }} ({{endpointLocation}})</div> -->
+        </div>
+    </div>
+    <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto"></ul>
+    </div>
+</nav>
+
+<!-- video -->
+
+<div id="call-connecting" class="call-connecting">
+    <div class="loading-display-box">
+        <div class="loding-box">
+            <div class="connecting-icon-container">
+                <div class="connecting-icon-box">
+                    <i id="material-icons-1" class="material-icons">
+                        laptop_mac
+                    </i>
+                </div>
+                <div class="connecting-icon-box">
+                    <i
+                        id="connecting-line-1"
+                        class="material-icons connecting-line"
+                    >
+                        maximize
+                    </i>
+                    <i
+                        id="connecting-cross-1"
+                        class="material-icons connecting-cross"
+                    >
+                        clear
+                    </i>
+                    <div id="connecting-1" class="material-icons-animation">
+                        <div class="loader">Loading...</div>
+                    </div>
+                </div>
+                <div class="connecting-icon-box">
+                    <i id="material-icons-2" class="material-icons">
+                        language
+                    </i>
+                </div>
+                <div class="connecting-icon-box">
+                    <i
+                        id="connecting-line-2"
+                        class="material-icons connecting-line"
+                    >
+                        maximize
+                    </i>
+                    <i
+                        id="connecting-cross-2"
+                        class="material-icons connecting-cross"
+                    >
+                        clear
+                    </i>
+                    <div id="connecting-2" class="material-icons-animation">
+                        <div class="loader">Loading...</div>
+                    </div>
+                </div>
+                <div class="connecting-icon-box">
+                    <i id="material-icons-3" class="material-icons">
+                        storage
+                    </i>
+                </div>
+                <div class="connecting-icon-box">
+                    <i
+                        id="connecting-line-3"
+                        class="material-icons connecting-line"
+                    >
+                        maximize
+                    </i>
+                    <i
+                        id="connecting-cross-3"
+                        class="material-icons connecting-cross"
+                    >
+                        clear
+                    </i>
+                    <div id="connecting-3" class="material-icons-animation">
+                        <div class="loader">Loading...</div>
+                    </div>
+                </div>
+                <div class="connecting-icon-box">
+                    <i id="material-icons-4" class="material-icons">
+                        desktop_mac
+                    </i>
+                </div>
+            </div>
+            <div
+                style="
+                    width: 100%;
+                    clear: both;
+                    position: absolute;
+                    top: 175px;
+                "
+            >
+                <h6
+                    id="connecting-text-0"
+                    class="connecting-text"
+                    style="display: block;"
+                >
+                    Please wait we are connecting you...
+                </h6>
+                <h6 id="connecting-text-1" class="connecting-text">
+                    Checking network connectivity
+                </h6>
+                <h6 id="connecting-text-2" class="connecting-text">
+                    Establishing secure connection to Server
+                </h6>
+                <h6 id="connecting-text-3" class="connecting-text">
+                    Connecting... Please wait.
+                </h6>
+            </div>
+
+            <div
+                id="sessionEndOption"
+                style="
+                    width: 100%;
+                    clear: both;
+                    position: absolute;
+                    top: 180px;
+                    display: none;
+                "
+            >
+                <h6>
+                    We were unable to connect. Do you want to reconnect or end
+                    session ?
+                </h6>
+                <button mat-button style="color: #00aecd;" onclick="reload()">
+                    Try to Reconnect
+                </button>
+                <button mat-button style="color: red;" (click)="EndSession()">
+                    End Session
+                </button>
+            </div>
+            <div
+                id="endpointError"
+                style="
+                    width: 100%;
+                    clear: both;
+                    position: absolute;
+                    top: 180px;
+                    display: none;
+                "
+            >
+                <h6>
+                    {{endpointErrorMessage}}
+                </h6>
+                <button mat-button style="color: #00aecd;" (click)="EndSession()">
+                    Ok
+                </button>
+            </div>
+        </div>
+        <div class="loding-box-footer"></div>
+    </div>
+</div>
+
+<!--      custom       -->
+
+<div *ngIf="session">
+    <app-publisher id="publishVideo" [session]="session" [hidden] = "cameraPrivacy"></app-publisher>
+    <div
+        [ngDraggable]="draggable"
+        [position]="position"
+        [handle]="DemoHandle"
+        class="draggdiv"
+    >
+        <div #DemoHandle class="card-header" [hidden]="!draggable">
+            &nbsp;
+        </div>
+        <div class="subscribers">
+        <app-subscriber
+            (childLoaded) = "childLoaded($event)"
+            *ngFor="let stream of streams"
+            id = "{{stream.streamId}}"
+            [stream]="stream"
+            [session]="session"
+            (click) = "setPrimary($event)"
+        ></app-subscriber>
+        </div>
+    </div>
+</div>
+
+<!--      custom       -->
+
+<div class="preview-area-b" [style.display]="previewD">
+    <div
+        [style.display]="videoLoader"
+        style="
+            border: 0px solid black;
+            width: 90px;
+            height: 150px;
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+        "
+    >
+        <div class="ptl pbm">
+            <span class="vm-loader"></span>
+        </div>
+    </div>
+
+    <div
+        id="onlinebox"
+        class="alert alert-success online onlineshow"
+        style="display: none;"
+    >
+        <a
+            style="text-decoration: none; color: seagreen;"
+            mat-button
+            onclick="reload()"
+            >Reconnect to session</a
+        >
+        <a
+            style="text-decoration: none; color: blueviolet; float: right;"
+            mat-button
+            onclick="homepageredirect()"
+            >Go to home page</a
+        >
+    </div>
+    <div
+        id="offlinebox"
+        class="alert alert-danger offline offlineshow"
+        style="display: none;"
+    >
+        Please check your internet connection
+    </div>
+    <div
+        id="cartofflinebox"
+        class="alert alert-danger cartoffline offlineshow"
+        [hidden]="!specialistOffline"
+    >
+        Session from Specialist has been lost
+    </div>
+    <div
+        id="cartofflinebox"
+        class="alert alert-danger cartoffline offlineshow"
+        [hidden]="!cartoffline"
+    >
+        Session from Patient has been lost
+    </div>
+    <div
+        id="sessiondisconect"
+        class="alert alert-success sessiondisconect offlineshow"
+        style="display: none;"
+    >
+        Session has been ended.
+    </div>
+    <div
+        id="kartdisconect"
+        class="alert alert-success kartdisconect offlineshow"
+        style="display: none;"
+    >
+        Session has been ended from Patient.
+    </div>
+    <div
+        class="alert alert-danger cartoffline offlineshow"
+        [hidden]="!isMicMuted"
+    >
+        Your Mic has been muted by Specialist
+    </div>
+    <div
+        class="alert alert-danger cartoffline offlineshow"
+        [hidden]="!isVideoMuted"
+    >
+        Your Camera has been muted by Specialist
+    </div>
+
+    <div id="button-bar" class="button-bar">
+        <button
+            *ngIf="Type == 'session' && !isOnline"
+            id="refreshPacs"
+            class="list-btn-round light"
+            (click)="refreshPacs()"
+        >
+            <span class="credits"></span>
+        </button>
+
+        <button
+            id="cameraButton"
+            class="list-btn-round light"
+            [disabled]="isVideoMuted"
+            (click)="cameraButton()"
+        >
+            <i id="camIcon" class="icon_vm_video"></i>
+        </button>
+        <button
+            id="microphoneButton"
+            class="list-btn-round light"
+            [disabled]="isMicMuted"
+            (click)="microphoneButton()"
+        >
+            <i id="micIcon" class="icon_vm_mic"></i>
+        </button>
+
+
+        <button class="list-btn-round decline-btn" (click)="ondisconnect()">
+            <i class="icon_vm_phone_decline"></i>
+        </button>
+        <!-- <button (click) = "toggleBlur()" class="list-btn-round"
+        [ngClass] = "{'blur': isBlurred , 'light' : !isBlurred, 'dark' : isBlurred}">
+           blur
+       </button> -->
+
+
+
+        <br />
+    </div>
+
+
+    <div style="position: absolute; bottom: 10px; right: 10px; z-index: 5;">
+        <input type="radio" id="Color1" name="Color" value="1" />
+        <label for="Color1" style="color: white;"></label>
+
+        <input type="radio" id="Color2" name="Color" value="2" checked />
+        <label for="Color2" style="color: white;"></label>
+
+    </div>
+
+    <canvas
+        style="position: absolute; z-index: 4;"
+        class="unselectable"
+        [ngClass] = "{'canvas-primary': areMutlipleStreams}"
+        id="canvascontanier"
+        oncontextmenu="return false;"
+        [hidden]="!isPrimaryStreamKart"
+    >
+    </canvas>
+</div>
+
+<!-- <div *ngIf="showLoader && pageNum != 1" style="margin-top: 30vh;">
+    <div class="text-center">
+        <div class="ptl pbm">
+            <span class="vm-loader"></span>
+            <br />
+            <h6>PACS viewer is loading please wait...</h6>
+        </div>
+    </div>
+</div> -->
+
+<!-- <pacs
+    class="pacsbox hidden"
+    [ngClass]="{ show: pacsVisble }"
+    *ngIf="showPacs"
+    (refeshPacs)="refresh()"
+></pacs>
+<div class="notebox hidden" *ngIf="dynamicNotesData">
+    <dynamic-notes [data]="dynamicNotesData"></dynamic-notes>
+</div>
+
+<app-lab-reports class="lab hidden"></app-lab-reports>
+ -->
+
+<!-- <div class="survey hidden">
+    <app-survey></app-survey>
+</div> -->

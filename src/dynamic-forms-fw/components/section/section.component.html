@@ -1,0 +1,10 @@
+<!--Main Root Layout-->
+<!--Main Form-->
+<form (ngSubmit)="formSubmit()" [formGroup]="form"> 
+  <div *ngIf="sectionTitle"><h1 class="sectionTitle">{{sectionTitle}}</h1></div>
+  <!--UIElements (root contianers only)-->
+  <div *ngFor="let container of containers, trackBy:elementIdTracker">
+    <ui-element [form]="form" [sectionElement]="container"></ui-element>
+  </div>
+  <!-- <button title="Save">Save</button> -->
+</form>

@@ -1,0 +1,25 @@
+<!-- <div id="toast" class="toast-container" *ngIf='opacity !=0'
+   [style.opacity]='opacity' [style.zindex]='zIndex'>
+  <div class="toast-card mdl-shadow--16dp">
+    <h5 class="toast-title">{{title}}</h5>
+    <p class="toast-message">{{msg}}</p>
+  </div>
+</div> -->
+
+
+
+<div id="toast"  class="toast-container {{ type }} sc-toast " *ngIf='opacity !=0'
+[style.opacity]='opacity' [style.zindex]='zIndex'>
+<!-- Error -->
+<i class="material-icons mat-icon">{{iconType}}</i>
+<!-- Warning -->
+<!-- <md-icon>warning</md-icon> -->
+<!-- Info -->
+<!-- <md-icon>info</md-icon> -->
+<!-- Success -->
+<!-- <md-icon>done all</md-icon> -->
+<div class="toast-card mdl-shadow--16dp">
+ <h5 class="toast-title">{{title}}</h5>
+ <p class="toast-message">{{msg}}</p>
+</div>
+</div>

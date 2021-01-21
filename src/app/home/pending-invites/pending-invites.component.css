@@ -1,0 +1,99 @@
+.list-btn-round {
+    border: none;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    position: relative;
+    border-radius: 50%;
+    margin: 8px 0 8px 15px;
+    vertical-align: middle;
+    outline: none;
+    cursor: pointer;
+}
+
+.list-btn-round i {
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -15px 0 0 -15px;
+    color: #fff;
+}
+
+.session-card1 {
+    /* border: 1px solid #929292;
+    border-radius: 5px; */
+    padding: 2.5%;
+    margin-bottom: 15px;
+    background: whitesmoke;
+    /* min-width: 600px; */
+}
+.session-card2 {
+    /* border: 1px solid #929292;
+    border-radius: 5px; */
+    padding: 2.5%;
+    margin-bottom: 15px;
+    background: white;
+}
+.session-card3 {
+    /* border: 1px solid #929292;
+    border-radius: 5px; */
+    padding: 2.5%;
+    /* margin-bottom: 15px; */
+    margin : 15px auto;
+    width: 70%;
+    background: rgba(152, 185, 194, 0.205);
+}
+
+.issue-type {
+    color: #414042;
+    font-size: 20px;
+    text-transform: capitalize;
+    position: relative;
+}
+
+.hospital-name {
+    color: #b2b2b2;
+    font-size: 17px;
+    text-transform: capitalize;
+}
+
+.list-btn {
+    background: transparent;
+    border: 1px solid #929292;
+    height: 34px;
+    line-height: 32px;
+    border-radius: 40px;
+    padding: 0 10px;
+    font-size: 18px;
+    color: #00AECC;
+    position: relative;
+    cursor: pointer;
+    /* margin: 15px 0 15px 15px; */
+    outline: none;
+    vertical-align: middle;
+}
+
+.list-btn.list-btn-ico > i {
+   position: absolute;
+   font-size: 22px;
+   left: 5px;
+   top: 50%;
+   margin-top: -11px;
+}
+
+.list-btn.list-btn-ico {
+   padding-left: 34px;
+}
+
+.list-btn.list-btn-ico.green-btn {
+    background-color: #4cda64;
+    color: #fff;
+    border-color: #4cda64;
+
+}
+.list-btn.list-btn-ico.red-btn {
+    background-color: #dd662e;
+    color: #fff;
+    border-color: #dd662e;
+}

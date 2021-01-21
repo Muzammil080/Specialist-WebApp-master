@@ -1,0 +1,24 @@
+h4 {
+    color: #00aecd;
+}
+textarea {
+    /* margin-top: 14px;
+    height: 170px;
+    min-height: 170px;
+    max-height: 180px;
+    width: 610px;
+    margin-left:50px; */
+    width: 100%;
+}
+
+.full-width {
+    width: 100%;
+}
+
+/* .mat-dialog-actions{
+    padding: 12px 0;
+    margin-bottom: 0px;
+    float: right !important;
+    display: block;
+    margin: 2px;
+} */

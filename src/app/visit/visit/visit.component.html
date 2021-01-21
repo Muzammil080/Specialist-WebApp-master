@@ -1,0 +1,40 @@
+<div class="mainContainer">
+    <div id="main">
+        <nav class="navbar navbar-expand-sm fixed-top navbar-light navbar-vm">
+            <div class="container-fluid">
+                <div class="row full">
+                    <div class="col">
+                        <div class="logo-box-header">
+                            <embed src="assets/img/svg/logo.svg">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </nav>
+        <!-- End of Navbar -->
+    </div>
+    <section class="full-pg">
+        <div class="container">
+            <div class="full-pgmid-content">
+                <div *ngIf="isLoading">
+                    <div class="capt-cont">Please wait...</div>
+
+                    <div class="stage">
+                        <div class="dot-floating"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </section>
+    <div class="footer">
+        <div class="copyright">
+            <p style="float: right; margin-right: 2px;">Version {{version}}</p>
+            <p style="text-align: center; margin-left: 9%;">
+                &copy; {{ currentDate | date: "yyyy" }} VeeMed Inc
+            </p>
+        </div>
+    </div>
+
+</div>

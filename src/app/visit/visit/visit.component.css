@@ -1,0 +1,152 @@
+.mainContainer{
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    bottom: 0px;
+    right: 0px;
+    display: flex;
+}
+
+section.full-pg {
+    margin-top: 75px;
+    /* min-height: calc(100vh - 155px); */
+    padding-bottom: 30px;
+    position: absolute;
+    top: 75px;
+    width: 100%;
+}
+
+.full-pgmid-content {
+    text-align: center;
+    padding-top: 130px;
+}
+.capt-cont {
+    font-size: 22px;
+    color: #333;
+    font-weight: 500;
+}
+.stage {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    padding: 2rem 0;
+    margin: 0 -5%;
+    overflow: hidden;
+}
+
+/**
+ * ==============================================
+ * Dot Floating
+ * ==============================================
+ */
+ .dot-floating {
+    position: relative;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #00aecc;
+    color: #00aecc;
+    animation: dot-floating 3s infinite cubic-bezier(0.15, 0.6, 0.9, 0.1);
+  }
+
+  .dot-floating::before, .dot-floating::after {
+    content: '';
+    display: inline-block;
+    position: absolute;
+    top: 0;
+  }
+
+  .dot-floating::before {
+    left: -12px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #00aecc;
+    color: #00aecc;
+    animation: dot-floating-before 3s infinite ease-in-out;
+  }
+
+  .dot-floating::after {
+    left: -24px;
+    width: 10px;
+    height: 10px;
+    border-radius: 5px;
+    background-color: #00aecc;
+    color: #00aecc;
+    animation: dot-floating-after 3s infinite cubic-bezier(0.4, 0, 1, 1);
+  }
+
+  @keyframes dot-floating {
+    0% {
+      left: calc(-50% - 5px);
+    }
+    75% {
+      left: calc(50% + 105px);
+    }
+    100% {
+      left: calc(50% + 105px);
+    }
+  }
+
+  @keyframes dot-floating-before {
+    0% {
+      left: -50px;
+    }
+    50% {
+      left: -12px;
+    }
+    75% {
+      left: -50px;
+    }
+    100% {
+      left: -50px;
+    }
+  }
+
+  @keyframes dot-floating-after {
+    0% {
+      left: -100px;
+    }
+    50% {
+      left: -24px;
+    }
+    75% {
+      left: -100px;
+    }
+    100% {
+      left: -100px;
+    }
+  }
+
+  nav.navbar.fixed-top.navbar-light.navbar-vm {
+    background-color: #fff;
+    padding: 0 20px;
+    min-height: 75px;
+    color: #00aecd;
+    z-index: 900 !important;
+    border-bottom: 1px solid #ebebeb;
+}
+.fixed-top .row.full {
+    width: 100%;
+}
+.logo-box-header {
+    text-align: center;
+}
+.logo-box-header embed {
+    height: 40px;
+}
+
+
+.footer{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 40px;
+}
+
+.copyright
+{
+    color: lightgrey;
+}
+

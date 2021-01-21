@@ -1,0 +1,436 @@
+<nav *ngIf="Type == 'session'" id="navbar" class="navbar navbar-expand-lg fixed-top navbar-light navbar-vm">
+        <div class="nav-title-box clearfix">
+                <i class="icon_vm_document"></i>
+                <div class="dropdown">
+                        <div class="titleblock">
+                                <div class="name">{{Name}}</div>
+                                <div class="place">{{Hospital}}</div>
+                        </div>
+                        <div class="dropdown-content" style="padding:20px;">
+                                <table>
+                                        <tr>
+                                                <th style="color:#00aecd; border-top:0px;">
+                                                        <i class="icon_vm_document" style="    font-size: 2em;
+                                                        margin-top: -3px;
+                                                        margin-right: 5px;">
+                                                        </i>
+                                                        Patient info
+                                                </th>
+                                                <br>
+                                        </tr>
+                                        <tr>
+                                                <td style="color:#00aecd">DOB:</td>
+                                                <td>{{Dob ? ( (Dob | date:'MMM d, y') +' (Age: ' + Age + ')') : 'Unknown'}}
+                                                </td>
+                                        </tr>
+                                        <tr>
+                                                <td style="color:#00aecd">Sex:</td>
+                                                <td>{{Gender}}</td>
+                                        </tr>
+                                        <tr>
+                                                <td style="color:#00aecd">MRN:</td>
+                                                <td>{{Mrn}}</td>
+                                        </tr>
+                                        <tr>
+                                                <td style="color:#00aecd">Physician Name:</td>
+                                                <td>{{PhysicianName}}</td>
+                                        </tr>
+                                        <tr>
+                                                <td style="color:#00aecd">Physician Cell:</td>
+                                                <td>{{PhysicianCell}}</td>
+                                        </tr>
+                                        <tr>
+                                                <td style="color:#00aecd">Last Well Known Date:</td>
+                                                <td>{{ LastWellKnownDate ? (LastWellKnownDate | date:'MMM d, y') :
+                                                        'Unknown'
+                                                        }}
+                                                </td>
+                                        </tr>
+                                        <tr>
+                                                <td style="color:#00aecd">Reason For Request:</td>
+                                                <td>{{reasonForRequest}}</td>
+                                        </tr>
+                                        <tr>
+                                                <td style="color:#00aecd">Visit Type:</td>
+                                                <td>{{VisitType}}</td>
+                                        </tr>
+                                        <tr>
+                                                <td style="color:#00aecd">Priority:</td>
+                                                <td>{{Priority}}</td>
+                                        </tr>
+                                </table>
+                        </div>
+                </div>
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                        <li class="nav-item">
+                                <a class="nav-link" (click)="onVideo()">
+                                        <i class="icon_vm_video"></i>
+                                        <span class="item-name">Video</span>
+                                </a>
+                        </li>
+                        <li class="nav-item" *ngIf="Pacsshow">
+                                <a class="nav-link" (click)="onPacs()">
+                                        <i class="icon_vm_pacs"></i>
+                                        <span class="item-name">PACS</span>
+                                </a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link" (click)="onNotes()">
+                                        <i class="icon_vm_document"></i>
+                                        <span class="item-name">Notes</span>
+                                </a>
+                        </li>
+
+                </ul>
+        </div>
+</nav>
+
+<nav *ngIf="Type == 'endpoint'" id="navbar" class="navbar navbar-expand-lg fixed-top navbar-light navbar-vm">
+        <div class="nav-title-box clearfix">
+                <i class="icon_vm_endpoints"></i>
+                <div class="titleblock">
+                        <div class="name">{{endpointFacilityName}}</div>
+                        <div class="place">{{endpointSerialNumber}}</div>
+                </div>
+
+        </div>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav ml-auto">
+                        <!-- <li class="nav-item">
+                                <a class="nav-link" (click)="onVideo()">
+                                        <i class="icon_vm_video"></i>
+                                        <span class="item-name">Video</span>
+                                </a>
+                        </li> -->
+                        <!-- <li class="nav-item" *ngIf="Pacsshow">
+                                <a class="nav-link" (click)="onPacs()">
+                                        <i class="icon_vm_pacs"></i>
+                                        <span class="item-name">PACS</span>
+                                </a>
+                        </li>
+                        <li class="nav-item">
+                                <a class="nav-link" (click)="onNotes()">
+                                        <i class="icon_vm_document"></i>
+                                        <span class="item-name">Notes</span>
+                                </a>
+                        </li> -->
+
+                </ul>
+        </div>
+</nav>
+
+
+<!-- video -->
+
+<!-- <div id="render" [style.visibility]="renderHide" [style.position]="renderPosition" [style.width]="renderW" [style.height]="renderH"
+        [style.bottom]="renderP" [style.left]="renderL">
+
+        <div class="call-connecting">
+                <div class="loading-display-box">
+                        <div style="border: 0px solid black; width: 200px; height:200px; position: absolute; top:0;bottom: 0;left: 0;right: 0;margin: auto; ">
+                                <div class="ptl pbm">
+                                        <span class="vm-loader"></span>
+                                        <div class="pts loading-txt">Connecting...</div>
+                                </div>
+
+                        </div>
+                        <div style="border: 0px solid black; width: 195px; height:100px; position: absolute; top:1;bottom: 0;left: 0;right: 0;margin: auto; ">
+                                <button class="list-btn-round decline-btn" onclick="disconnectCallbefore()">
+                                        <i class="icon_vm_phone_decline"></i>
+                                </button>
+                        </div>
+                </div>
+        </div>
+</div> -->
+<div id="call-connecting" class="call-connecting">
+        <div class="loading-display-box">
+                <div class="loding-box">
+
+                        <div class="connecting-icon-container">
+                                <div class="connecting-icon-box">
+                                        <i id="material-icons-1" class="material-icons">
+                                                laptop_mac
+                                        </i>
+                                </div>
+                                <div class="connecting-icon-box">
+                                        <i id="connecting-line-1" class="material-icons connecting-line">
+                                                maximize
+                                        </i>
+                                        <i id="connecting-cross-1" class="material-icons connecting-cross">
+                                                clear
+                                        </i>
+                                        <div id="connecting-1" class="material-icons-animation">
+                                                <div class="loader">Loading...</div>
+                                        </div>
+                                </div>
+                                <div class="connecting-icon-box">
+                                        <i id="material-icons-2" class="material-icons">
+                                                language
+                                        </i>
+                                </div>
+                                <div class="connecting-icon-box">
+                                        <i id="connecting-line-2" class="material-icons connecting-line">
+                                                maximize
+                                        </i>
+                                        <i id="connecting-cross-2" class="material-icons connecting-cross">
+                                                clear
+                                        </i>
+                                        <div id="connecting-2" class="material-icons-animation">
+                                                <div class="loader">Loading...</div>
+                                        </div>
+                                </div>
+                                <div class="connecting-icon-box">
+                                        <i id="material-icons-3" class="material-icons">
+                                                storage
+                                        </i>
+                                </div>
+                                <div class="connecting-icon-box">
+                                        <i id="connecting-line-3" class="material-icons connecting-line">
+                                                maximize
+                                        </i>
+                                        <i id="connecting-cross-3" class="material-icons connecting-cross">
+                                                clear
+                                        </i>
+                                        <div id="connecting-3" class="material-icons-animation">
+                                                <div class="loader">Loading...</div>
+                                        </div>
+                                </div>
+                                <div class="connecting-icon-box">
+                                        <i id="material-icons-4" class="material-icons">
+                                                desktop_mac
+                                        </i>
+                                </div>
+                        </div>
+                        <div style="width: 100%;clear: both; position: absolute; top: 175px;">
+                                <h6 id="connecting-text-0" class="connecting-text" style="display: block">Please wait
+                                        while we connect you to endpoint {{endPoint}} in {{Hospital}} {{specialityName
+                                        ? ' - ' + specialityName : ''}}</h6>
+                                <h6 id="connecting-text-1" class="connecting-text">Checking network connectivity</h6>
+                                <h6 id="connecting-text-2" class="connecting-text">Establishing secure connection to
+                                        Server</h6>
+                                <h6 id="connecting-text-3" class="connecting-text">Connecting to endpoint {{endPoint}}
+                                        in {{Hospital}} {{specialityName ? ' - ' + specialityName : ''}}</h6>
+                        </div>
+
+                        <div id="sessionEndOption"
+                                style="width: 100%;clear: both; position: absolute; top: 180px; display: none;">
+                                <h6>We were unable to connect to Kart. Do you want to reconnect or end session ? </h6>
+                                <button mat-button style="color: #00aecd" onclick="reload()">Try to Reconnect</button>
+                                <button mat-button style="color: red" (click)='EndSession()'>End Session</button>
+                        </div>
+
+                </div>
+                <div class="loding-box-footer">
+
+                        <!-- <button class="list-btn-round decline-btn" onclick="disconnectCallbefore()">
+                                <i class="icon_vm_phone_decline"></i>
+                        </button> -->
+                </div>
+        </div>
+</div>
+<!-- <div id="Renderer_preview" class="Renderer_preview" style="width:200px ; height: 150px ; z-index: 5 ; position: absolute; top: calc(100vh - 155px); left:calc(100% - 200px);"></div>
+<div id="remoteRenderer_Kart" style="width:100% ; height: 100vh ; position: absolute;  z-index: 2 ; top: 0px;">
+        
+</div>
+
+<div id="remoteRenderer_Sp1" style="width:200px ; height: 150px ; z-index: 5 ; position: absolute; top: calc(100vh - 155px); left:0px; display: none;"></div> -->
+
+<!--      custom       -->
+<!-- <div id="options" class="optionsHide">
+        <form>
+        <div id="optionsParameters">
+        <p>
+              
+                <label>Host</label>
+                <input type="text" id="host" value="prod.vidyo.io">
+        </p>
+        <p>
+               
+                <label>Token</label>
+                <input type="text" id="token" placeholder="ACCESS-TOKEN" value="">
+        </p>
+        <p>
+               
+                <label for="displayName">Display Name</label>
+                <input id="displayName" type="text" placeholder="Display Name" value="Guest">
+        </p>
+        <p>
+               
+                <label for="resourceId">Resource ID</label>
+                <input id="resourceId" type="text" placeholder="Conference Reference" value="demoRoom">
+        </p>
+        </div>
+        <p>
+                <label for="cameras">Camera</label>
+                <select id="cameras">
+                        <option value='0'>None</option>
+                </select>
+        </p>
+        <p>
+                <label for="microphones">Microphone</label>
+                <select id="microphones">
+                        <option value='0'>None</option>
+                </select>
+        </p>
+        <p>
+                <label for="speakers">Speaker</label>
+                <select id="speakers">
+                        <option value='0'>None</option>
+                </select>
+        </p>
+        </form>
+        <div id="messages">
+               
+                <span id="error"></span>
+                <span id="message"></span>
+        </div>
+</div> -->
+
+<!-- This is the div into which the Vidyo component will be inserted. -->
+<div id="renderer0" class="renderer0 pluginOverlay"> </div>
+<div id="renderer1" class="renderer1 renderer1animation pluginOverlay"> </div>
+<div id="renderer2" class="pluginOverlay"> </div>
+<div id="renderer3" class="pluginOverlay"> </div>
+<div id="renderer4" class="pluginOverlay"> </div>
+<div id="renderer5" class="pluginOverlay"> </div>
+<!-- <div id="toolbarLeft" class="toolbar hidden">
+        <span id="participantStatus"></span>
+</div> -->
+<!-- <div id="toolbarCenter" class="toolbar hidden">
+     
+        <button id="cameraButton" title="Camera Privacy" class="toolbarButton cameraOn"></button>
+
+      
+        <button id="joinLeaveButton" title="Join Conference" class="toolbarButton callStart"></button>
+
+       
+        <button id="microphoneButton" title="Microphone Privacy" class="toolbarButton microphoneOn"></button>
+</div>
+<div id="toolbarRight" class="toolbar hidden">
+        <span id="connectionStatus">Initializing</span>
+        <span id="clientVersion"></span>
+</div> -->
+<!--      custom       -->
+
+<div class="preview-area-b" [style.display]="previewD">
+
+
+        <div [style.display]="videoLoader"
+                style="border: 0px solid black; width: 90px; height:150px; position: absolute; top:0;bottom: 0;left: 0;right: 0;margin: auto; ">
+                <div class="ptl pbm">
+                        <span class="vm-loader"></span>
+
+                </div>
+
+        </div>
+
+
+        <div id="onlinebox" class="alert alert-success online onlineshow">
+                <a style="text-decoration: none;  color: seagreen;" mat-button onclick="reload()">Reconnect to
+                        session</a>
+                <a style="text-decoration: none;  color: blueviolet; float: right" mat-button
+                        onclick="homepageredirect()">Go
+                        to home page</a>
+        </div>
+        <div id="offlinebox" class="alert alert-danger offline offlineshow">Please check your internet connection </div>
+        <div id="cartofflinebox" class="alert alert-danger cartoffline offlineshow">Session from Kart has been lost
+        </div>
+        <div id="cartdisconect" class="alert alert-success cartdisconect offlineshow">Session has been ended from Kart
+        </div>
+
+        <div id="button-bar" class="button-bar">
+
+                <!-- <button id="addSpecialist" class="list-btn-round light" (click)="onSpecialist()">
+                        <i id="addSpecialistIcon" class="icon_vm_specialist"></i>
+                </button> -->
+
+                <!-- <button onclick="showStatsVidyo()">
+                       show stats
+                </button> -->
+
+                <!-- <button *ngIf="Type == 'session'" id="refreshPacs" class="list-btn-round light" (click)='refreshPacs()'>
+                        <embed (click)='refreshPacs()' style="padding-top: 5px; cursor: pointer" src="assets/img/svg/pacs_reset.svg" >
+                </button> -->
+                <button *ngIf="Type == 'session'" id="refreshPacs" class="list-btn-round light" (click)='refreshPacs()'>
+                        <span class="credits"></span>
+                </button>
+                <button id="resetButton" class="list-btn-round light" onclick="resetcameraButton()">
+                        <i id="resetIcon" class="icon_vm_camera_reset"></i>
+                </button>
+                <button id="cameraButton" class="list-btn-round light">
+                        <i id="camIcon" class="icon_vm_video"></i>
+                </button>
+                <button id="microphoneButton" class="list-btn-round light">
+                        <i id="micIcon" class="icon_vm_mic"></i>
+                </button>
+                <button id="stethoscopeButton" class="list-btn-round dark" (click)="stethoscopeButton()">
+                        <i class="icon_vm_stethoscope"></i>
+                </button>
+
+
+
+                <!--     
+    <button class="pulse list-btn-round">
+        <i  class="icon_vm_stethoscope"></i>
+    </button> -->
+
+                <button class="list-btn-round decline-btn" (click)='ondisconnect()'>
+                        <i class="icon_vm_phone_decline"></i>
+                </button>
+
+
+                <br>
+                <input hidden="hidden" type="radio" id="Scheme1" name="Scheme" value="1" />
+                <label for="Scheme1" style="color: white;"></label>
+                <input hidden="hidden" type="radio" id="Scheme2" name="Scheme" value="2" checked />
+                <label for="Scheme2" style="color: white;"></label>
+                <br>
+        </div>
+
+        <div style="position: absolute;bottom:10px; right:10px; z-index: 5;">
+                <input type="radio" id="Color1" name="Color" value="1" />
+                <label for="Color1" style="color: white;"></label>
+
+                <input type="radio" id="Color2" name="Color" value="2" checked />
+                <label for="Color2" style="color: white;"></label>
+                <button mat-icon-button onclick="fullscreen()">
+                        <mat-icon class="material-icons" style="color: white;">zoom_out_map</mat-icon>
+                </button>
+        </div>
+
+        <canvas style="position: absolute;  z-index: 4" class="unselectable" id="canvascontanier"
+                oncontextmenu="return false;">
+        </canvas>
+
+
+</div>
+
+
+<div *ngIf="showLoader && pageNum != 1" style="margin-top: 30vh ">
+        <div class="text-center">
+                <div class="ptl pbm">
+                        <span class="vm-loader"></span>
+                        <br>
+                        <h6>PACS viewer is loading please wait...</h6>
+                </div>
+
+        </div>
+</div>
+<pacs *ngIf="showPacs" [hidden]="showLoader" (refeshPacs)="refresh()"></pacs>
+<!-- <div *ngIf="pageNum == 3"> -->
+<!-- <notes></notes> -->
+<div class="notebox" *ngIf="dynamicNotesData" [hidden]="showLoader">
+        <dynamic-notes [data]="dynamicNotesData"></dynamic-notes>
+
+</div>
+<!-- </div> -->

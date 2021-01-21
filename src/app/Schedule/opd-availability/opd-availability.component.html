@@ -1,0 +1,79 @@
+<div id="Loadingpage" [style.display]="LoadingPage">
+    <div class="text-center">
+        <div class="ptl pbm">
+            <span class="vm-loader"></span>
+        </div>
+        <div class="pts loading-txt">Please Wait...</div>
+    </div>
+</div>
+
+<ng-template
+    #customHeaderTemplate
+    let-days="days"
+    let-locale="locale"
+    let-dayHeaderClicked="dayHeaderClicked"
+    let-eventDropped="eventDropped"
+>
+    <div class="cal-day-headers">
+        <div
+            class="cal-header"
+            *ngFor="let day of days"
+            [class.cal-past]="day.isPast"
+            [class.cal-today]="day.isToday"
+            [class.cal-future]="day.isFuture"
+            [class.cal-weekend]="day.isWeekend"
+            [ngClass]="day.cssClass"
+            (mwlClick)="dayHeaderClicked.emit({ day: day })"
+            mwlDroppable
+            dragOverClass="cal-drag-over"
+            (drop)="
+                eventDropped.emit({
+                    event: $event.dropData.event,
+                    newStart: day.date
+                })
+            "
+        >
+            <span class="cht">{{
+                day.date | calendarDate: "weekViewColumnHeader":locale
+            }}</span>
+            <button
+                type="button"
+                class="btn-vm-icon"
+                (click)="addAvailability(day.date)"
+            >
+                <i class="material-icons">add_circle</i>
+            </button>
+        </div>
+    </div>
+</ng-template>
+
+<ng-template
+    #customEventTemplate
+    let-weekEvent="weekEvent"
+    let-eventClicked="eventClicked"
+>
+    <div
+        class="cal-event"
+        [style.backgroundColor]="weekEvent.event.color?.secondary"
+        [style.borderColor]="weekEvent.event.color?.primary"
+        (mwlClick)="eventClicked.emit()"
+    >
+        <mwl-calendar-event-actions [event]="weekEvent.event">
+        </mwl-calendar-event-actions>
+        &ngsp;
+        <mwl-calendar-event-title [event]="weekEvent.event" view="week">
+        </mwl-calendar-event-title>
+    </div>
+</ng-template>
+
+<div [style.display]="calenderView" class="unselectablediv">
+    <mwl-calendar-week-view
+        [viewDate]="viewDate"
+        [events]="events"
+        [refresh]="refresh"
+        [headerTemplate]="customHeaderTemplate"
+        [eventTemplate]="customEventTemplate"
+        (eventClicked)="handleEvent('Clicked', $event.event)"
+    >
+    </mwl-calendar-week-view>
+</div>

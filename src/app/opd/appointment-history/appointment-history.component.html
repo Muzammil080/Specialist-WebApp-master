@@ -1,0 +1,131 @@
+<div class="row align-items-center " style="margin-top: 15px;">
+    <div class="col-xl-4 col-lg-4 col-md-3 col-sm-4">
+        <div class="row align-items-center">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                <button
+                    style="min-width: 30%"
+                    id="btnfilter"
+                    mat-raised-button
+                    color="warn"
+                    (click)="historyChangeButton('W')"
+                    [class.disabled]="!LastW"
+                >
+                    Last 7 Days
+                </button>
+                <button
+                    style="min-width: 30%"
+                    id="btnfilter"
+                    mat-raised-button
+                    color="warn"
+                    (click)="historyChangeButton('M')"
+                    [class.disabled]="!LastM"
+                >
+                    Last 30 Days
+                </button>
+                <button
+                    style="min-width: 30%"
+                    id="btnfilter"
+                    mat-raised-button
+                    color="warn"
+                    (click)="historyChangeButton('Y')"
+                    [class.disabled]="!LastY"
+                >
+                    Last 12 Months
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+        <input
+            type="text"
+            class="form-control"
+            placeholder="Search"
+            [(ngModel)]="sessionserach"
+            (keyup.enter)="appointmentsfilter()"
+        />
+    </div>
+</div>
+
+<div class="text-center align-items-center">
+    <mat-spinner
+        [hidden]="!loading"
+        style="margin:auto;margin-top: 25px;"
+    ></mat-spinner>
+</div>
+
+<div
+    class="text-center align-items-center"
+    [hidden]="!isError"
+    style="margin-top: 30px;"
+>
+
+</div>
+
+<div
+    class="text-center align-items-center"
+    *ngIf="sessionsCount == 0 && !loading"
+    style="margin-top: 30px;"
+>
+    No results were found!
+</div>
+
+<div
+    *ngIf="sessionsCount != 0"
+    [hidden]="loading || isError"
+    style="margin-top: 10px;"
+>
+    <table class="table">
+        <tr class="table-custom-border">
+            <th>ID</th>
+            <!-- <th>Partner Site</th>
+            <th>Facility</th> -->
+            <th>Patient Name</th>
+            <th>MRN</th>
+            <!-- <th>End Point</th> -->
+            <th>Received On</th>
+            <th>Call Duration</th>
+            <th></th>
+        </tr>
+        <tr *ngFor="let a of appointments">
+            <td>{{ a.id }}</td>
+            <!-- <td>{{ a.partnerSite }}</td>
+            <td>{{ a.facility }}</td> -->
+            <td>{{a.patientFirstName | titlecase}} {{ a.patientLastName | titlecase }}</td>
+            <td>{{ a.mrn }}</td>
+            <!-- <td>{{ a.endPoint }}</td> -->
+            <td>
+                <span>
+                    {{
+                        a.receivedOn
+                            ? (a.receivedOn | specilist | date: "MMM d, y")
+                            : ""
+                    }}
+                </span>
+                <br />
+                <span>
+                    {{
+                        a.receivedOn
+                            ? (a.receivedOn | specilist | date: "h:mm a")
+                            : ""
+                    }}
+                </span>
+            </td>
+            <td>{{ a.sessionTime }} Min</td>
+            <td>
+                <button mat-stroked-button color="warn" (click)="openNote(a)">Notes</button>
+            </td>
+            <!--<td class="gry-bg"><button (click)="openSessionDetail(a)" mat-button>Log</button></td>-->
+        </tr>
+    </table>
+
+    <mat-paginator
+        *ngIf="sessionsCount != 0"
+        [hidden]="loading || isError"
+        [length]="sessionsCount"
+        [pageSize]="pageSize"
+        [pageIndex]="pageIndex"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="pageChanged($event)"
+    >
+    </mat-paginator>
+</div>

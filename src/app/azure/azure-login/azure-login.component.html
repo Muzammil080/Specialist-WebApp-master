@@ -1,0 +1,26 @@
+<div class="flex-container">
+    <div class="auth-card">
+        <div id="Loadingpage" *ngIf="isLoading">
+            <div class="text-center">
+                <div class="ptl pbm">
+                    <span class="vm-loader"></span>
+                </div>
+                <div class="pts loading-txt">Please Wait...</div>
+            </div>
+        </div>
+
+        <div *ngIf="showError" class="capt-cont">
+            Sorry, your credentials are not valid.
+        </div>
+    </div>
+</div>
+
+
+<div class="footer">
+    <div class="copyright">
+        <p style="float: right; margin-right: 2px;">Version {{version}}</p>
+        <p style="text-align: center; margin-left: 9%;">
+            &copy; {{ currentDate | date: "yyyy" }} VeeMed Inc
+        </p>
+    </div>
+</div>

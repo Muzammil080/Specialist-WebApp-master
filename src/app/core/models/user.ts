@@ -1,0 +1,56 @@
+import { BaseModel } from './base.model';
+
+import { Specialist } from './specialist.model';
+
+export class User extends BaseModel {
+    userName: string;
+    password: any;
+    confirmPassword: any;
+    email: string;
+    fullName: string;
+    firstName: string;
+    lastName: string;
+    mobileNumber: String;
+    credentials: String;
+    title: String;
+    utcDSTOffset: number;
+    country: string;
+    countryId: number;
+    employer: string;
+    address: string;
+    address1: string;
+    city: any;
+    cityId: any;
+    stateId: any;
+    state: string;
+    userStatus: string;
+    zipCode: string;
+    specialist: Specialist = new Specialist();
+    secretQuestion1: string;
+    secretQuestion2: string;
+    secretAnswer1: string;
+    secretAnswer2: string;
+    terms: string;
+    webUrl: string;
+    token: string;
+    expiry: number;
+    entityType: string;
+    entityName: string;
+    entityId: number;
+    profilePic: any;
+    accountVerified: boolean;
+    userRole: string;
+    roleId: number;
+    roleName: string;
+    lastLogin: string;
+    created: string;
+    stateName: string;
+    countryName: string;
+    cityName: string;
+    updated: string;
+    gender: string;
+    userGUID: string;
+    isSpecialist: boolean;
+    userType:string;
+    partnerSiteId:number;
+}

@@ -1,0 +1,28 @@
+<div id="container">
+        <br>
+        <table *ngIf="notes && notes.length > 0" class="table">
+                <tr class="table-custom-border">
+                        <th>ID</th>
+                        <th>Submitted By</th>
+                        <th>MRN #</th>
+                        <th>Submitted Date</th>
+                        <th>Accepted On</th>
+                        <th>Days Accepted</th>
+                        <th></th>
+
+                </tr>
+                <tr *ngFor="let s of notes" [style.display]="visibilityLoginSpinnerdata">
+                        <td>{{s.referenceId}}</td>
+                        <td>{{s.submittedBy}}</td>
+                        <td>{{s.mrn}}</td>
+                        <td>{{s.submittedTime | split | date:'MMM d y h:mm a'}}</td>
+                        <td>{{s.acceptedOn | split | date:'MMM d y h:mm a'}}</td>
+                        <td>{{s.daysAccepted}}</td>
+                        <td>
+                                <button mat-stroked-button color="primary" (click)="openUnsignedRequest(s)">Open</button>
+                                <button mat-stroked-button color="primary" (click)="sessionRejectConfirmation(s)">Reject</button>
+                        </td>
+                </tr>
+        </table>
+        <h6 *ngIf="notes && notes.length == 0" class="nodata">There are no unsigned notes</h6>
+</div>

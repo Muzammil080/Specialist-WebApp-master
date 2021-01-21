@@ -1,0 +1,81 @@
+<div class="tab-container-box">
+    <div id="CurrentVirtualSessions" style="padding-right: 25px; padding-left: 25px;">
+        <div style="float: right;">
+            <button id="resetButton" class="list-btn-round light" (click)='getRequests()'>
+                <i id="camIcon" class="icon_vm_refresh"></i>
+            </button>
+        </div>
+        <div style="clear:both;">
+        </div>
+        <div class=".ps-rev" style="border: 0px solid black;">
+            <div id="Loadingpage" [style.display]="visibilityLoginSpinner">
+                <div class="text-center">
+                    <div class="ptl pbm">
+                        <span class="vm-loader"></span>
+                    </div>
+
+                </div>
+            </div>
+            <h6 [style.display]="visibilitysessionmessage" class="nodata">There are no new requests.</h6>
+            <div *ngFor="let r of request  ; let rowIndex2  = index  ">
+                <div *ngIf="visibilityLoginSpinner != 'block'">
+                    <div class="session-card1">
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6">
+                                <!-- <div>Patient Name: {{r.patientName}}</div>
+                                <div>Submitted By: {{r.submittedBy}}</div>
+                                <div>Submitted Date: {{r.submittedTime}}</div>
+                                <div>priority: {{r.priority}}</div> -->
+                                <table>
+                                    <tr>
+                                        <th>Patient Name: </th>
+                                        <td>{{r.patientName}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Submitted By: </th>
+                                        <td>{{r.submittedBy}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Submitted Date: </th>
+                                        <td>{{r.submittedTime | split | date:'MMM d, y, h:mm a'}}</td>
+                                    </tr>
+                                    <tr>
+                                        <th>Priority: </th>
+                                        <td>{{r.priority}}</td>
+                                    </tr>
+                                </table>
+                                <!-- <div class="issue-type show-ico mll">
+                                    <i class="icon_vm_warning"></i>{{request.specialityName +
+                                    (request.isHighPriority ? " Call Waiting - URGENT":"
+                                    Call Waiting....")}}
+                                </div>
+                                <div *ngIf="request.isHighPriority == false" class="issue-type  mll">
+                                    <i class="icon_vm_warning"></i>{{request.specialityName +
+                                    (request.isHighPriority ? " Call Waiting - URGENT":"
+                                    Call Waiting....")}}
+                                </div>
+                                <div class="hospital-name mll">{{request.facilityName}}</div>
+                                <div class="hospital-name mll">{{request.pendingSince | split | date:'MMM d, y,
+                                    h:mm a'}}</div>
+                                <div class="hospital-name mll">Reason for request: {{request.reasonForRequest}}</div> -->
+                            </div>
+                            <div class="col-lg-6 col-md-6 text-right">
+                                <!-- <button *ngIf="msgDefer" class="list-btn list-btn-ico" (click)='callDefere(request.id)'>
+                                    <i class="icon_vm_time"></i>Defer call
+                                </button>
+                                <button class="list-btn-round decline-btn" (click)='callReject(request.id)'>
+                                    <i class="icon_vm_phone_decline"></i>
+                                </button>
+                                <button class="list-btn-round accept-btn" (click)='callAccept(request.id,request.facilityName,request.reasonForRequest,request.specialityName,request.endPoint,request.endPointId)'>
+                                    <i class="icon_vm_phone"></i>
+                                </button> -->
+                                <button class="list-btn list-btn-ico" (click)='callAccept(r)'>Accept
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

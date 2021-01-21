@@ -1,0 +1,60 @@
+<div style="padding-right: 25px; padding-left: 25px;">
+    <div style="float: right;">
+        <button
+            id="resetButton"
+            class="list-btn-round light"
+            (click)="getPendingInvites()"
+        >
+            <i id="camIcon" class="icon_vm_refresh"></i>
+        </button>
+    </div>
+    <div style="clear: both;"></div>
+    <div class="ps-rev">
+        <div id="Loadingpage" *ngIf="isLoading">
+            <div class="text-center">
+                <div class="ptl pbm">
+                    <span class="vm-loader"></span>
+                </div>
+            </div>
+        </div>
+        <h6 class="nodata" *ngIf="!isLoading && invites.length == 0">
+            There are no pending invites.
+        </h6>
+
+        <div *ngFor="let invite of invites">
+            <div *ngIf="!isLoading && invites.length > 0">
+                <div class="session-card3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="hospital-name mll">
+                                Invited to patient session by:
+                                Dr.{{ invite.primarySpecialistName | titlecase }}
+                            </div>
+                            <div *ngIf="invite.patientFirstName" class="hospital-name mll">
+                                For Patient:
+                                {{ invite.patientFirstName | titlecase }} {{ invite.patientLastName | titlecase }}
+                            </div>
+                            <div class="hospital-name mll">
+                                {{ invite.createdOn | date: "MMM d y h:mm a"}}
+                            </div>
+                        </div>
+                        <div class="col text-center">
+                            <button
+                        class="list-btn list-btn-ico red-btn"
+                        (click)="decline(invite)"
+                        >Decline
+                        <i class="icon_vm_phone_decline"></i>
+                    </button>
+                            <button
+                                class="list-btn list-btn-ico green-btn"
+                                (click)="join(invite)"
+                            >Join
+                                <i class="icon_vm_phone"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

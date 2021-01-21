@@ -1,0 +1,8 @@
+<div *ngIf="uiElementData && form" class="textField" [formGroup]="form">
+    <!--Caption, if available-->
+    <label *ngIf="uiElementData.caption">
+        {{uiElementData.caption}}
+    </label>
+    <input *ngIf="uiElementData.bindTo == 'totalScore'"  type="text"  disabled style="border: none; background: transparent;"
+    [formControlName]="uiElementData.bindTo" maxlength="512"/>
+</div>

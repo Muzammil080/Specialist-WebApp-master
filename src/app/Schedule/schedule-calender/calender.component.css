@@ -1,0 +1,265 @@
+#Color1:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid whitesmoke;
+}
+
+/* .css-spiner {
+  background-color: blue;
+}
+
+.css-spiner:hover {
+  background-color: blue;
+} */
+
+.partnersitename{
+  margin-left: 10px;
+  margin-top: 10px;
+  color: #00aecc;
+  font-size: 0.9em;
+  max-width: 130px;
+  overflow: hidden;
+  height: 23px;
+}
+#Color1:checked:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #00aecd;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid whitesmoke;
+}
+#Color2:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #d1d3d1;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid whitesmoke;
+}
+
+#Color2:checked:after {
+  width: 15px;
+  height: 15px;
+  border-radius: 15px;
+  top: -2px;
+  left: -1px;
+  position: relative;
+  background-color: #28B463;
+  content: '';
+  display: inline-block;
+  visibility: visible;
+  border: 2px solid whitesmoke;
+}
+/* #span1:hover + .button-bar-hidden {
+  display: block;
+} */
+.holidays
+{
+  position: absolute;  margin-left:6px; margin-top:25px; z-index: 1;color: #00aecc; border: 0px solid black
+}
+.cal-day-selected
+{
+   /* background-color: deeppink !important; */
+   background-image: url("../../../assets/img/x.png");
+   background-size: 40px,40px;
+   background-repeat: no-repeat;
+   background-position: center; 
+}
+
+.cal-day-selected:hover {
+  /* background-color: deeppink !important; */
+  background-image: url("../../../assets/img/x.png");
+  background-size: 40px,40px;
+  background-repeat: no-repeat;
+  background-position: center; 
+}
+
+.cal-day-selectedoffday,
+
+.cal-day-selectedoffday:hover {
+  background-color: #ff2c55 !important;
+   /* background-image: url("../../../assets/img/x.png");
+  background-size: 40px,40px;
+  background-repeat: no-repeat;
+  background-position: center;  */
+}
+.cal-day-selectedworkingday,
+
+.cal-day-selectedworkingday:hover {
+  background-color: #00aecc !important;
+   /* background-image: url("../../../assets/img/x.png");
+  background-size: 40px,40px;
+  background-repeat: no-repeat;
+  background-position: center;  */
+}
+
+.cal-disabled {
+  background-color: #eee;
+  pointer-events: none;
+}
+
+.cal-disabled .cal-day-number {
+  opacity: 0.1;
+}
+.logo-box img {
+    width: 17rem;
+  }
+  
+  .logo-box {
+    text-align: center;
+    margin: 10% auto 6%;
+  }
+  
+  .logo-box embed {
+    width: 250px;
+  }
+  
+  .reg-card {
+    max-width: 550px;
+    margin: 2rem auto 1rem;
+  }
+  .auth-card-fields {
+    border: 1px solid #ccc;
+  }
+  .auth-card-btn-box {
+    text-align: center;
+    padding: 30px;
+  }
+  
+  .input-wrap .vm-input {
+    width: 100%;
+    padding: 12px 0;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    outline: none;
+    font-size: 20px;
+    color: #414141;
+  }
+  .input-wrap:last-child .vm-input {
+    border-bottom: none;
+  }
+  
+  .input-wrap {
+    padding: 0 15px;
+  }
+  
+  .vm-input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    color: #b2b2b2;
+  }
+  .vm-input::-moz-placeholder { /* Firefox 19+ */
+    color: #b2b2b2;
+  }
+  .vm-input:-ms-input-placeholder { /* IE 10+ */
+    color: #b2b2b2;
+  
+  }
+  .vm-input:-moz-placeholder { /* Firefox 18- */
+    color: #b2b2b2;
+  }
+  .auth-card-btn-box .btn-vm-auth2 {
+    border: 1px solid #929292;
+    background-color: #00aecc;
+    cursor: pointer;
+    border-radius: 25px;
+    font-size: 17px;
+    color: white;
+   
+    line-height: 36px;
+    height: 40px;
+    width: 15%;
+    
+    margin-left: auto;
+    margin-right: auto;
+    /* float: right; */
+  }
+  
+  .auth-card-btn-box .btn-vm-auth2:hover {
+    border: 1px solid #929292;
+    background-color: #00aecc;
+    color: #fff;
+    border-color: #00aecc;
+  }
+  
+  .auth-card-btn-box .btn-vm-clear {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: 19px;
+    font-size: 17px;
+    color: #929292;
+    padding: 0 35px;
+    line-height: 36px;
+    height: 38px;
+  }
+  
+  .auth-card-btn-box .btn-vm-clear:hover {
+    background-color: #f5f5f5;
+    color: #00aecc;
+  }
+  
+  mat-form-field.registration-form-full-width {
+    width: 100%;
+  }
+  
+  
+  .steps-indicator-box {
+    height: 30px;
+    position: relative;
+  }
+  
+  .steps-indicator {
+    display: block;
+    text-align: center;
+    width: 184px;
+    margin: auto;
+  }
+  
+  span.step {
+    float: left;
+    width: 16px;
+    height: 16px;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 50%;
+    margin: 0 15px;
+  }
+  span.step.inprogress {
+    border: 1px solid #ccc;
+    background-color: #00aecc;
+  }
+  
+  span.steps-indicator:after {
+    content: '';
+    height: 1px;
+    background-color: #ccc;
+    position: relative;
+    top: -8px;
+    z-index: -1;
+  }
+  
+  /* Loader */
+  .loading-txt {
+    color: #929292;
+    font-size: 20px;
+  }
+  
+  

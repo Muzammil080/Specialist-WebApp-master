@@ -1,0 +1,23 @@
+<br />
+<div class="tab-container-box">
+    <mat-tab-group *ngIf="markOffDays || viewSchedule">
+
+        <mat-tab *ngIf="viewSchedule" label="Inpatient Schedule">
+            <br />
+            <mySchedule></mySchedule>
+        </mat-tab>
+        <!--will be using opd availablity as schedule-->
+        <mat-tab *ngIf="opdAvailability" label="Outpatient Schedule">
+            <br />
+            <opd-availability></opd-availability>
+        </mat-tab>
+        <mat-tab *ngIf="markOffDays" label="Days Off">
+            <br />
+            <markOffDays></markOffDays>
+        </mat-tab>
+        <!-- <mat-tab *ngIf="opdSchedule" label="My Out Patient Schedule">
+            <br />
+            <opd-schedule></opd-schedule>
+        </mat-tab> -->
+    </mat-tab-group>
+</div>

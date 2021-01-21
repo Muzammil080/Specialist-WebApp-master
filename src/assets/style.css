@@ -1,0 +1,564 @@
+@font-face {
+  font-family: 'veemed';
+  src:
+    url('fonts/veemed.ttf?49uxey') format('truetype'),
+    url('fonts/veemed.woff?49uxey') format('woff'),
+    url('fonts/veemed.svg?49uxey#veemed') format('svg');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+[class^="icon_vm_"], [class*=" icon_vm_"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'veemed' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon_vm_outpatient:before {
+  content: "\e9ab";
+}
+.icon_vm_inpatient:before {
+  content: "\e9ac";
+}
+.icon_vm_stroke-image:before {
+  content: "\e9aa";
+}
+.icon_vm_refresh1:before {
+  content: "\e9a5";
+}
+.icon_vm_question:before {
+  content: "\e9a6";
+}
+.icon_vm_brightness_2:before {
+  content: "\e9a7";
+}
+.icon_vm_volume_2:before {
+  content: "\e9a8";
+}
+.icon_vm_wifi_2:before {
+  content: "\e9a9";
+}
+.icon_vm_scheduler:before {
+  content: "\e900";
+}
+.icon_vm_alerts:before {
+  content: "\e901";
+}
+.icon_vm_appointment:before {
+  content: "\e902";
+}
+.icon_vm_patient-journey:before {
+  content: "\e903";
+}
+.icon_vm_patient1:before {
+  content: "\e904";
+}
+.icon_vm_search-appointment:before {
+  content: "\e905";
+}
+.icon_vm_session-history:before {
+  content: "\e906";
+}
+.icon_vm_unverified-appointment:before {
+  content: "\e9ad";
+}
+.icon_vm_ophthalmology:before {
+  content: "\e907";
+}
+.icon_vm_gastroenterology:before {
+  content: "\e908";
+}
+.icon_vm_nephrology1:before {
+  content: "\e909";
+}
+.icon_vm_family-medicine:before {
+  content: "\e90a";
+}
+.icon_vm_radiation-oncology:before {
+  content: "\e90b";
+}
+.icon_vm_allergy-and-immunology:before {
+  content: "\e90c";
+}
+.icon_vm_peripherals:before {
+  content: "\e90d";
+}
+.icon_vm_family-visit:before {
+  content: "\e90e";
+}
+.icon_vm_emergency-medicine:before {
+  content: "\e90f";
+}
+.icon_vm_social-worker:before {
+  content: "\e910";
+}
+.icon_vm_invite:before {
+  content: "\e911";
+}
+.icon_vm_blur:before {
+  content: "\e912";
+}
+.icon_vm_more:before {
+  content: "\e913";
+}
+.icon_vm_message:before {
+  content: "\e914";
+}
+.icon_vm_phone_decline_filled:before {
+  content: "\e915";
+}
+.icon_vm_phone_filled:before {
+  content: "\e916";
+}
+.icon_vm_refresh:before {
+  content: "\e917";
+}
+.icon_vm_camera_reset:before {
+  content: "\e918";
+}
+.icon_vm_lookup:before {
+  content: "\e919";
+}
+.icon_vm_last_patient:before {
+  content: "\e91a";
+}
+.icon_vm_clear:before {
+  content: "\e91b";
+}
+.icon_vm_bandwidth_stats:before {
+  content: "\e91c";
+}
+.icon_vm_stroke_2:before {
+  content: "\e91d";
+}
+.icon_vm_close:before {
+  content: "\e91e";
+}
+.icon_vm_minimize:before {
+  content: "\e91f";
+}
+.icon_vm_stroke_1 .path1:before {
+  content: "\e920";
+  color: rgb(2, 2, 2);
+}
+.icon_vm_stroke_1 .path2:before {
+  content: "\e921";
+  margin-left: -1em;
+  color: rgb(1, 1, 1);
+}
+.icon_vm_hospital:before {
+  content: "\e922";
+}
+.icon_vm_patient_sad-02:before {
+  content: "\e923";
+}
+.icon_vm_xray:before {
+  content: "\e924";
+}
+.icon_vm_lab_technician:before {
+  content: "\e925";
+}
+.icon_vm_privacy_phone:before {
+  content: "\e926";
+}
+.icon_vm_psychiatry:before {
+  content: "\e927";
+}
+.icon_vm_doctor:before {
+  content: "\e928";
+}
+.icon_vm_patient_elderly:before {
+  content: "\e929";
+}
+.icon_vm_ct_scan:before {
+  content: "\e92a";
+}
+.icon_vm_computer_downloading:before {
+  content: "\e92b";
+}
+.icon_vm_thermometer:before {
+  content: "\e92c";
+}
+.icon_vm_cardiology:before {
+  content: "\e92d";
+}
+.icon_vm_nurse:before {
+  content: "\e92e";
+}
+.icon_vm_patient_elderly_2:before {
+  content: "\e92f";
+}
+.icon_vm_data:before {
+  content: "\e930";
+}
+.icon_vm_consult_inprogress:before {
+  content: "\e931";
+}
+.icon_vm_pulse_oximeter:before {
+  content: "\e932";
+}
+.icon_vm_dermatology:before {
+  content: "\e933";
+}
+.icon_vm_ambulace:before {
+  content: "\e934";
+}
+.icon_vm_patient_baby:before {
+  content: "\e935";
+}
+.icon_vm_telemedicine_cart:before {
+  content: "\e936";
+}
+.icon_vm_doctor_busy:before {
+  content: "\e937";
+}
+.icon_vm_ecg:before {
+  content: "\e938";
+}
+.icon_vm_endocrinology:before {
+  content: "\e939";
+}
+.icon_vm_clinic:before {
+  content: "\e93a";
+}
+.icon_vm_patient_teenage:before {
+  content: "\e93b";
+}
+.icon_vm_transmission_of_data:before {
+  content: "\e93c";
+}
+.icon_vm_service_unavailable:before {
+  content: "\e93d";
+}
+.icon_vm_dermatoscope:before {
+  content: "\e93e";
+}
+.icon_vm_neurology:before {
+  content: "\e93f";
+}
+.icon_vm_medicine:before {
+  content: "\e940";
+}
+.icon_vm_patient_teenage_2:before {
+  content: "\e941";
+}
+.icon_vm_laptop:before {
+  content: "\e942";
+}
+.icon_vm_patient_happy:before {
+  content: "\e943";
+}
+.icon_vm_patient_new_mother:before {
+  content: "\e944";
+}
+.icon_vm_ipad:before {
+  content: "\e945";
+}
+.icon_vm_network_problem:before {
+  content: "\e946";
+}
+.icon_vm_rheumatology:before {
+  content: "\e947";
+}
+.icon_vm_nephrology:before {
+  content: "\e948";
+}
+.icon_vm_patient_happy_2:before {
+  content: "\e949";
+}
+.icon_vm_patient_in_icu:before {
+  content: "\e94a";
+}
+.icon_vm_iphone:before {
+  content: "\e94b";
+}
+.icon_vm_slow_network:before {
+  content: "\e94c";
+}
+.icon_vm_palliative_care:before {
+  content: "\e94d";
+}
+.icon_vm_pulmonary:before {
+  content: "\e94e";
+}
+.icon_vm_patient_sad-46:before {
+  content: "\e94f";
+}
+.icon_vm_patient_in_home:before {
+  content: "\e950";
+}
+.icon_vm_android_phone:before {
+  content: "\e951";
+}
+.icon_vm_software_service:before {
+  content: "\e952";
+}
+.icon_vm_stroke:before {
+  content: "\e953";
+}
+.icon_vm_drip:before {
+  content: "\e954";
+}
+.icon_vm_patiemt_sad_2:before {
+  content: "\e955";
+}
+.icon_vm_patient_in_clinic:before {
+  content: "\e956";
+}
+.icon_vm_stethoscope:before {
+  content: "\e957";
+}
+.icon_vm_lab_report:before {
+  content: "\e958";
+}
+.icon_vm_icu:before {
+  content: "\e959";
+}
+.icon_vm_raiology:before {
+  content: "\e95a";
+}
+.icon_vm_patient_distressed:before {
+  content: "\e95b";
+}
+.icon_vm_bp_monitor:before {
+  content: "\e95c";
+}
+.icon_vm_machine_ultrasound:before {
+  content: "\e95d";
+}
+.icon_vm_infectious_disease:before {
+  content: "\e95e";
+}
+.icon_vm_hospitalist:before {
+  content: "\e95f";
+}
+.icon_vm_pathology:before {
+  content: "\e960";
+}
+.icon_vm_psychiatry_filled:before {
+  content: "\e961";
+}
+.icon_vm_cardiology_filled:before {
+  content: "\e962";
+}
+.icon_vm_dermatology_filled:before {
+  content: "\e963";
+}
+.icon_vm_endocrinology_filled:before {
+  content: "\e964";
+}
+.icon_vm_neurology_filled:before {
+  content: "\e965";
+}
+.icon_vm_nephrology_filled:before {
+  content: "\e966";
+}
+.icon_vm_pulmonary_filled:before {
+  content: "\e967";
+}
+.icon_vm_rheumatology_filled:before {
+  content: "\e968";
+}
+.icon_vm_radiology_filled:before {
+  content: "\e969";
+}
+.icon_vm_pathology_filled:before {
+  content: "\e96a";
+}
+.icon_vm_stroke_filled:before {
+  content: "\e96b";
+}
+.icon_vm_icu_filled:before {
+  content: "\e96c";
+}
+.icon_vm_hospitalist_filled:before {
+  content: "\e96d";
+}
+.icon_vm_infectious_disease_filled:before {
+  content: "\e96e";
+}
+.icon_vm_palliative_care_filled:before {
+  content: "\e96f";
+}
+.icon_vm_document_filled:before {
+  content: "\e970";
+}
+.icon_vm_video:before {
+  content: "\e971";
+}
+.icon_vm_notification:before {
+  content: "\e972";
+}
+.icon_vm_xray1:before {
+  content: "\e973";
+}
+.icon_vm_chat:before {
+  content: "\e974";
+}
+.icon_vm_star:before {
+  content: "\e975";
+}
+.icon_vm_setting:before {
+  content: "\e976";
+}
+.icon_vm_collapse:before {
+  content: "\e977";
+}
+.icon_vm_expand:before {
+  content: "\e978";
+}
+.icon_vm_phone:before {
+  content: "\e979";
+}
+.icon_vm_time:before {
+  content: "\e97a";
+}
+.icon_vm_patient:before {
+  content: "\e97b";
+}
+.icon_vm_pacs:before {
+  content: "\e97c";
+}
+.icon_vm_folder:before {
+  content: "\e97d";
+}
+.icon_vm_mic:before {
+  content: "\e97e";
+}
+.icon_vm_phone_decline:before {
+  content: "\e97f";
+}
+.icon_vm_shape:before {
+  content: "\e980";
+}
+.icon_vm_dashboard:before {
+  content: "\e981";
+}
+.icon_vm_reports:before {
+  content: "\e982";
+}
+.icon_vm_specialities:before {
+  content: "\e983";
+}
+.icon_vm_specialist:before {
+  content: "\e984";
+}
+.icon_vm_endpoints:before {
+  content: "\e985";
+}
+.icon_vm_partner_site:before {
+  content: "\e986";
+}
+.icon_vm_warning:before {
+  content: "\e987";
+}
+.icon_vm_edit:before {
+  content: "\e988";
+}
+.icon_vm_search:before {
+  content: "\e989";
+}
+.icon_vm_unlock:before {
+  content: "\e98a";
+}
+.icon_vm_lock:before {
+  content: "\e98b";
+}
+.icon_vm_download:before {
+  content: "\e98c";
+}
+.icon_vm_send:before {
+  content: "\e98d";
+}
+.icon_vm_add:before {
+  content: "\e98e";
+}
+.icon_vm_mute:before {
+  content: "\e98f";
+}
+.icon_vm_unmute:before {
+  content: "\e990";
+}
+.icon_vm_envelope:before {
+  content: "\e991";
+}
+.icon_vm_cardio:before {
+  content: "\e992";
+}
+.icon_vm_logout:before {
+  content: "\e993";
+}
+.icon_vm_volume_down:before {
+  content: "\e994";
+}
+.icon_vm_brightness_high:before {
+  content: "\e995";
+}
+.icon_vm_help:before {
+  content: "\e996";
+}
+.icon_vm_volume_up:before {
+  content: "\e997";
+}
+.icon_vm_wifi:before {
+  content: "\e998";
+}
+.icon_vm_screen:before {
+  content: "\e999";
+}
+.icon_vm_brightness_low:before {
+  content: "\e99a";
+}
+.icon_vm_document:before {
+  content: "\e99b";
+}
+.icon_vm_video_disable:before {
+  content: "\e99c";
+}
+.icon_vm_pacs_reset .path1:before {
+  content: "\e99d";
+  color: rgb(1, 1, 1);
+}
+.icon_vm_pacs_reset .path2:before {
+  content: "\e99e";
+  margin-left: -1em;
+  color: rgb(1, 1, 1);
+}
+.icon_vm_pacs_reset .path3:before {
+  content: "\e99f";
+  margin-left: -1em;
+  color: rgb(1, 1, 1);
+}
+.icon_vm_pacs_reset .path4:before {
+  content: "\e9a0";
+  margin-left: -1em;
+  color: rgb(0, 0, 0);
+}
+.icon_vm_pacs_reset .path5:before {
+  content: "\e9a1";
+  margin-left: -1em;
+  color: rgb(0, 0, 0);
+}
+.icon_vm_pacs_reset .path6:before {
+  content: "\e9a2";
+  margin-left: -1em;
+  color: rgb(1, 1, 1);
+}
+.icon_vm_pacs_reset .path7:before {
+  content: "\e9a3";
+  margin-left: -1em;
+  color: rgb(1, 1, 1);
+}
+.icon_vm_re-notify:before {
+  content: "\e9a4";
+}

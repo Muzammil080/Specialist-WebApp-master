@@ -1,0 +1,31 @@
+<!-- <h3>Test Page for IOS </h3>
+<h3>Patient ID: {{pid}}</h3>
+<h3>Token: {{token}}</h3>  -->
+
+<div id="pacsbox" class="clearfix pacs-box">
+        <div class="pacs-left">
+                <!-- <div style="height: 75px"> </div> -->
+                <div class="mainpanel">
+                        <div id="left-panel" class="left-panel">
+                                <p>Study</p>
+                                <ul>
+                                        <li *ngFor="let s of patientStudies ; let i  = index  "
+                                                (click)="getSeries(s.InstanceUID)">
+                                                {{s.Description ? s.Description : 'Study ' + (i + 1) }} </li>
+                                </ul>
+                        </div>
+                        <!-- <div id="back" class="back" (click)="back()">
+                                <mat-icon  class="material-icons" style="color: #00aecc ;font-size: 3em;" >keyboard_backspace</mat-icon>                                
+                        </div> -->
+                        <!-- <div  class="left-panel"> -->
+                        <p style="cursor: pointer;" (click)="back()">Study</p>
+                        <!-- </div> -->
+                        <div class="imgbox">
+
+                                <div class="pacs_viewer" id="pacs_viewer">
+                                </div>
+
+                        </div>
+                </div>
+        </div>
+</div>

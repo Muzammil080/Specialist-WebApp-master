@@ -1,0 +1,29 @@
+.time-zone {
+    font-size: 16px;
+}
+.time-zone label {
+    margin: 0;
+}
+
+select.vm-select {
+    background-color: #fff;
+    border: thin solid #cccccc;
+    border-radius: 3px;
+    display: inline-block;
+    font-size: 14px;
+    color: #666;
+    padding: 2px 5px;
+    margin: 0;
+    box-sizing: border-box;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    vertical-align: middle;
+    outline: none;
+}
+
+.full-width {
+    width: 100% !important;
+}
+h2{
+    font-size: 24px;
+}

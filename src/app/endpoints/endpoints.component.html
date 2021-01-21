@@ -1,0 +1,154 @@
+<br>
+<!-- <div class="container-fluid">
+  <div class="tab-container-box">
+    <mat-tab-group>
+      <mat-tab label="Virtual Endpoints"> -->
+        <div class="tab-container-box">
+          <!-- <hr> -->
+            <virutalendpoint></virutalendpoint>
+        </div>
+          
+      <!-- </mat-tab>
+     
+    </mat-tab-group>
+
+  </div>
+</div> -->
+
+<!-- <div class="example-header">
+  <mat-form-field>
+    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Filter">
+  </mat-form-field>
+</div>
+
+<div class="example-container mat-elevation-z8">
+
+  <mat-table [dataSource]="dataSource" matSort>
+
+
+    <ng-container matColumnDef="id">
+      
+      <mat-header-cell *matHeaderCellDef mat-sort-header> ID </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.id}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="progress">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Progress </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.progress}}% </mat-cell>
+    </ng-container>
+
+ 
+    <ng-container matColumnDef="name">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+      <mat-cell *matCellDef="let row"> {{row.name}} </mat-cell>
+    </ng-container>
+
+
+    <ng-container matColumnDef="color">
+      <mat-header-cell *matHeaderCellDef mat-sort-header> Color </mat-header-cell>
+      <mat-cell *matCellDef="let row" [style.color]="row.color"> {{row.color}} </mat-cell>
+    </ng-container>
+
+    <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+    <mat-row *matRowDef="let row; columns: displayedColumns;">
+    </mat-row>
+  </mat-table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]"></mat-paginator>
+</div> -->
+
+<!-- <table class="table" id="myTable" style="width: 80%; margin-left: auto;margin-right: auto;">
+  <tr>
+    <th>Partnersite </th>
+    <th>Facility </th>
+    <th>Endpoints </th>
+  </tr>
+  <tr *ngFor="let tp of TestPoint">
+    <th> {{tp.Partnersite}}</th>
+    <td colspan="2">
+     
+      <tr *ngFor="let tps of tp.Facility">
+        <th> {{tps.facility}}</th>
+        <td >
+          <tr>
+            <th>Serial Number </th>
+            <th>Status </th>
+            <th>Camera </th>
+            <th>Battery Life</th>
+            <th>Last Session </th>
+            <th>Location</th>
+          </tr>
+          <tr *ngFor="let tpse of tps.Endpoints">
+            <td>{{tpse.SerialNumber}}</td>
+            <td>{{tpse.Status}}</td>
+            <td>{{tpse.Camera}}</td>
+            <td>{{tpse.BatteryLife}}</td>
+            <td>{{tpse.LastSession}}</td>
+            <td>{{tpse.Location}}</td>
+          </tr>
+        </td>
+      
+      </tr>
+  
+    </td>
+  
+  </tr>
+</table> -->
+
+
+
+<!-- <div class="container">
+  <input #inputstring (keyup)="endpointfilter(inputstring.value)" type="text" id="myInput" placeholder="Search using serial number" title="SEARCH">
+  <table class="table"id="myTable" >
+      <tr>
+
+          <th >PartnerSite </th>
+          <th >Facility</th>
+          <th >Serial Number </th>
+          <th >Status </th>
+          <th >Camera </th>
+          <th >Battery Life</th>
+          <th >Last Session </th>                                               
+          <th >Location</th>
+          
+        </tr>
+
+        <tr *ngFor="let ep of EndpointsFilter ; let rowIndex  = index" >
+
+            <td >{{ep.Partnersite}}</td>
+            <td >{{ep.facility}}</td>
+            <td >{{ep.SerialNumber}}</td>
+            <td >{{ep.Status}}</td>
+            <td >{{ep.Camera}}</td>
+            <td >{{ep.BatteryLife}}</td>
+            <td >{{ep.LastSession}}</td>
+            <td >{{ep.Location}}</td>
+           
+          </tr>
+
+  </table>
+  <nav aria-label="Page navigation example" style=float:right;>
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link" aria-label="Previous" (click)="pagNum('P')">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+      
+      <li class="page-item"><a class="page-link"  (click)="pagNum(10)">1</a></li>
+      <li class="page-item"><a class="page-link"  (click)="pagNum(20)">2</a></li>
+    
+      <li class="page-item">
+        <a class="page-link"  aria-label="Next" (click)="pagNum('N')">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+  
+              
+               
+</div> -->

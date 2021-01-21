@@ -1,0 +1,356 @@
+<div id="call-connecting" class="call-connecting">
+    <div class="loading-display-box">
+        <div class="loding-box">
+            <div class="connecting-icon-container">
+                <div class="connecting-icon-box">
+                    <i class="material-icons"> laptop_mac </i>
+                </div>
+                <div class="connecting-icon-box">
+                    <div id="connecting1" class="material-icons-animation">
+                        <div class="loader">Loading...</div>
+                    </div>
+                </div>
+                <div class="connecting-icon-box">
+                    <i class="material-icons"> language </i>
+                </div>
+                <div class="connecting-icon-box">
+                    <div id="connecting2" class="material-icons-animation">
+                        <div class="loader">Loading...</div>
+                    </div>
+                </div>
+                <div class="connecting-icon-box">
+                    <i class="material-icons"> storage </i>
+                </div>
+                <div class="connecting-icon-box">
+                    <div id="connecting3" class="material-icons-animation">
+                        <div class="loader">Loading...</div>
+                    </div>
+                </div>
+                <div class="connecting-icon-box">
+                    <i class="material-icons"> desktop_mac </i>
+                </div>
+            </div>
+        </div>
+        <div
+            style="
+                border: 0px solid black;
+                width: 195px;
+                height: 100px;
+                position: absolute;
+                top: 1;
+                bottom: 0;
+                left: 0;
+                right: 0;
+                margin: auto;
+            "
+        ></div>
+    </div>
+</div>
+<br />
+<!-- connected Requests{ -->
+<div *ngFor="let request of requests; let rowIndex = index">
+    <div *ngIf="request.currentStateName == 'Connected'">
+        <div class="session-card-reconnect">
+            <h6 *ngIf="connectedSessions > 1" class="count-bubble">
+                {{ connectedSessions }}
+            </h6>
+            <h6 style="text-align: center">
+                It seems that your session was interrupted. Please reconnect or end the session.
+            </h6>
+            <h6 style="text-align: center">
+                {{ request.facilityName }} -
+                {{ request.specialityName }}
+            </h6>
+            <div class="row">
+                <div style="margin-left: auto; margin-right: auto">
+                    <button
+                        class="list-btn list-btn-ico red-btn"
+                        (click)="callEnd(request.id)"
+                    >
+                        <i class="icon_vm_phone_decline"></i>End Session
+                    </button>
+                    <button
+                        class="list-btn list-btn-ico green-btn"
+                        (click)="
+                            callReconnect(
+                                request.id,
+                                request.connectionFrom,
+                                request.facilityName,
+                                request.reasonForRequest,
+                                request.specialityName,
+                                request.endPoint,
+                                request.endpointId,
+                                request.workflowInstanceId
+                            )
+                        "
+                    >
+                        <i class="icon_vm_phone"></i>Reconnect
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ------------ -->
+
+<div class="tab-container-box">
+    <mat-tab-group>
+        <mat-tab *ngIf="TodaysAppointment" label="Today's Appointments">
+            <div style="padding-right: 25px; padding-left: 25px">
+                <div style="float: left; margin: 8px">
+                    <button (click)="addQuickAppointment()" class="btn-vm-icon">
+                        <i class="material-icons">add_circle</i>
+                        Quick Appointment
+                    </button>
+                </div>
+                <div style="float: right">
+                    <button
+                        id="resetButton"
+                        class="list-btn-round light"
+                        (click)="getRequests()"
+                    >
+                        <i id="camIcon" class="icon_vm_refresh"></i>
+                    </button>
+                </div>
+                <div style="clear: both"></div>
+
+                <div class=".ps-rev" style="border: 0px solid black">
+                    <div
+                        id="Loadingpage"
+                        [style.display]="visibilityLoginSpinner"
+                    >
+                        <div class="text-center">
+                            <div class="ptl pbm">
+                                <span class="vm-loader"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <h6
+                        [style.display]="visibilitysessionmessage"
+                        class="nodata"
+                    >
+                        There are no sessions pending.
+                    </h6>
+                    <!-- Pending Requests{ -->
+                    <div
+                        *ngFor="
+                            let request of currentSessions;
+                            let rowIndex2 = index
+                        "
+                    >
+                        <div
+                            *ngIf="
+                                request.currentStateName ==
+                                    'SessionRequested' &&
+                                visibilityLoginSpinner != 'block' &&
+                                visibilitysessionmessage != 'block'
+                            "
+                        >
+                            <div class="session-card1">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="issue-type mll">
+                                            <i class="icon_vm_warning"></i
+                                            >Patient is waiting
+                                        </div>
+                                        <div class="hospital-name mll">
+                                            {{ request.facilityName }}
+                                        </div>
+                                        <div class="hospital-name mll">
+                                            {{
+                                                request.pendingSince
+                                                    | date: "MMM d, y, h:mm a"
+                                            }}
+                                        </div>
+                                        <div class="hospital-name mll">
+                                            Appointment Time:
+                                            {{
+                                                getUTCDate(request.startDate)
+                                                    | date: "shortTime"
+                                            }}
+                                        </div>
+                                        <div class="hospital-name mll">
+                                            Patient Name:
+                                            {{
+                                                request.patientFirstName +
+                                                    " " +
+                                                    request.patientLastName
+                                            }}
+                                        </div>
+                                        <div class="hospital-name mll">
+                                            Reason: {{ request.reason }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 text-right">
+                                        <button
+                                            class="list-btn-round decline-btn"
+                                            (click)="
+                                                cancelAppointment(request.id)
+                                            "
+                                        >
+                                            <i
+                                                class="icon_vm_phone_decline"
+                                            ></i>
+                                        </button>
+                                        <button
+                                            class="list-btn-round accept-btn"
+                                            (click)="
+                                                callAccept(
+                                                    request.id,
+                                                    request.facilityName,
+                                                    request.reasonForRequest,
+                                                    request.specialityName,
+                                                    request.endPoint,
+                                                    request.endpointId,
+                                                    request.workflowInstanceId
+                                                )
+                                            "
+                                        >
+                                            <i class="icon_vm_phone"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+            <hr />
+            <br />
+            <div
+                id="container"
+                [style.display]="
+                    visibilityLoginSpinner === 'block' ? 'none' : 'block'
+                "
+            >
+                <table class="table">
+                    <tr class="table-custom-border">
+                        <th>MRN</th>
+                        <th>Time</th>
+                        <th>Date</th>
+                        <th>Patient</th>
+                        <!-- <th>Visit Type</th> -->
+                        <th>Status</th>
+                    </tr>
+                    <tr>
+                        <td [style.display]="zeroResults" colspan="6">
+                            <h6 class="nodata">There are no appointments</h6>
+                        </td>
+                    </tr>
+                    <tr *ngFor="let appointment of Appointments">
+                        <td>{{ appointment.mrn }}</td>
+                        <td>
+                            {{
+                                (appointment.startDate | date: "shortTime") +
+                                    " - " +
+                                    (appointment.endDate | date: "shortTime")
+                            }}
+                        </td>
+                        <td>
+                            {{ appointment.startDate | date: "mediumDate" }}
+                        </td>
+                        <td>
+                            {{
+                                appointment.patientFirstName | titlecase
+                            }} {{appointment.patientLastName | titlecase}}
+                        </td>
+                        <!-- <td>
+                            {{ appointment.visitType }}
+                        </td> -->
+                        <td>
+                            <span
+                                *ngIf="
+                                    appointment.currentStateName == 'Scheduled'
+                                "
+                                >Scheduled</span
+                            >
+                            <span
+                                *ngIf="
+                                    appointment.currentStateName == 'CheckedIn'
+                                "
+                                >Checked In</span
+                            >
+                            <span
+                                *ngIf="
+                                    appointment.currentStateName ==
+                                    'TriageCompleted'
+                                "
+                                >Triage Completed</span
+                            >
+                            <span
+                                *ngIf="
+                                    appointment.currentStateName ==
+                                    'RoomAssigned'
+                                "
+                                >Waiting for Session</span
+                            >
+                            <span
+                                *ngIf="
+                                    appointment.currentStateName == 'Connected'
+                                "
+                                >In Session</span
+                            >
+                            <span
+                                *ngIf="
+                                    appointment.currentStateName == 'Completed'
+                                "
+                                >Completed</span
+                            >
+                            <span
+                                *ngIf="
+                                    appointment.currentStateName ==
+                                    'ForceCompleted'
+                                "
+                                >Force Completed</span
+                            >
+                            <span
+                                *ngIf="
+                                    appointment.currentStateName ==
+                                    'CanceledState'
+                                "
+                                >Canceled</span
+                            >
+                            <span
+                                *ngIf="
+                                    appointment.currentStateName == 'ErrorState'
+                                "
+                                >Error</span
+                            >
+                            <span
+                                *ngIf="
+                                    appointment.currentStateName ==
+                                    'SessionRequested'
+                                "
+                                >Session Requested</span
+                            >
+                            <span
+                                *ngIf="
+                                    appointment.currentStateName.toLowerCase() ==
+                                    'missed'
+                                "
+                                >Missed</span
+                            >
+                            <span
+                                *ngIf="
+                                    appointment.currentStateName.toLowerCase() ==
+                                    'timeup'
+                                "
+                                >TimeUp</span
+                            >
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </mat-tab>
+        <mat-tab *ngIf="SearchAppointments" label="Search Appointments">
+            <my-appointments></my-appointments>
+        </mat-tab>
+        <mat-tab *ngIf="AppointmentHistory" label="Appointment History">
+            <appointment-history></appointment-history>
+        </mat-tab>
+        <mat-tab *ngIf="UnsignedNotesAppointments" label = "Unsigned Notes">
+            <opd-notes></opd-notes>
+        </mat-tab>
+    </mat-tab-group>
+</div>

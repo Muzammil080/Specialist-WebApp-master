@@ -1,0 +1,124 @@
+<!-- <h6 style="text-align: center; margin-top: 20px;">No current session history</h6> -->
+<div class="button-row" style="margin-top: 12px;margin-bottom: 12px;">
+  <button id="btnfilter" mat-raised-button color="warn" (click)="historychangebtn('W')" [disabled]="LastW">Last
+    Week</button>
+  <button id="btnfilter" mat-raised-button color="warn" (click)="historychangebtn('M')" [disabled]="LastM">Last
+    Month</button>
+  <button id="btnfilter" mat-raised-button color="warn" (click)="historychangebtn('Y')" [disabled]="LastY">Last
+    Year</button>
+  <div id="myInputbox">
+    <i class="icon_vm_search"></i>
+    <input #inputstring [(ngModel)]="inputValue" (keyup)="sessionfilter(inputstring.value)" type="text"
+      id="myInputhistry" placeholder="Search" title="SEARCH">
+  </div>
+</div>
+<div id="container">
+  <table class="table">
+    <tr class="table-custom-border">
+      <!-- <th>Partnersite </th> -->
+      <!-- <th>Reference Id </th>
+      <th>Partner Site </th>
+      <th>Facility</th>
+      <th>MRN #</th>
+      <th>Encounter #</th>
+      <th>Endpoint </th>
+      <th>Received On</th>
+      <th>Call Duration</th>
+      <th></th> -->
+
+      <th>ID</th>
+      <th>Submitted By</th>
+      <th>MRN #</th>
+      <th>Submitted Date</th>
+      <th>Accepted On</th>
+      <th>Signed On</th>
+      <th></th>
+    </tr>
+    <tr>
+      <td [style.display]="zeroResults" colspan="8">
+        <h6 class="nodata">There is no session history</h6>
+      </td>
+    </tr>
+    <tr>
+      <td colspan="8" [style.display]="visibilityLoginSpinner">
+        <div id="Loadingpage">
+          <div class="text-center">
+            <div class="ptl pbm">
+              <span class="vm-loader"></span>
+            </div>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr *ngFor="let s of SessionHistoryFilter" [style.display]="visibilityLoginSpinnerdata">
+
+      <td>{{s.referenceId}}</td>
+      <td>{{s.submittedBy}}</td>
+      <td>{{s.mrn}}</td>
+      <td>{{s.requestDateTime | split | date:'MMM d y h:mm a'}}</td>
+      <td>{{s.acceptedOn | split | date:'MMM d y h:mm a'}}</td>
+      <td>{{s.signedOn | split | date:'MMM d y h:mm a'}}</td>
+      <!-- <td>{{sh.id}}</td>
+      <td>{{sh.partnerSite}}</td>
+      <td>{{sh.facilityName}}</td>
+      <td>{{sh.mrn}}
+         
+      </td>
+      <td>
+          {{sh.encounterNumber}}
+      </td>
+      <td>{{sh.endPointName}}</td>
+      <td>{{sh.receivedOn | split | date:'MMM d y h:mm a'}}</td>
+      <td>{{sh.durationInMinutes | myTime}}</td> -->
+      <td>
+        <button *ngIf="!s.isPacsDeleted" mat-stroked-button color="primary" (click)="openReports(s)">View</button>
+        <button *ngIf="s.isPacsDeleted" mat-stroked-button color="primary"
+          (click)="openReportsWithoutPacs(s)">Reports</button>
+        <button mat-stroked-button color="primary" (click)="resendNote(s)">Resend</button>
+        <!-- <button *ngIf="sh.isSigned"  mat-stroked-button color="primary" (click)="resendNote(sh)">Resend</button>
+        <button *ngIf="sh.isSigned"  mat-stroked-button color="warn" (click)="openNote(sh)">View</button>        
+        <button *ngIf="!sh.isSigned && sh.connectionFrom == 'Kart'"  mat-stroked-button color="warn" (click)="openNote(sh)">Notes</button> -->
+      </td>
+    </tr>
+  </table>
+
+  <div [style.display]="paginationdisplay"
+    style="float:left; color:lightgrey; margin-left: 12px; margin-top: 10px; font-size: 0.9em">Page
+    {{currentpage}} | {{(currentpage * 8) > SessionHistory.length ? SessionHistory.length : (currentpage * 8) }} of
+    {{SessionHistory.length}}
+    | Session History </div>
+  <div [style.display]="paginationdisplayfilter"
+    style="float:left; color:lightgrey; margin-left: 12px; margin-top: 10px; font-size: 0.9em">Page
+    {{currentpage}} | {{(currentpage * 8) > SessionHistoryFilterPagination.length ?
+    SessionHistoryFilterPagination.length
+    : (currentpage * 8) }} of {{SessionHistoryFilterPagination.length}} | Filtered Session History </div>
+
+  <nav [style.display]="paginationdisplaybtn" aria-label="Page navigation example" style="float:right;">
+    <ul class="pagination">
+      <li class="page-item">
+        <a class="page-link noselect" aria-label="Previous" (click)="pagNum('P',inputstring.value)">
+          <span aria-hidden="true">&laquo;</span>
+          <span class="sr-only">Previous</span>
+        </a>
+      </li>
+
+
+      <li *ngFor="let item of PageLengthrange ;let rowIndex  = index"
+        class="{{currentpage == PageLengthrange[rowIndex] ? 'page-item active' : 'page-item' }}">
+        <a class="page-link noselect"
+          [style.display]="PageLengthrange[rowIndex] > (currentpage - ((currentpage == PageLengthrange.length ) ? 5 : ((currentpage == (PageLengthrange.length - 1) ) ? 4 : 3) ) ) && PageLengthrange[rowIndex] < (currentpage + ((currentpage == 1 ) ? 5 : ((currentpage == 2 ) ? 4 : 3) ) ) ? 'block' : 'none'"
+          (click)="pagNum(PageLengthrange[rowIndex],inputstring.value)">{{PageLengthrange[rowIndex]}}</a>
+      </li>
+
+      <!-- <li class="page-item"><a class="page-link"  (click)="pagNum(20,inputstring.value)">2</a></li> -->
+
+      <li class="page-item">
+        <a class="page-link noselect" aria-label="Next" (click)="pagNum('N',inputstring.value)">
+          <span aria-hidden="true">&raquo;</span>
+          <span class="sr-only ">Next</span>
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+</div>

@@ -1,0 +1,494 @@
+<div class="clearfix pacs-box">
+  <div class="pacs-left">
+    <div class="mainpanel">
+      <div id="sidebar" class="left-panel">
+        <p style="float: left;">Reports</p>
+        <div style="clear: both;"></div>
+        <ul>
+          <li (click)="getReport()">Report 1</li>
+        </ul>
+      </div>
+      <div *ngIf="showMsgBox" class="msgBoxContainer">
+        <div class="msgBox">
+          <div class="innerMsgBox">
+            <span>Please select a study from the left panel</span>
+          </div>
+        </div>
+      </div>
+      <div id="inercontainer" *ngIf="!showMsgBox" class="imgbox">
+        <div>
+          <div class="text-center">
+            <div>
+            <div malihu-scrollbar [scrollbarOptions]="darkScrollbarOptions" class="WordSection1">
+
+              <p>
+                <b><span>Specimen ID:</span></b><span><span>
+                  </span>193-992-9201-0<span>
+                  </span></span><b><span>Acct #:</span></b><span>
+                  90000999 </span><b><span>Phone:</span></b><span> (336)
+                  436-8645<span>
+                  </span></span><span><b><span>Rte</span></b></span><b><span>:</span></b> <span>00</span>
+              </p>
+
+              <p><b><span>Control
+                    ID:<span>
+                    </span></span></b><span>LabCorp
+                  Test Master</span></p>
+
+              <h1>
+                Test Account</h1>
+
+              <table>
+                <tr>
+                  <td></td>
+
+                  <td>
+                    <p><span>5450 Millstream Road</span></p>
+                    <p><span>MCLEANSVILLE NC 27301</span></p>
+                  </td>
+                </tr>
+              </table>
+              <table class="table">
+                <thead>
+                  <tr>
+                    <th>Patient Details</th>
+                    <th>Specimen Details</th>
+                    <th>Physician Details</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td><b><span>DOB:</span></b><span>
+                        01/01/1960 </span></td>
+                    <td>
+                      <b><span>Date collected:
+                        </span></b><span>07/12/<span>2018 0000</span> Local</span>
+                    </td>
+                    <td>
+                      <b><span>Ordering:</span></b>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td><b><span>Age(y/m/d):</span></b><span>
+                        058/06/11 </span></td>
+                    <td><b><span>Date received: </span></b><span>07/12/2018</span></td>
+                    <td><b><span>Referring:</span></b></td>
+                  </tr>
+                  <tr>
+                    <td><b><span>Gender:</span></b><b><span>SSN:</span></b>
+                    </td>
+                    <td><b><span>Date
+                          entered: </span></b><span>07/12/2018</span></td>
+                    <td><b><span>ID:</span></b></td>
+                  </tr>
+                  <tr>
+                    <td><b><span>Patient
+                          ID: </span></b></td>
+                    <td><b><span>Date reported: </span></b><span>07/12/<span>2018 0000</span> ET</span></td>
+                    <td><b><span>NPI:</span></b></td>
+                  </tr>
+                </tbody>
+
+              </table>
+              <p>
+                <b><span>General
+                    Comments &amp; Additional Information </span></b><b><span>Clinical
+                    Info: </span></b><span>NORMAL
+                  REPORT</span></p>
+
+              <p>
+                <b><span>Ordered
+                    Items</span></b></p>
+
+              <p>
+                <span>CBC
+                  With
+                  Differential/Platelet</span></p>
+
+              <table class="table table-bordered table-condensed table-striped">
+                <tr>
+                  <td>TESTS RESULT</td>
+                  <td>UNITS</td>
+                  <td>REFERENCE INTERVAL</td>
+                  <td>LAB</td>
+                </tr>
+                <tr>
+                  <td>
+                    <p><b><span>CBC With
+                          Differential/Platelet</span></b></p>
+                    <p><span>WBC</span><sup><span><span>
+                          </span></span></sup><span><span></span>4.7</span>
+                    </p>
+                  </td>
+                  <td width=248 colspan=2 valign=bottom>
+                    <p><span>x10E3/<span class=SpellE>uL</span> 3.4 - 10.8</span></p>
+                  </td>
+                  <td width=32 valign=bottom>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span>RBC</span><sup><span><span>
+                          </span></span></sup><span><span></span>3.77</span>
+                    </p>
+                  </td>
+                  <td width=248 colspan=2 valign=top>
+                    <p><span>x10E6/<span class=SpellE>uL</span> 3.77 - 5.28</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span>Hemoglobin</span><sup><span><span>
+                          </span></span></sup><span><span></span>12.3</span>
+                    </p>
+                  </td>
+                  <td width=89 valign=top>
+                    <p><span>g/<span class=SpellE>dL</span></span></p>
+                  </td>
+                  <td width=159 valign=top>
+                    <p><span><span>
+                        </span>11.1 -
+                        15.9</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span>Hematocrit</span><sup><span><span>
+                          </span></span></sup><span><span></span>36.3</span>
+                    </p>
+                  </td>
+                  <td width=89 valign=top>
+                    <p><span>%</span></p>
+                  </td>
+                  <td width=159 valign=top>
+                    <p><span><span>
+                        </span>34.0 -
+                        46.6</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span>MCV</span><sup><span><span>
+                          </span></span></sup><span><span></span>96</span>
+                    </p>
+                  </td>
+                  <td width=89 valign=top>
+                    <p><span class=SpellE><span>fL</span></span>
+                    </p>
+                  </td>
+                  <td width=159 valign=top>
+                    <p><span><span>
+                        </span>79 -
+                        97</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span>MCH</span><sup><span><span>
+                          </span></span></sup><span><span></span>32.6</span>
+                    </p>
+                  </td>
+                  <td width=89 valign=top>
+                    <p><span class=SpellE><span>pg</span></span>
+                    </p>
+                  </td>
+                  <td width=159 valign=top>
+                    <p><span><span>
+                        </span>26.6 -
+                        33.0</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span>MCHC</span><sup><span><span>
+                          </span></span></sup><span><span></span>33.9</span>
+                    </p>
+                  </td>
+                  <td width=89 valign=top>
+                    <p><span>g/<span class=SpellE>dL</span></span></p>
+                  </td>
+                  <td width=159 valign=top>
+                    <p><span><span>
+                        </span>31.5 -
+                        35.7</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span>RDW</span><sup><span><span>
+                          </span></span></sup><span><span></span>13.8</span>
+                    </p>
+                  </td>
+                  <td width=89 valign=top>
+                    <p><span>%</span></p>
+                  </td>
+                  <td width=159 valign=top>
+                    <p><span><span>
+                        </span>12.3 -
+                        15.4</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span>Platelets</span><sup><span><span>
+                          </span></span></sup><span><span></span>293</span>
+                    </p>
+                  </td>
+                  <td width=248 colspan=2 valign=top>
+                    <p><span>x10E3/<span class=SpellE>uL</span> 150 - 379</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span>Neutrophils</span><sup><span><span>
+                          </span></span></sup><span><span></span>54</span>
+                    </p>
+                  </td>
+                  <td width=89 valign=top>
+                    <p><span>%</span></p>
+                  </td>
+                  <td width=159 valign=top>
+                    <p><span><span>
+                        </span>Not
+                        <span class=SpellE>Estab</span>.</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span class=SpellE><span>Lymphs</span></span><sup><span><span>
+                          </span></span></sup><span><span></span>30</span>
+                    </p>
+                  </td>
+                  <td width=89 valign=top>
+                    <p><span>%</span></p>
+                  </td>
+                  <td width=159 valign=top>
+                    <p><span><span>
+                        </span>Not
+                        <span class=SpellE>Estab</span>.</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span>Monocytes</span><sup><span><span>
+                          </span></span></sup><span><span></span>7</span>
+                    </p>
+                  </td>
+                  <td width=89 valign=top>
+                    <p><span>%</span></p>
+                  </td>
+                  <td width=159 valign=top>
+                    <p><span><span>
+                        </span>Not
+                        <span class=SpellE>Estab</span>.</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span>Eos</span><sup><span><span>
+                          </span></span></sup><span><span></span>7</span>
+                    </p>
+                  </td>
+                  <td width=89 valign=top>
+                    <p><span>%</span></p>
+                  </td>
+                  <td width=159 valign=top>
+                    <p><span><span>
+                        </span>Not
+                        <span class=SpellE>Estab</span>.</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span class=SpellE><span>Basos</span></span><sup><span><span>
+                          </span></span></sup><span><span></span>2</span>
+                    </p>
+                  </td>
+                  <td width=89 valign=top>
+                    <p><span>%</span></p>
+                  </td>
+                  <td width=159 valign=top>
+                    <p><span><span>
+                        </span>Not
+                        <span class=SpellE>Estab</span>.</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span>Neutrophils
+                        (Absolute)</span><sup><span><span>
+                          </span></span></sup><span><span></span>2.5</span>
+                    </p>
+                  </td>
+                  <td width=248 colspan=2 valign=top>
+                    <p><span>x10E3/<span class=SpellE>uL</span> 1.4 - 7.0</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span class=SpellE><span>Lymphs</span></span><span>
+                        (Absolute)</span><sup><span><span>
+                          </span></span></sup><span><span></span>1.4</span>
+                    </p>
+                  </td>
+                  <td width=248 colspan=2 valign=top>
+                    <p><span>x10E3/<span class=SpellE>uL</span> 0.7 - 3.1</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span>Monocytes(Absolute)</span><sup><span><span>
+                          </span></span></sup><span><span></span>0.3</span>
+                    </p>
+                  </td>
+                  <td width=248 colspan=2 valign=top>
+                    <p><span>x10E3/<span class=SpellE>uL</span> 0.1 - 0.9</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span>Eos
+                        (Absolute)</span><sup><span><span>
+                          </span></span></sup><span><span></span>0.3</span>
+                    </p>
+                  </td>
+                  <td width=248 colspan=2 valign=top>
+                    <p><span>x10E3/<span class=SpellE>uL</span> 0.0 - 0.4</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span class=SpellE><span>Baso</span></span><span>
+                        (Absolute)</span><sup><span><span>
+                          </span></span></sup><span><span></span>0.1</span>
+                    </p>
+                  </td>
+                  <td width=248 colspan=2 valign=top>
+                    <p><span>x10E3/<span class=SpellE>uL</span> 0.0 - 0.2</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span>Immature
+                        Granulocytes</span><sup><span><span>
+                          </span></span></sup><span><span></span>0</span>
+                    </p>
+                  </td>
+                  <td width=248 colspan=2 valign=top>
+                    <p><span>
+                      </span><span>%<span>
+                        </span> Not <span class=SpellE>Estab</span>.</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p><span>Immature Grans
+                        (Abs)</span><sup><span><span>
+                          </span></span></sup><span><span></span>0.0</span>
+                    </p>
+                  </td>
+                  <td width=248 colspan=2 valign=top>
+                    <p><span>x10E3/<span class=SpellE>uL</span> 0.0 - 0.1</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p><span>01</span></p>
+                  </td>
+                </tr>
+                <tr>
+                  <td width=443 valign=top>
+                    <p>
+                      <span>01<span>
+                        </span>LabCorp
+                        Burlington</span></p>
+                    <p align=center>
+                      <span>1447
+                        York
+                        Court, Burlington, NC 27215-3361</span></p>
+                  </td>
+                  <td width=248 colspan=2 valign=top>
+                    <p><span>Dir:
+                        William F Hancock, MD</span></p>
+                  </td>
+                  <td width=32 valign=top>
+                    <p></p>
+                  </td>
+                </tr>
+              </table>
+
+              <p>
+                <span>For
+                  inquiries, the physician may
+                  contact <b>Branch: 800-222-7566 Lab: 800-762-4344</b></span></p>
+
+              <p></p>
+
+              <p><span>Date <span>Issued:</span> 07/12/18 1259
+                  ET Page
+                  1 of 1</span></p>
+
+            </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

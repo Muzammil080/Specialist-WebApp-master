@@ -1,0 +1,452 @@
+<div class="container-fluid">
+    <div class="reg-card">
+        <div class="logo-box">
+            <embed src="assets/img/svg/logo.svg">
+        </div>
+        <!-- For completion page -->
+        <div id="completionpage" [style.display]="completionpage">
+            <form id="completeionform" [formGroup]="form" (ngSubmit)="register()">
+                <div class="auth-card-fields pal">
+                    <div class="steps-indicator-box clearfix">
+                        <span class="steps-indicator clearfix">
+                            <span [ngClass]="{'inprogress': panel == 1}" class="step step1"></span>
+                            <span [ngClass]="{'inprogress': panel == 2}" class="step step2"></span>
+                            <span [ngClass]="{'inprogress': panel == 3}" class="step step3"></span>
+                            <span [ngClass]="{'inprogress': panel == 4}" class="step step3"></span>
+                        </span>
+                    </div>
+                    <div class="row" *ngIf="panel == 1">
+                        <div class="col-md-6">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <input matInput readonly="readonly" style="color: grey" placeholder="Email" type="email"
+                                    [(ngModel)]='user.email' formControlName="email" />
+                                <mat-error *ngIf="form.get('email').invalid && (form.get('email').dirty || form.get('email').touched)">
+                                    Email is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <!-- <span style="color: grey" matPrefix>+1 &nbsp;</span> -->
+                                <input readonly="readonly" style="color: grey" matInput placeholder="Mobile Number"
+                                    type="tel" [(ngModel)]="user.mobileNumber" formControlName="mobileNumber" />
+                                <mat-error *ngIf="form.get('mobileNumber').hasError('required') && (form.get('mobileNumber').dirty || form.get('mobileNumber').touched)">
+                                    Mobile number is required
+                                </mat-error>
+                                <mat-error *ngIf="form.get('mobileNumber').hasError('pattern') && (form.get('mobileNumber').dirty || form.get('mobileNumber').touched)">
+                                    Mobile number is not valid
+                                </mat-error>
+
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <input matInput placeholder="Last Name" type="text" [(ngModel)]='user.lastName'
+                                    formControlName="lastName" maxlength="50" />
+                                <mat-error *ngIf="form.get('lastName').invalid && (form.get('lastName').dirty || form.get('lastName').touched)">
+                                    <span *ngIf="form.get('lastName').hasError('required')">
+                                        Last name is required
+                                    </span>
+                                    <span *ngIf="form.get('lastName').hasError('pattern')">
+                                        Only alphabets are allowed
+                                    </span>
+                                    <span *ngIf="form.get('lastName').hasError('whitespace') && !form.get('lastName').hasError('required')">
+                                        Remove all extra spaces
+                                    </span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <input matInput placeholder="First Name" type="text" maxlength="50" [(ngModel)]='user.firstName'
+                                    formControlName="firstName" />
+                                <mat-error *ngIf="form.get('firstName').invalid && (form.get('firstName').dirty || form.get('firstName').touched)">
+
+                                    <span *ngIf="form.get('firstName').hasError('required')">
+                                        First name is required
+                                    </span>
+                                    <span *ngIf="form.get('firstName').hasError('pattern')">
+                                        Only alphabets are allowed
+                                    </span>
+                                    <span *ngIf="form.get('firstName').hasError('whitespace') && !form.get('firstName').hasError('required')">
+                                        Remove all extra spaces
+                                    </span>
+                                </mat-error>
+
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <mat-select [(ngModel)]='user.credentials' placeholder="Credentials" formControlName="credentials">
+                                    <mat-option *ngFor="let credential of credentials" [value]="credential.value ">
+                                        {{ credential.value }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.get('credentials').hasError('required') 
+                                                    && (form.get('credentials').dirty || form.get('credentials').touched)">
+                                    Credentials is required
+                                </mat-error>
+                            </mat-form-field>
+
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <mat-select [(ngModel)]='user.title' placeholder="Title" formControlName="title">
+                                    <mat-option *ngFor="let title of titles" [value]="title.value ">
+                                        {{ title.value }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.get('title').hasError('required') 
+                                            && (form.get('title').dirty || form.get('title').touched)">
+                                    Title name is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-6">
+                                <mat-form-field flex class="registration-form-full-width"> 
+                                        <input matInput placeholder="Credentials" type="text" [(ngModel)]='user.credentials' formControlName="credentials" />
+                                        <mat-error *ngIf="form.get('credentials').invalid && (form.get('credentials').dirty || form.get('credentials').touched)">
+                                            Credentials is required.
+                                        </mat-error> 
+                                </mat-form-field>
+                            </div>
+                            <div class="col-md-6">
+                                <mat-form-field flex class="registration-form-full-width"> 
+                                        <input matInput placeholder="Title"  type="text" [(ngModel)]='user.title' formControlName="title" />
+                                        <mat-error *ngIf="form.get('title').invalid && (form.get('title').dirty || form.get('title').touched)">
+                                            Title name is required.
+                                        </mat-error>
+                                </mat-form-field>
+                            </div> -->
+                    </div>
+                    <div class="row" *ngIf="panel == 2">
+                        <address-component *ngIf="addressData" style="width: 96%; margin-left: auto; margin-right: auto;"
+                            [data]="addressData" (onDataReceived)="addressOnDataReceived($event)"></address-component>
+                        <div class="col-md-12">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <input matInput placeholder="Employer" type="text" maxlength="100" [(ngModel)]='user.employer'
+                                    formControlName="employer" />
+
+                                <mat-error *ngIf="form.get('employer').invalid && (form.get('employer').dirty || form.get('employer').touched)">
+                                    <span *ngIf="form.get('employer').hasError('required')">
+                                        Employer is required
+                                    </span>
+                                    <span *ngIf="form.get('employer').hasError('whitespace') && !form.get('employer').hasError('required')">
+                                        Remove all extra spaces
+                                    </span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-6">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <input matInput placeholder="Zipcode" type="text" maxlength="5" [(ngModel)]='user.zipCode' formControlName="zipCode" (ngModelChange)="zipCodeCheck(user.zipCode)"
+                                />
+                                <mat-error *ngIf="form.get('zipCode').hasError('incorrect')">
+                                    Zipcode is Invalid
+                                </mat-error>
+                                <mat-error *ngIf="form.get('zipCode').hasError('required') && (form.get('zipCode').dirty || form.get('zipCode').touched)">
+                                    Zipcode is required
+                                </mat-error>
+                                <mat-error *ngIf="form.get('zipCode').hasError('minlength') && (form.get('zipCode').dirty || form.get('zipCode').touched)">
+                                    Zipcode should be minimum 5 characters.
+                                </mat-error>
+                                <mat-error *ngIf="form.get('zipCode').hasError('pattern') && (form.get('zipCode').dirty || form.get('zipCode').touched)">
+                                    Zipcode should be a number
+                                </mat-error>
+                            </mat-form-field>
+
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <input matInput placeholder="Address 1" type="text" maxlength="250" [(ngModel)]='user.address' formControlName="address"
+                                />
+                                <mat-error *ngIf="form.get('address').invalid && (form.get('address').dirty || form.get('address').touched)">
+                                    <span *ngIf="form.get('address').hasError('required')">
+                                        Address is required
+                                    </span>
+                                    <span *ngIf="form.get('address').hasError('whitespace') && !form.get('address').hasError('required')">
+                                        Remove all extra spaces
+                                    </span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <input matInput placeholder="Address 2 (optional)" type="text" maxlength="250" [(ngModel)]='user.address1' formControlName="addressOptional"
+                                />
+                                <mat-error *ngIf="form.get('addressOptional').invalid && (form.get('addressOptional').dirty || form.get('addressOptional').touched)">
+                                 
+                                    <span *ngIf="form.get('address').hasError('whitespace')">
+                                        Remove all extra spaces
+                                    </span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-4">
+                           
+                            <mat-form-field flex class="registration-form-full-width">
+                                <input readonly type="text" placeholder="City" aria-label="city" [(ngModel)]="user.cityName" matInput formControlName="city">
+                              
+                            </mat-form-field>
+                           
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <input readonly type="text" placeholder="State" aria-label="State" [(ngModel)]="user.stateName" matInput formControlName="state">
+                               
+                            </mat-form-field>
+                           
+                        </div>
+                        <div class="col-md-4">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <input readonly type="text" placeholder="Country" aria-label="Country" [(ngModel)]="user.countryName" matInput formControlName="country">
+                                <mat-error *ngIf="form.get('country').invalid && (form.get('country').dirty || form.get('country').touched)">
+                                    Country is required.
+                                </mat-error>
+                            </mat-form-field>
+                           
+                        </div> -->
+
+                    </div>
+                    <div class="row" *ngIf="panel == 3">
+                        <div class="col-md-12">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <mat-select [(ngModel)]='user.secretQuestion1' placeholder="Secret Question # 1"
+                                    formControlName="secretQuestion1">
+                                    <mat-option *ngFor="let secret of secretQuestions" [value]="secret.question">
+                                        {{ secret.question }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.get('secretQuestion1').hasError('required') 
+                                                && (form.get('secretQuestion1').dirty || form.get('secretQuestion1').touched)">
+                                    Secret Question # 1 is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-12">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <mat-select [(ngModel)]='user.secretQuestion2' placeholder="Secret Question # 2"
+                                    formControlName="secretQuestion2">
+                                    <mat-option *ngFor="let secret of secretQuestions" [value]="secret.question">
+                                        {{ secret.question }}
+                                    </mat-option>
+                                </mat-select>
+                                <mat-error *ngIf="form.get('secretQuestion2').hasError('required') && (form.get('secretQuestion2').dirty || form.get('secretQuestion2').touched)">
+                                    Secret Question # 2 is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <input matInput placeholder="Secret Answer # 1" type="text" [(ngModel)]='user.secretAnswer1'
+                                    formControlName="secretAnswer1" />
+                                <mat-error *ngIf="form.get('secretAnswer1').hasError('required') && form.get('secretAnswer1').invalid && (form.get('secretAnswer1').dirty || form.get('secretAnswer1').touched)">
+                                    Secret Answer # 1 is required
+                                </mat-error>
+                                <mat-error *ngIf="form.get('secretAnswer1').hasError('minlength') && (form.get('secretAnswer1').dirty || form.get('secretAnswer1').touched)">
+                                    Secret Answer # 1 should be minimum 5 characters
+                                </mat-error>
+                                <mat-error *ngIf="form.get('secretAnswer1').hasError('maxlength') && (form.get('secretAnswer1').dirty || form.get('secretAnswer1').touched)">
+                                    Secret Answer # 1 should be maximum 20 characters
+                                </mat-error>
+                                <mat-error *ngIf="form.get('secretAnswer1').hasError('whitespace') && !form.get('secretAnswer1').hasError('required') && !form.get('secretAnswer1').hasError('minlength') && !form.get('secretAnswer1').hasError('maxlength')">
+                                    Remove all extra spaces
+                                </mat-error>
+                            </mat-form-field>
+
+                        </div>
+                        <div class="col-md-6">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <input matInput placeholder="Secret Answer # 2" type="text" [(ngModel)]='user.secretAnswer2'
+                                    formControlName="secretAnswer2" />
+                                <mat-error *ngIf="form.get('secretAnswer2').hasError('required') && (form.get('secretAnswer2').dirty || form.get('secretAnswer2').touched)">
+                                    Secret Answer # 2 is required
+                                </mat-error>
+                                <mat-error *ngIf="form.get('secretAnswer2').hasError('minlength') && (form.get('secretAnswer2').dirty || form.get('secretAnswer2').touched)">
+                                    Secret Answer # 2 should be minimum 5 characters
+                                </mat-error>
+                                <mat-error *ngIf="form.get('secretAnswer2').hasError('maxlength') && (form.get('secretAnswer2').dirty || form.get('secretAnswer2').touched)">
+                                    Secret Answer # 2 should be maximum 20 characters
+                                </mat-error>
+                                <mat-error *ngIf="form.get('secretAnswer2').hasError('whitespace') && !form.get('secretAnswer2').hasError('required') && !form.get('secretAnswer2').hasError('minlength') && !form.get('secretAnswer2').hasError('maxlength')">
+                                    Remove all extra spaces
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div style="width:100%">
+                            <hr> 
+                            <mat-checkbox color="primary" [checked]="isSpecialist" (change)="toggleIsSpecialist()">I am a Specialist</mat-checkbox>
+                            <!-- I am a Specialist
+                            <input value="I am a Specialist" type="checkbox" [checked]="isSpecialist" (change)="toggleIsSpecialist()" /> -->
+                            
+                            
+                        </div>
+                        <mat-error *ngIf="form.hasError('sameQuestions') 
+                        && (form.get('secretQuestion1').dirty || form.get('secretQuestion1').touched && !form.get('secretQuestion1').hasError('required'))
+                        && (form.get('secretQuestion2').dirty || form.get('secretQuestion2').touched && !form.get('secretQuestion2').hasError('required'))">
+                            Secret Question should be different from each other
+                        </mat-error>
+                        <mat-error *ngIf="form.hasError('sameAnswers')
+                                    && (form.get('secretAnswer1').dirty || form.get('secretAnswer1').touched  && !form.get('secretAnswer1').hasError('required'))
+                                    && (form.get('secretAnswer2').dirty || form.get('secretAnswer2').touched  && !form.get('secretAnswer2').hasError('required'))">
+                            Secret Answer should be different from each other
+                        </mat-error>
+
+                    </div>
+                    <div class="row" *ngIf="panel == 4 && isSpecialist">
+                        <div class="col-md-6">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <input matInput placeholder="DEA Number" type="text" maxlength="50" [(ngModel)]='user.specialist.deaNumber'
+                                    formControlName="deaNumber" />
+                                <mat-error *ngIf="form.get('deaNumber').invalid && (form.get('deaNumber').dirty || form.get('deaNumber').touched)">
+                                    <span *ngIf="form.get('deaNumber').hasError('required')">
+                                        DEA Number is required
+                                    </span>
+                                    <span *ngIf="form.get('deaNumber').hasError('whitespace') && !form.get('deaNumber').hasError('required')">
+                                        Remove all extra spaces
+                                    </span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <input matInput placeholder="NPI Number" type="text" maxlength="24" [(ngModel)]='user.specialist.npiNumber'
+                                    formControlName="npiNumber" />
+                                <mat-error *ngIf="form.get('npiNumber').hasError('pattern') && (form.get('npiNumber').dirty || form.get('npiNumber').touched)">
+                                    Only alphabets numbers and (-) are allowed
+                                </mat-error>
+                                <mat-error *ngIf="form.get('npiNumber').hasError('required') && (form.get('npiNumber').dirty || form.get('npiNumber').touched)">
+                                    Npi Number is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <!-- <div class="col-md-6">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <input matInput placeholder="Physican License Number" maxlength="50" type="text" [(ngModel)]='user.specialist.physicianLicenseNumber'
+                                    formControlName="physicianLicenseNumber" />
+                                <mat-error *ngIf="form.get('physicianLicenseNumber').invalid && (form.get('physicianLicenseNumber').dirty || form.get('physicianLicenseNumber').touched)">
+                                    <span *ngIf="form.get('physicianLicenseNumber').hasError('required')">
+                                        Physican License Number is required
+                                    </span>
+                                    <span *ngIf="form.get('physicianLicenseNumber').hasError('whitespace') && !form.get('physicianLicenseNumber').hasError('required')">
+                                        Remove all extra spaces
+                                    </span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div> -->
+
+                        <!-- <div class="col-md-6">
+                           
+                            <mat-form-field flex class="registration-form-full-width">
+                                <mat-select placeholder="Licensed States" [(ngModel)]="user.specialist.licensedStates" formControlName="licensedStates" multiple>
+                                    <mat-select-trigger>
+                                        {{user.specialist.licensedStates ? user.specialist.licensedStates[0]?.stateName : ''}}
+                                        <span *ngIf="user.specialist.licensedStates?.length > 1" class="additional-selection">
+                                            (+{{user.specialist.licensedStates.length - 1}} more)
+                                        </span>
+                                    </mat-select-trigger>
+                                    <mat-option *ngFor="let multipleLicensedStates of multipleLicensedStates" [value]="multipleLicensedStates">{{multipleLicensedStates.stateName}}</mat-option>
+                                </mat-select>
+                            </mat-form-field>
+                        </div> -->
+
+                        <div class="col-md-6">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <input type="text" placeholder="Speciality" aria-label="Speciality" matInput (focusout)="focusoutSelectSpeciality()"
+                                    [(ngModel)]="user.specialist.speciality" formControlName="speciality"
+                                    [matAutocomplete]="autoSp">
+                                <mat-autocomplete #autoSp="matAutocomplete" [displayWith]="displaySpeciality.bind(this)">
+                                    <mat-option *ngFor="let specialities of filteredSpeciality | async" [value]="specialities">
+                                        {{ specialities.name }}
+                                    </mat-option>
+                                </mat-autocomplete>
+                                <mat-error *ngIf="form.get('speciality').invalid && (form.get('speciality').dirty || form.get('speciality').touched)">
+                                    Speciality is required
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+
+                        <div class="col-md-6">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <input matInput placeholder="Practice Group" type="text" maxlength="50" [(ngModel)]='user.specialist.practiceGroup'
+                                    formControlName="practiceGroup" />
+                                <mat-error *ngIf="form.get('practiceGroup').invalid && (form.get('practiceGroup').dirty || form.get('practiceGroup').touched)">
+                                    <span *ngIf="form.get('practiceGroup').hasError('required')">
+                                        Practice Group is required
+                                    </span>
+                                    <span *ngIf="form.get('practiceGroup').hasError('whitespace') && !form.get('practiceGroup').hasError('required')">
+                                        Remove all extra spaces
+                                    </span>
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                        <div class="col-md-12">
+                            <mat-form-field flex class="registration-form-full-width">
+                                <mat-select placeholder="Licensed States" [(ngModel)]="user.specialist.licensedStates"
+                                    formControlName="licensedStates" multiple (openedChange)="openedChange($event)">
+                                    <mat-select-trigger>
+                                        {{user.specialist.licensedStates ? user.specialist.licensedStates[0]?.stateName
+                                        : ''}}
+                                        <span *ngIf="user.specialist.licensedStates?.length > 1" class="additional-selection">
+                                            (+{{user.specialist.licensedStates.length - 1}} more)
+                                        </span>
+                                    </mat-select-trigger>
+                                    <span *ngFor="let multipleLicensedStates of multipleLicensedStates ; let i = index">
+                                        <div [class]="user.specialist.licensedStates?.length > 0 ? 'col-md-6' : 'col-md-12'"
+                                            style="float: left">
+                                            <mat-option [value]="multipleLicensedStates">{{multipleLicensedStates.stateName}}</mat-option>
+                                        </div>
+                                        <div class="col-md-6" style="float: right" *ngIf="user.specialist.licensedStates">
+                                            <div *ngFor="let sl of user.specialist.licensedStates">
+                                                <mat-form-field floatPlaceholder="never" hideRequiredMarker style="font-size: 0.85em"
+                                                    flex class="registration-form-full-width" *ngIf="multipleLicensedStates.stateName == sl.stateName">
+                                                    <input id="licensenumber" name="licensenumber" #licensenumber="ngModel"
+                                                        autocomplete="off" matInput placeholder="{{multipleLicensedStates.stateName + ' License Number'}}"
+                                                        maxlength="50" type="text" [(ngModel)]="sl.licenceNumber"
+                                                        [ngModelOptions]="{standalone: true}" required (keydown)="$event.stopPropagation()" />
+                                                    <mat-error *ngIf="licensenumber.invalid && (licensenumber.dirty || licensenumber.touched)">
+                                                        <div *ngIf="licensenumber.errors.required">
+                                                            License number is required.
+                                                        </div>
+                                                    </mat-error>
+                                                </mat-form-field>
+                                            </div>
+                                        </div>
+                                        <div style="clear: both"></div>
+                                    </span>
+                                </mat-select>
+                                <mat-error *ngIf="form.get('licensedStates').hasError('required')  && (form.get('licensedStates').dirty || form.get('licensedStates').touched)">
+                                    Licensed state with valid license number is required.
+                                </mat-error>
+                            </mat-form-field>
+                        </div>
+                    </div>
+                </div>
+                <div class="auth-card-btn-box text-center">
+                    <div class="text-center">
+                        <button style="float:  left;" [style.display]="backbutton" type="button" class="btn-vm-auth"
+                            (click)="previous()">Back</button>
+                        <button style="float: right;" type="submit" [style.cursor]="(!form.valid || !addressForm) ? 'not-allowed' : 'pointer' "
+                            [style.display]="completebutton" [disabled]="(!form.valid || !addressForm)" class="btn-vm-auth">Complete</button>
+                        <button style="float: right; " [style.cursor]="(!form.valid || !addressForm) ? 'not-allowed' : 'pointer' "
+                            [style.display]="nextbutton" type="button" [disabled]="(!form.valid || !addressForm)" class="btn-vm-auth"
+                            (click)="next()">Next</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- For Loading page -->
+        <div id="Loadingpage" [style.display]="Loadingpage">
+            <div class="text-center">
+                <div class="ptl pbm">
+                    <span class="vm-loader"></span>
+                </div>
+                <div class="pts loading-txt">Please Wait...</div>
+            </div>
+        </div>
+        <!-- -->
+    </div>
+</div>

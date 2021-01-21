@@ -1,0 +1,9 @@
+<div *ngIf="uiElementData && form" class="textField" [formGroup]="form">
+    <!--Caption, if available-->
+    <label *ngIf="uiElementData.caption" [for]="uiElementData.name">
+        {{uiElementData.caption}}
+    </label>
+    <input type="text"  
+          [formControlName]="uiElementData.bindTo" maxlength="512"/>    
+  
+  </div>

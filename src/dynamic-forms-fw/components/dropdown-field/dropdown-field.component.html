@@ -1,0 +1,6 @@
+<div *ngIf="uiElementData && form" class="dropdownField" [formGroup]="form">
+
+  <select [formControlName]="uiElementData.bindTo" [id]="uiElementData.name">    
+      <option *ngFor="let opt of options" [value]="opt.key">{{opt.value}}</option>
+  </select>
+</div>

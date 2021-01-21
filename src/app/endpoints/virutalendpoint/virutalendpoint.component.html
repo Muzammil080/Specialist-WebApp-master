@@ -1,0 +1,363 @@
+<div id="call-connecting" class="call-connecting">
+    <div class="loading-display-box">
+        <div class="loding-box">
+            <!-- <div class="ptl pbm">
+                <span class="vm-loader"></span>
+                <div class="pts loading-txt">Connecting...</div>
+            </div> -->
+            <div class="connecting-icon-container">
+                <div class="connecting-icon-box">
+                    <i class="material-icons">
+                        laptop_mac
+                    </i>
+                </div>
+                <div class="connecting-icon-box">
+                    <div id="connecting1" class="material-icons-animation">
+                        <div class="loader">Loading...</div>
+                    </div>
+                </div>
+                <div class="connecting-icon-box">
+                    <i class="material-icons">
+                        language
+                    </i>
+                </div>
+                <div class="connecting-icon-box">
+                    <div id="connecting2" class="material-icons-animation">
+                        <div class="loader">Loading...</div>
+                    </div>
+                </div>
+                <div class="connecting-icon-box">
+                    <i class="material-icons">
+                        storage
+                    </i>
+                </div>
+                <div class="connecting-icon-box">
+                    <div id="connecting3" class="material-icons-animation">
+                        <div class="loader">Loading...</div>
+                    </div>
+                </div>
+                <div class="connecting-icon-box">
+                    <i class="material-icons">
+                        desktop_mac
+                    </i>
+                </div>
+            </div>
+        </div>
+        <div
+            style="border: 0px solid black; width: 195px; height:100px; position: absolute; top:1;bottom: 0;left: 0;right: 0;margin: auto; "
+        >
+            <!-- <button class="list-btn-round decline-btn" onclick="disconnectCallbefore()">
+                <i class="icon_vm_phone_decline"></i>
+            </button> -->
+        </div>
+    </div>
+</div>
+
+<!-- <div id="myInputbox">
+    <i class="icon_vm_search"></i>
+    <input
+        type="text"
+        id="myInput"
+        placeholder="Search"
+        title="SEARCH"
+        (change)="onSearchChange()"
+        [(ngModel)]="filter"
+    />
+</div> -->
+
+<div class="row align-items-center">
+    <div class="col" *ngIf = "partnerSites.length > 1">
+        <mat-form-field class="full-width">
+            <mat-select
+                placeholder="Partner Site"
+                [(value)]="partnerSiteId"
+                [disabled] = "partnerSites.length == 1"
+            >
+                <mat-option
+                    *ngIf="partnerSites.length > 1"
+                    [value]="0"
+                    (onSelectionChange)="
+                        searchByselect($event, 'partnersite', 0)
+                    "
+                    >All
+                </mat-option>
+                <mat-option
+                    *ngFor="let partnersite of partnerSites"
+                    [value]="partnersite.id"
+                    (onSelectionChange)="
+                        searchByselect(
+                            $event,
+                            'partnersite',
+                            partnersite.id
+                        )
+                    "
+                >
+                    {{ partnersite.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="col">
+        <mat-form-field class="full-width">
+            <mat-select placeholder="Facility" [(value)]="facilityId">
+                <mat-option
+                    *ngIf="facilities.length > 1"
+                    [value]="0"
+                    (onSelectionChange)="
+                        searchByselect($event, 'facility', 0)
+                    "
+                    >All
+                </mat-option>
+                <mat-option
+                    *ngFor="let facility of facilities"
+                    [value]="facility.id"
+                    (onSelectionChange)="
+                        searchByselect(
+                            $event,
+                            'facility',
+                            facility.id
+                        )
+                    "
+                >
+                    {{ facility.name }}
+                </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+
+    <div class="col-xl-4 col-lg-5 col-md-6 col-sm-12">
+        <mat-form-field class="full-width">
+            <input
+                matInput
+                (change)="onSearchChange()"
+                [(ngModel)]="filter"
+                placeholder="Search"
+            />
+        </mat-form-field>
+    </div>
+</div>
+<div class="row">
+    <div class="col pvm">
+        <button class="mr-2" (click)="endpointStatus('online')" [class.disabled]="currentEndpointStatus != 'online'" mat-raised-button color="primary">Online</button>
+        <button class="mr-2" (click)="endpointStatus('offline')" [class.disabled]="currentEndpointStatus != 'offline'" mat-raised-button color="primary">Offline</button>
+        <button (click)="endpointStatus('busy')" [class.disabled]="currentEndpointStatus != 'busy'" mat-raised-button color="primary">Busy</button>
+        <!-- <button (click)="endpointStatus('inactive')" [disabled]="currentEndpointStatus == 'inactive'" mat-raised-button color="primary">InActive</button> -->
+    </div>
+    <div class="col">
+        <mat-form-field class="full-width">
+            <mat-select
+                placeholder="Sort By"
+                [(value)]="sortBy"
+            >
+                <mat-option
+                    [value]="'name'"
+                    (onSelectionChange)="
+                        searchByselect($event, 'sort', 'name')
+                    "
+                    >Name
+                </mat-option>
+                <mat-option
+                [value]="'location'"
+                (onSelectionChange)="
+                    searchByselect($event, 'sort', 'location')
+                "
+                >Location
+            </mat-option>
+            </mat-select>
+        </mat-form-field>
+    </div>
+    <div class="col">
+        <button class="list-btn-round light float-right" (click)= "whenUserInteract()">
+            <i class="icon_vm_refresh"></i>
+        </button>
+    </div>
+</div>
+
+<div id="scrollbox">
+    <table class="table" id="myTable">
+        <tr
+            style="border-bottom: 2px solid lightgray; border-top : 2px solid lightgray; background: rgba(253, 253, 253, 0.589);"
+        >
+            <th *ngIf = "partnerSites.length > 1">Partner Site</th>
+            <th>Facility</th>
+            <th>Name</th>
+            <th>PC Name</th>
+            <th>Location</th>
+            <th>Last Session</th>
+            <th></th>
+        </tr>
+        <tr>
+            <td
+                [style.display]="zeroResults"
+                colspan="6"
+                style="text-align: center; color: lightgrey;"
+            >
+                There are no Virtual Endpoints
+            </td>
+        </tr>
+        <tr>
+            <td colspan="6" [style.display]="visibilityLoginSpinner">
+                <div id="Loadingpage">
+                    <div class="text-center">
+                        <div class="ptl pbm">
+                            <span class="vm-loader"></span>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        <!-- remove noselect class to enable selection of data -->
+        <tr
+            *ngFor="let ep of EndpointsFilter; let rowIndex = index"
+        >
+            <td *ngIf = "partnerSites.length > 1">{{ ep.partnerSiteName }}</td>
+            <td>{{ ep.facilityName }}</td>
+            <td>{{ ep.name }}</td>
+            <td>{{ep.pcName}}</td>
+            <td>{{ ep.location }}</td>
+            <td>
+                <!-- {{
+                    ep.lastSessionTimeInUtc
+                        ? (ep.lastSessionTimeInUtc | specilist | date: "MMM d y h:mm a")
+                        : "N/A"
+                }} -->
+                {{ ep.lastSessionTimeInUtc ? (ep.lastSessionTimeInUtc | date: "MMM d y h:mm a") : "N/A" }}
+            </td>
+
+            <td>
+                <button
+                    (click)="connectEndpoint(ep)"
+                    [class]="
+                        ep.kartStatus.toUpperCase() == 'ONLINE'
+                            ? 'btn-vm-auth'
+                            : 'btn-vm-auth-disabled'
+                    "
+                    [style.paddingRight]="
+                        ep.kartStatus.toUpperCase() == 'BUSY' ? '11.5px' : '0px'
+                    "
+                >
+                    <span
+                        [class]="
+                            ep.kartStatus.toUpperCase() == 'ONLINE'
+                                ? 'dotgreen'
+                                : ep.kartStatus.toUpperCase() == 'OFFLINE'
+                                ? 'dotred'
+                                : 'dotyellow'
+                        "
+                    ></span>
+                    {{
+                        ep.kartStatus.toUpperCase() == "ONLINE"
+                            ? "Connect"
+                            : ep.kartStatus[0].toUpperCase() +
+                              ep.kartStatus.slice(1)
+                    }}
+                </button>
+            </td>
+        </tr>
+    </table>
+
+    <mat-paginator
+        [length]="count"
+        [pageSize]="pageSize"
+        [pageIndex]="pageIndex"
+        [pageSizeOptions]="pageSizeOptions"
+        (page)="pageChanged($event)"
+    >
+    </mat-paginator>
+</div>
+<!-- <div
+    [style.display]="paginationdisplay"
+    style="float:left; color:lightgrey; margin-left: 12px; margin-top: 10px; font-size: 0.9em"
+>
+    Page {{ currentpage }} |
+    {{
+        currentpage * 8 > Endpoints.length ? Endpoints.length : currentpage * 8
+    }}
+    of {{ Endpoints.length }} | Endpoints
+</div>
+<div
+    [style.display]="paginationdisplayfilter"
+    style="float:left; color:lightgrey; margin-left: 12px; margin-top: 10px; font-size: 0.9em"
+>
+    Page {{ currentpage }} |
+    {{
+        currentpage * 8 > EndpointsFilterPagination.length
+            ? EndpointsFilterPagination.length
+            : currentpage * 8
+    }}
+    of {{ EndpointsFilterPagination.length }} | Filtered Endpoints
+</div>
+
+<nav
+    [style.display]="paginationdisplaybtn"
+    aria-label="Page navigation example"
+    style="float:right;"
+>
+    <ul class="pagination">
+        <li class="page-item">
+            <a
+                class="page-link"
+                aria-label="Previous"
+                (click)="pagNum('P', inputstring.value)"
+            >
+                <span aria-hidden="true">&laquo;</span>
+                <span class="sr-only">Previous</span>
+            </a>
+        </li>
+        <li
+            *ngFor="let item of PageLengthrange; let rowIndex = index"
+            class="{{
+                currentpage == PageLengthrange[rowIndex]
+                    ? 'page-item active'
+                    : 'page-item'
+            }}"
+        >
+            <a
+                class="page-link"
+                [style.display]="
+                    PageLengthrange[rowIndex] > currentpage - 4 &&
+                    PageLengthrange[rowIndex] < currentpage + 4
+                        ? 'block'
+                        : 'none'
+                "
+                (click)="pagNum(PageLengthrange[rowIndex], inputstring.value)"
+                >{{ PageLengthrange[rowIndex] }}</a
+            >
+        </li>
+        // <li class="page-item"><a class="page-link"  (click)="pagNum(20,inputstring.value)">2</a></li>
+        <li class="page-item">
+            <a
+                class="page-link"
+                aria-label="Next"
+                (click)="pagNum('N', inputstring.value)"
+            >
+                <span aria-hidden="true">&raquo;</span>
+                <span class="sr-only">Next</span>
+            </a>
+        </li>
+    </ul>
+</nav> -->
+
+<!--
+<div id="main-container" style="text-align:center">
+  <div class="container">
+    <h2>Hello {{nick}}!</h2>
+    <form (ngSubmit)="sendMessage()" #chatForm="ngForm">
+      <div>
+        <label for="message">Message</label>
+        <input type="text" id="message" name="message" [(ngModel)]="message" required>
+      </div>
+      <button type="submit" id="sendmessage" [disabled]="!chatForm.valid">
+        Send
+      </button>
+    </form>
+  </div>
+
+  <div class="container" *ngIf="messages.length > 0" style="border: 1px solid black">
+    <div *ngFor="let message of messages">
+      <span>{{message}}</span>
+    </div>
+  </div>
+
+</div> -->

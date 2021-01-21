@@ -1,0 +1,34 @@
+<div id="container">
+    <br>
+    <table *ngIf="notes && notes.length > 0"  class="table">
+            <tr  class="table-custom-border">
+                    <th>Reference ID </th>
+                    <th>First Name  </th>
+                    <th>Last Name</th>
+                    <th>Phone Number</th>
+                    <th></th>
+
+            </tr>
+            <tr *ngFor="let sh of notes" [style.display]="visibilityLoginSpinnerdata">
+                    <td>{{sh.id}}</td>
+                    <td>{{sh.patientFirstName}}</td>
+                    <td>{{sh.patientLastName}}</td>
+                    <td>{{sh.patientMobileNumber}}</td>
+
+                    <td>
+                            <button mat-stroked-button color="warn" (click)="openNote(sh)">Notes</button>
+                    </td>
+            </tr>
+    </table>
+    <h6 *ngIf="notes && notes.length == 0"  class="nodata">There are no unsigned notes</h6>
+    <mat-paginator
+    *ngIf="notes"
+    [length]="count"
+    [pageSize]="pageSize"
+    [pageIndex]="pageIndex"
+    [pageSizeOptions]="pageSizeOptions"
+    (page)="pageChanged($event)"
+>
+</mat-paginator>
+    <!-- <dynamic-notes *ngIf="dynamicNotesData" [data]="dynamicNotesData" ></dynamic-notes> -->
+</div>

@@ -1,0 +1,81 @@
+<form [formGroup]="form">
+    <div class="row">
+        <div [class]="cloClass">
+            <mat-form-field flex class="full-width">
+                <input matInput placeholder="Address 1 (optional)" type="text" maxlength="250" formControlName="address" />
+                <mat-error *ngIf="form.get('address').invalid && (form.get('address').dirty || form.get('address').touched)">
+                    <span *ngIf="form.get('address').hasError('required')">
+                        Address is required
+                    </span>
+                    <span *ngIf="form.get('address').hasError('whitespace') && !form.get('address').hasError('required')">
+                        Remove all extra spaces
+                    </span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div [class]="cloClass">
+            <mat-form-field flex class="full-width">
+                <input matInput placeholder="Address 2 (optional)" type="text" maxlength="250" formControlName="address1" />
+                <mat-error *ngIf="form.get('address1').invalid && (form.get('address1').dirty || form.get('address1').touched)">
+                    <span *ngIf="form.get('address1').hasError('whitespace')">
+                        Remove all extra spaces
+                    </span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div [class]="cloClass">
+            <mat-form-field flex class="full-width">
+                <input matInput placeholder="Zipcode" type="text" maxlength="5" formControlName="zipCode" />
+                <mat-error *ngIf="form.get('zipCode').hasError('incorrect')">
+                    Zipcode is Invalid
+                </mat-error>
+                <mat-error *ngIf="form.get('zipCode').hasError('required') && (form.get('zipCode').dirty || form.get('zipCode').touched)">
+                    Zipcode is required
+                </mat-error>
+                <mat-error *ngIf="!form.get('zipCode').hasError('pattern')  && form.get('zipCode').hasError('minlength') && (form.get('zipCode').dirty || form.get('zipCode').touched)">
+                    Zipcode should be minimum 5 characters.
+                </mat-error>
+                <mat-error *ngIf="form.get('zipCode').hasError('pattern') && (form.get('zipCode').dirty || form.get('zipCode').touched)">
+                    Zipcode should be a number
+                </mat-error>
+            </mat-form-field>
+
+        </div>
+        <div [class]="cloClass">
+
+            <mat-form-field flex class="full-width">
+                <input type="text" placeholder="City (optional)" maxlength="50" aria-label="city" matInput formControlName="cityName">
+                <mat-error *ngIf="form.get('cityName').hasError('pattern') && (form.get('cityName').dirty || form.get('cityName').touched)">
+                    Only alphabets are allowed
+                </mat-error>
+            </mat-form-field>
+
+        </div>
+        <div [class]="cloClass">
+            <!-- <mat-form-field flex class="registration-form-full-width">
+                <input readonly type="text" placeholder="State" aria-label="State" matInput formControlName="state">
+
+            </mat-form-field> -->
+            <mat-form-field flex class="full-width">
+                <mat-select placeholder="State" [compareWith]="compareFn" formControlName="stateId">
+                    <mat-option *ngFor="let states of states" [value]="states.id">
+                        {{states.stateName}}
+                    </mat-option>
+                </mat-select>
+                <mat-error *ngIf="form.get('stateId').invalid && (form.get('stateId').dirty || form.get('stateId').touched)">
+                    <span *ngIf="form.get('stateId').hasError('required')">
+                        State is required
+                    </span>
+                </mat-error>
+            </mat-form-field>
+        </div>
+        <div [class]="cloClass">
+            <mat-form-field flex class="full-width">
+                <input readonly type="text" placeholder="Country" aria-label="Country" matInput formControlName="countryName">
+                <!-- <mat-error *ngIf="form.get('countryName').invalid && (form.get('countryName').dirty || form.get('countryName').touched)">
+                    Country is required.
+                </mat-error> -->
+            </mat-form-field>
+        </div>
+    </div>
+</form>

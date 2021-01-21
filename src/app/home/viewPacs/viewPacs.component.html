@@ -1,0 +1,223 @@
+<div id="call-connecting" class="call-connecting">
+    <div class="loading-display-box">
+        <div class="loding-box">
+            <!-- <div class="ptl pbm">
+                    <span class="vm-loader"></span>
+                    <div class="pts loading-txt">Connecting...</div>
+                </div> -->
+            <div class="connecting-icon-container">
+                <div class="connecting-icon-box">
+                    <i class="material-icons">
+                        laptop_mac
+                    </i>
+                </div>
+                <div class="connecting-icon-box">
+                    <div id="connecting1" class="material-icons-animation">
+                        <div class="loader">Loading...</div>
+                    </div>
+                </div>
+                <div class="connecting-icon-box">
+                    <i class="material-icons">
+                        language
+                    </i>
+                </div>
+                <div class="connecting-icon-box">
+                    <div id="connecting2" class="material-icons-animation">
+                        <div class="loader">Loading...</div>
+                    </div>
+                </div>
+                <div class="connecting-icon-box">
+                    <i class="material-icons">
+                        storage
+                    </i>
+                </div>
+                <div class="connecting-icon-box">
+                    <div id="connecting3" class="material-icons-animation">
+                        <div class="loader">Loading...</div>
+                    </div>
+                </div>
+                <div class="connecting-icon-box">
+                    <i class="material-icons">
+                        desktop_mac
+                    </i>
+                </div>
+            </div>
+        </div>
+        <div
+            style="border: 0px solid black; width: 195px; height:100px; position: absolute; top:1;bottom: 0;left: 0;right: 0;margin: auto; "
+        >
+            <!-- <button class="list-btn-round decline-btn" onclick="disconnectCallbefore()">
+                    <i class="icon_vm_phone_decline"></i>
+                </button> -->
+        </div>
+    </div>
+</div>
+<nav
+    id="navbar"
+    class="navbar navbar-expand-lg fixed-top navbar-light navbar-vm"
+>
+    <div class="nav-title-box clearfix">
+        <i class="icon_vm_document"></i>
+        <div class="dropdown">
+            <div class="titleblock">
+                <div class="name">
+                    {{
+                        request?.firstName
+                            ? request?.firstName + " " + request?.lastName
+                            : "loading...."
+                    }}
+                </div>
+                <div class="place">{{ request?.facilityName }}</div>
+            </div>
+            <div class="dropdown-content" style="padding:20px;">
+                <table>
+                    <tr>
+                        <th style="color:#00aecd; border-top:0px;">
+                            <i
+                                class="icon_vm_document"
+                                style="    font-size: 2em;
+                                                                margin-top: -3px;
+                                                                margin-right: 5px;"
+                            >
+                            </i>
+                            Patient info
+                        </th>
+                        <br />
+                    </tr>
+                    <tr>
+                        <td style="color:#00aecd">DOB:</td>
+                        <td>
+                            {{
+                                request?.dob
+                                    ? (request?.dob | date: "MMM d, y") +
+                                      " (Age: " +
+                                      request?.age +
+                                      ")"
+                                    : "Unknown"
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:#00aecd">Sex:</td>
+                        <td>{{ request?.gender }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color:#00aecd">MRN:</td>
+                        <td>{{ request?.mrn }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color:#00aecd">Physician Name:</td>
+                        <td>{{ request?.physicianName }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color:#00aecd">Physician Cell:</td>
+                        <td>{{ request?.physicianCell }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color:#00aecd">Last Well Known Date:</td>
+                        <td>
+                            {{
+                                request?.lastWellKnownDate
+                                    ? (request?.lastWellKnownDate
+                                      | date: "MMM d, y")
+                                    : "Unknown"
+                            }}
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="color:#00aecd">Reason For Request:</td>
+                        <td>{{ request?.reasonForRequest }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color:#00aecd">Visit Type:</td>
+                        <td>{{ request?.visitType }}</td>
+                    </tr>
+                    <tr>
+                        <td style="color:#00aecd">Priority:</td>
+                        <td>{{ request?.priority }}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+    >
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" (click)="pageView(0)">
+                    <i class="icon_vm_pacs"></i>
+                    <span class="item-name">PACS</span>
+                </a>
+            </li>
+            <li class="nav-item" (click)="pageView(1)">
+                <a class="nav-link">
+                    <i class="icon_vm_chat"></i>
+                    <span class="item-name">Messages</span>
+                    <span *ngIf="MessageCount != 0" class="count-bubble">{{
+                        MessageCount
+                    }}</span>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" (click)="onExit()">
+                    <i class="icon_vm_logout"></i>
+                    <span class="item-name">Exit</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<div class="viewPacsTopRightBox">
+    <div
+        style="
+        float: right;
+        margin-right: 5px;"
+    >
+        <button class="list-btn list-btn-ico" (click)="callReject()">
+            <i class="icon_vm_phone_decline"></i>Cancel
+        </button>
+        <button class="list-btn list-btn-ico green-btn" (click)="callAccept()">
+            <i class="icon_vm_phone"></i>Start call
+        </button>
+    </div>
+</div>
+<div style="height:135px;"></div>
+<div [hidden]="pageIndex == 1">
+    <pacs
+        *ngIf="showPacs"
+        [hidden]="showLoader"
+        (refeshPacs)="refresh()"
+    ></pacs>
+
+    <div *ngIf="showLoader" style="margin-top: 30vh ">
+        <div class="text-center">
+            <div class="ptl pbm">
+                <span class="vm-loader"></span>
+                <br />
+                <h6>PACS viewer is loading please wait...</h6>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div
+    *ngIf="pageIndex == 1"
+    style="max-height: 560px !important;"
+    malihu-scrollbar
+    [scrollbarOptions]="scrollbarOptions"
+>
+    <div style="width:1000px;margin-left: auto;margin-right: auto;">
+        <defer-chat></defer-chat>
+    </div>
+</div>

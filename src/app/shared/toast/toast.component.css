@@ -1,0 +1,82 @@
+.toast-container {
+  /*-webkit-transition-property: opacity, bottom, left, right, width, margin, border-radius;
+  transition-property: opacity, bottom, left, right, width, margin, border-radius;
+  -webkit-transition-duration: 1.0s;
+          transition-duration: 1.0s;
+  -webkit-transition-timing-function: ease;
+          transition-timing-function: ease;*/
+          position: fixed !important;
+          right: 20px;
+          top: 20px;
+          overflow: auto;
+          background: rgba(255, 255, 255, 0.9);
+          z-index: 9999;
+          opacity: 0;
+          transition: opacity 400ms ease-in;
+          min-width: 260px;
+          width: auto;
+          /* box-shadow: 0 3px 1px -2px rgba(0,0,0,.2), 0 2px 2px 0 rgba(0,0,0,.14), 0 1px 5px 0 rgba(0,0,0,.12); */
+}
+
+.toast-container > * {
+  text-align: left;
+}
+
+.toast-card {
+  z-index: 1;
+  position: relative;
+  text-align: center;
+}
+
+.toast-card .toast-message {
+  margin: 5px 16px 16px 0;
+  font-size: 14px;
+  font-weight: 400;
+}
+
+.toast-card .toast-title {
+  margin: 16px 16px 5px 0;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* Customization */
+.toast-container .mat-icon {
+  width: 32px;
+  height: 32px;
+  font-size: 32px;
+  position: absolute;
+  top: 50%;
+  margin-top: -16px;
+  left: 15px;
+}
+.toast-card {
+  float: right;
+  width: calc(100% - 60px);
+}
+
+.toast-container.danger {
+  background-color:rgba(238, 20, 20, 0.705);
+  color: #fff;
+}
+
+.toast-container.warning {
+  background-color: #FFC107;
+  color: #fff;
+}
+
+.toast-container.info {
+  background-color: #03A9F4;
+  color: #fff;
+}
+
+.toast-container.success {
+  background-color: rgba(76, 175, 79, 0.705);
+  color: #fff;
+}
+
+/*
+Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+Use of this source code is governed by an MIT-style license that
+can be found in the LICENSE file at http://bit.ly/l1cense
+*/

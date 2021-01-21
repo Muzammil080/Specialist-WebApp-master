@@ -1,0 +1,8 @@
+<div *ngIf="uiElementData && form" class="textareaField" [formGroup]="form">
+    <!--Caption, if available-->
+    <label *ngIf="uiElementData.caption" [for]="uiElementData.name">
+        {{uiElementData.caption}}
+    </label>
+    <textarea rows="4" [formControlName]="uiElementData.bindTo" [placeholder]="uiElementData.placeHolder" maxlength="4000"></textarea>  
+  
+  </div>

@@ -1,0 +1,8 @@
+<div *ngIf="uiElementData" class="uiContainer">
+  <!--Tile if available-->
+  <h2 *ngIf="uiElementData.caption" class="subTitle">{{uiElementData.caption}}</h2>
+  <!--render child elements-->
+  <ui-element *ngFor='let element of uiElementData.childElements;trackBy:elementIdTracker' 
+      [form]="form" [sectionElement]="element"></ui-element>
+
+</div>

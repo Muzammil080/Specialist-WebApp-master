@@ -1,0 +1,98 @@
+<div class="flex-container">
+    <div class="auth-card">
+        <div class="logo-box">
+            <embed src="assets/img/svg/logo.svg" />
+        </div>
+
+        <div id="Mainpage" [style.display]="Mainpage">
+            <div class="auth-card-btn-box text-center">
+                <div class="ptl pvm">
+                    <button
+                        type="button"
+                        class="btn-vm-auth"
+                        (click)="Mainpagecreateaccount()"
+                    >
+                        Create Account
+                    </button>
+                </div>
+                <div class="pvm">
+                    <button
+                        type="button"
+                        class="btn-vm-clear"
+                        (click)="Mainpagesignin()"
+                    >
+                        Sign In
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div id="Loginpage" [style.display]="Loginpage">
+            <form
+                [formGroup]="formLogin"
+                (ngSubmit)="login()"
+                autocomplete="on"
+            >
+                <div class="auth-card-fields">
+                    <div class="input-wrap">
+                        <input
+                            placeholder="Email"
+                            value=""
+                            type="email"
+                            [(ngModel)]="user.email"
+                            formControlName="email"
+                            class="vm-input"
+                        />
+                    </div>
+
+                    <div class="input-wrap">
+                        <input
+                            placeholder="Password"
+                            value=""
+                            type="password"
+                            [(ngModel)]="user.password"
+                            formControlName="password"
+                            class="vm-input"
+                        />
+                    </div>
+                </div>
+                <a
+                    style="float: right; margin-top: 5px; font-size: 0.9em;"
+                    [routerLink]="['/reset']"
+                    >Forgot your password?</a
+                >
+                <div class="auth-card-btn-box text-center">
+                    <div class="text-center">
+                        <button type="submit" class="btn-vm-auth">
+                            Sign In
+                        </button>
+                    </div>
+                    <div>
+                        <br />
+                        Don't have an account?
+                        <a [routerLink]="['/registration']">Sign up</a>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <div id="Loadingpage" [style.display]="Loadingpage">
+            <div class="text-center">
+                <div class="ptl pbm">
+                    <span class="vm-loader"></span>
+                </div>
+                <div class="pts loading-txt">Please Wait...</div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- <button type="button" (click)="play()">Play</button> -->
+<!-- Footer -->
+<div class="footer">
+    <div class="copyright">
+        <p style="float: right; margin-right: 2px;">Version {{version}}</p>
+        <p style="text-align: center; margin-left: 9%;">
+            &copy; {{ currentDate | date: "yyyy" }} VeeMed Inc
+        </p>
+    </div>
+</div>

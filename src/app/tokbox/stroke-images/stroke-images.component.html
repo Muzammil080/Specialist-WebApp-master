@@ -1,0 +1,12 @@
+<!-- <h1 mat-dialog-title>Stroke Images</h1>
+<mat-dialog-content>
+    <img *ngFor="let i of images" [class.highlight]="i.id == selectedImageId" src="{{i.imageUrl}}" (click) = "onImgSelect(i)"/>
+</mat-dialog-content>
+<mat-dialog-actions>
+  <button mat-raised-button color="primary" (click)="close()">Done</button>
+</mat-dialog-actions> -->
+<div class="text-center">
+    <button mat-button (click) = "close()" style = "color:white;" >X</button>
+</div>
+<img *ngFor="let i of images" [class.highlight]="i.id == selectedImageId" src="{{i.imageUrl}}" (click) = "onImgSelect(i)"/>
+

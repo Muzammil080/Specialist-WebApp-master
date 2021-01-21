@@ -1,0 +1,222 @@
+
+
+.noselect {
+    -webkit-touch-callout: none; /* iOS Safari */
+      -webkit-user-select: none; /* Safari */
+       -khtml-user-select: none; /* Konqueror HTML */
+         -moz-user-select: none; /* Firefox */
+          -ms-user-select: none; /* Internet Explorer/Edge */
+              user-select: none; /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+  }
+
+  #myInputbox{
+    width: calc(100% - 310px);
+    height: 40px;
+    padding: 6px;
+    padding-left: 10px;
+    /* margin-top: 12px; */
+    margin-bottom: 10px;
+    border: 1px solid lightgrey;
+    float: right;
+  }
+    #myInputhistry {
+        width: calc(100% - 20px);
+        font-size: 16px;
+        padding-left: 5px;
+        border: 1px solid #ddd;
+        margin-bottom: 12px;
+        margin-top: 1px;
+        border: none;
+        outline: none;
+      }
+
+  #btnfilter
+  {
+      background-color: #00aecc;
+  }
+  #btnfilter[disabled]
+  {
+      background-color: lightgrey;
+  }
+.table
+{
+    font-size: 0.95rem;
+}
+
+.wd-9x {
+    max-width: 900px;
+    margin: auto;
+}
+
+.vm-heading {
+    font-size: 25px;
+    color: #00AECC;
+    font-weight: normal;
+    margin-bottom: 30px;
+}
+
+.session-card {
+    border: 1px solid #929292;
+    border-radius: 5px;
+    padding: 3%;
+    margin-bottom: 15px;
+}
+
+.issue-type {
+    color: #414042;
+    font-size: 20px;
+    text-transform: capitalize;
+    position: relative;
+}
+
+.hospital-name {
+    color: #b2b2b2;
+    font-size: 17px;
+    text-transform: capitalize;
+}
+
+.issue-type i {
+    position: absolute;
+    font-size: 26px;
+    left: -36px;
+    top: 3px;
+    color: #e62f53;
+    visibility: hidden;
+}
+.issue-type.show-ico i {
+    visibility: visible;
+}
+
+.list-btn {
+    background: transparent;
+    border: 1px solid #929292;
+    height: 32px;
+    line-height: 32px;
+    border-radius: 16px;
+    padding: 0 10px;
+    font-size: 18px;
+    color: #00AECC;
+    position: relative;
+    cursor: pointer;
+    margin: 15px 0 15px 15px;
+    outline: none;
+    vertical-align: middle;
+}
+
+.list-btn.list-btn-ico > i {
+   position: absolute;
+   font-size: 22px;
+   left: 5px;
+   top: 50%;
+   margin-top: -11px;
+}
+
+.list-btn.list-btn-ico {
+   padding-left: 34px;
+}
+
+.list-btn.list-btn-ico.green-btn {
+    background-color: #4cda64;
+    color: #fff;
+    border-color: #4cda64;
+}
+
+.list-chat-btn {
+    border: none;
+    padding: 0;
+    font-size: 46px;
+    position: relative;
+    color: #929292;
+    line-height: 45px;
+    vertical-align: middle;
+    background-color: transparent;
+    outline: none;
+    cursor: pointer;
+}
+
+.notify-count {
+    position: absolute;
+    height: 24px;
+    font-size: 13px;
+    background-color: #ff2c55;
+    color: #fff;
+    line-height: 24px;
+    padding: 0 4px;
+    min-width: 24px;
+    text-align: center;
+    border-radius: 12px;
+    font-weight: 500;
+    right: -12px;
+    top: -6px;
+}
+
+.list-btn-round {
+    border: none;
+    width: 45px;
+    height: 45px;
+    line-height: 45px;
+    position: relative;
+    border-radius: 50%;
+    margin: 8px 0 8px 15px;
+    vertical-align: middle;
+    outline: none;
+    cursor: pointer;
+}
+
+.list-btn-round i {
+    font-size: 30px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin: -15px 0 0 -15px;
+    color: #fff;
+}
+
+.list-btn-round.decline-btn {
+    background-color: #FF2C55;
+}
+
+.list-btn-round.accept-btn {
+    background-color: #4CDA64;
+}
+
+.session-card.current {
+    border-color: #00AECC;
+}
+
+.session-card.current .issue-type {
+    color: #00AECC;
+}
+.item-box {
+    margin-left: auto;
+    margin-right: auto;
+    width:100%;
+    height: 220px;
+}
+.txt-red {
+    color: #ed2b28;
+}
+
+/* material design */
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    min-width: 300px;
+  }
+  
+  .example-header {
+    min-height: 64px;
+    padding: 8px 24px 0;
+  }
+  
+  .mat-form-field {
+    font-size: 14px;
+    width: 100%;
+  }
+  
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }

@@ -1,0 +1,177 @@
+<!-- NEW----- -->
+<h6
+    [style.display]="visibilitysessionmessage"
+    class="text-center"
+    style="margin-top: 15px;"
+>
+    There are no new messages.
+</h6>
+
+<div *ngIf="Msgpage" class="msg-app-container">
+    <div class="msg-app-left column">
+        <div class="msg-app-header">
+            <div class="cell">
+                <div class="msgr-heading">Deferred Messages</div>
+            </div>
+        </div>
+        <div class="msg-app-left-list">
+            <div class="msg-list-wrapper">
+                <div class="influencers-list">
+                    <div id="deferSidebar">
+                        <div>
+                            <mat-button-toggle-group
+                                #group="matButtonToggleGroup"
+                                vertical
+                                value="{{ rowIndx }}"
+                            >
+                                <mat-button-toggle
+                                    *ngFor="
+                                        let deferredRequest of deferredRequest;
+                                        let rowIndex = index
+                                    "
+                                    value="{{
+                                        deferredRequest.specialistRequestId
+                                    }}"
+                                    (click)="
+                                        getAllMsg(
+                                            deferredRequest.requestMsgSessionId
+                                        )
+                                    "
+                                >
+                                    {{ deferredRequest.partnerSiteName }}
+                                    <mat-icon class="material-icons"
+                                        >keyboard_arrow_right</mat-icon
+                                    >
+                                    <!-- <span
+                                        class="msgTx"
+                                        *ngIf="
+                                            deferredRequest.fromUserId !=
+                                                UserId &&
+                                                deferredRequest.isUnRead ==
+                                                    true;
+                                            else other_content
+                                        "
+                                    >
+                                        {{ deferredRequest.message }}
+                                    </span> -->
+                                    <!-- <ng-template #other_content>
+                                        <span class="msgTx">{{
+                                            deferredRequest.message
+                                        }}</span>
+                                    </ng-template> -->
+                                </mat-button-toggle>
+                            </mat-button-toggle-group>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="Loadingpage" style="padding-top: 20vh;">
+            <div class="text-center">
+                <div class="ptl pbm">
+                    <span class="vm-loader"></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="msg-app-right column">
+        <div class="msg-app-header">
+            <!-- <div class="cell" *ngIf="CurrentChannelUsers">
+                                <div class="msgr-heading"><span *ngFor="let CurrentChannelUsers of CurrentChannelUsers">{{CurrentChannelUsers.name}}<span
+                                                        class="comma">, </span></span></div>
+                        </div> -->
+        </div>
+
+        <div
+            id="Loadingpage"
+            [style.display]="LoadingPagechatbox"
+            style=" position :relative; z-index: 5000; top: 30%"
+        >
+            <div class="text-center">
+                <div class="ptl pbm">
+                    <span class="vm-loader"></span>
+                </div>
+            </div>
+        </div>
+        <div id="deferMsgContainer" class="all-msg-list-large-col">
+            <div *ngFor="let chatmessages of chatmessages; let i = index">
+                <!-- <h5 *ngIf="i > 0 && (chatmmsg.dateUpdated  | date: 'MMM d, y') != (chatmessages[i - 1].dateUpdated  | date: 'MMM d, y')"
+                                                style="font-size: 0.7em ;color: lightgray; text-align: center">
+                                                {{chatmmsg.dateUpdated | date: 'MMM d, y'}}
+                                        </h5> -->
+                <div
+                    class="message-wrapper"
+                    *ngIf="chatmessages.fromUserId != UserId"
+                >
+                    <div class="chat-bubble left">
+                        <!-- <div class="chat-name">{{chatmmsg.userName}}</div> -->
+
+                        <div class="message">
+                            <p class="man">{{ chatmessages.message }}</p>
+                        </div>
+                    </div>
+                    <div class="clearfix"></div>
+                    <div class="lg-time left">
+                        <span class="time">{{
+                            chatmessages.receivedOnInUtc
+                                | split
+                                | date: "h:mm a "
+                        }}</span>
+                    </div>
+                </div>
+
+                <div
+                    class="message-wrapper"
+                    *ngIf="chatmessages.fromUserId == UserId"
+                >
+                    <div class="chat-bubble right">
+                        <div class="message">
+                            <p class="man">{{ chatmessages.message }}</p>
+                        </div>
+                    </div>
+                    <span
+                        *ngIf="chatmessages.id == 'notok'"
+                        class="span"
+                        (click)="msgretry(i, chatmessages.message)"
+                    >
+                        <mat-icon class="material-icons" class="retry"
+                            >clear</mat-icon
+                        >
+                        retry
+                    </span>
+                    <!-- <mat-icon *ngIf="chatmessages.id != '' && chatmessages.id != 'notok'  && chatmessages.id != 'waiting'" class="material-icons">done</mat-icon> -->
+
+                    <!-- <mat-icon *ngIf="chatmessages.id == 'waiting' " class="material-icons" style="font-size: 1em; color: lightgrey">update</mat-icon> -->
+                    <div class="clearfix"></div>
+                    <div
+                        class="lg-time right"
+                        *ngIf="chatmessages.id != 'notok'"
+                    >
+                        <span class="time">{{
+                            chatmessages.receivedOnInUtc
+                                | split
+                                | date: "h:mm a "
+                        }}</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="msg-type-area">
+            <div class="text-area">
+                <textarea
+                    maxlength="250"
+                    value=""
+                    rows="2"
+                    (keydown.enter)="messageSend(); (false)"
+                    [(ngModel)]="chatbox"
+                    placeholder="Type a message..."
+                ></textarea>
+            </div>
+            <div class="text-right msg-cs-type">
+                <!-- <mat-checkbox [(ngModel)]='isEnter' (change)="isEnterCheck()">Press enter to send</mat-checkbox> -->
+                <button class="msg-send" (click)="messageSend()">Send</button>
+            </div>
+        </div>
+    </div>
+</div>

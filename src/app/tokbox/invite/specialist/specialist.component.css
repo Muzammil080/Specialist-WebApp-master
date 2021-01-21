@@ -1,0 +1,72 @@
+.mat-dialog-actions{
+    justify-content: flex-end;
+    padding: 12px 12px;
+}
+
+.mat-dialog-content{
+    height: (100% - 96px);
+    padding: 20px;
+    margin : auto;
+}
+
+.center-content{
+    justify-content: center;
+    align-items: center;
+}
+
+.mat-form-field{
+ width: 250px;
+}
+
+h1{
+    font-size: 18px;
+}
+
+.specialists{
+    height: 220px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    /* max-width: 100%; */
+    text-overflow: ellipsis;
+    margin: 0 auto;
+    width: 400px;
+}
+
+.specialist i{
+    vertical-align: middle;
+    margin-right: 10px;
+    color:#00aecd;
+}
+.specialist button{
+    color:#00aecd;
+    background-color: transparent;
+}
+
+.wrapword{
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+  }
+
+  /* Track */
+  ::-webkit-scrollbar-track {
+    box-shadow: inset 0 0 3px #bbbbbb;
+
+    border-radius: 3px;
+  }
+
+  /* Handle */
+  ::-webkit-scrollbar-thumb {
+    background: lightgray;
+    border-radius: 10px;
+  }
+
+  /* Handle on hover */
+  ::-webkit-scrollbar-thumb:hover {
+    background: lightgray;
+  }
+

@@ -1,0 +1,483 @@
+<div id="call-connecting" class="call-connecting">
+    <div class="loading-display-box">
+        <div class="loding-box">
+            <div class="connecting-icon-container">
+                <div class="connecting-icon-box">
+                    <i class="material-icons">
+                        laptop_mac
+                    </i>
+                </div>
+                <div class="connecting-icon-box">
+                    <div id="connecting1" class="material-icons-animation">
+                        <div class="loader">Loading...</div>
+                    </div>
+                </div>
+                <div class="connecting-icon-box">
+                    <i class="material-icons">
+                        language
+                    </i>
+                </div>
+                <div class="connecting-icon-box">
+                    <div id="connecting2" class="material-icons-animation">
+                        <div class="loader">Loading...</div>
+                    </div>
+                </div>
+                <div class="connecting-icon-box">
+                    <i class="material-icons">
+                        storage
+                    </i>
+                </div>
+                <div class="connecting-icon-box">
+                    <div id="connecting3" class="material-icons-animation">
+                        <div class="loader">Loading...</div>
+                    </div>
+                </div>
+                <div class="connecting-icon-box">
+                    <i class="material-icons">
+                        desktop_mac
+                    </i>
+                </div>
+            </div>
+        </div>
+        <div
+            style="border: 0px solid black; width: 195px; height:100px; position: absolute; top:1;bottom: 0;left: 0;right: 0;margin: auto; "
+        ></div>
+    </div>
+</div>
+
+<br />
+<!-- connected Requests{ -->
+<div *ngFor="let request of request; let rowIndex = index">
+    <div *ngIf="request.status == 'Connected'">
+        <div class="session-card-reconnect">
+            <!-- <h6>{{rowIndex}}</h6> -->
+            <h6 *ngIf="connectedSessions > 1" class="count-bubble">
+                {{ connectedSessions }}
+            </h6>
+            <!-- <br> -->
+            <h6 style="text-align: center">
+                It seems that your session was interrupted. Please reconnect or end the session.
+            </h6>
+            <h6 style="text-align: center">
+                {{ request.facilityName }} - {{ request.specialityName }}
+            </h6>
+            <div class="row">
+                <div style="margin-left: auto; margin-right: auto;">
+                    <!-- <button (click)="chatBtn(request.id)" class="list-chat-btn">
+                                    <i class="icon_vm_chat"></i>
+
+                                </button> -->
+                    <button
+                        class="list-btn list-btn-ico red-btn"
+                        (click)="callEnd(request.id)"
+                    >
+                        <i class="icon_vm_phone_decline"></i>End Session
+                    </button>
+                    <button
+                        class="list-btn list-btn-ico green-btn"
+                        (click)="
+                            callReconnect(
+                                request.id,
+                                request.connectionFrom,
+                                request.facilityName,
+                                request.reasonForRequest,
+                                request.specialityName,
+                                request.endPoint,
+                                request.endPointId,
+                                request.endPointName,
+                                request.endPointLocation
+                            )
+                        "
+                    >
+                        <i class="icon_vm_phone"></i>Reconnect
+                    </button>
+                </div>
+            </div>
+            <!-- <br> -->
+        </div>
+    </div>
+</div>
+<!-- ------------ -->
+
+<div class="tab-container-box">
+    <mat-tab-group *ngIf="currentVirtualSessions || sessionHistory">
+        <mat-tab
+            *ngIf="currentVirtualSessions"
+            label="Current Virtual Sessions"
+        >
+            <div
+                id="CurrentVirtualSessions"
+                style="padding-right: 25px; padding-left: 25px;"
+            >
+                <div style="float: right;">
+                    <button
+                        id="resetButton"
+                        class="list-btn-round light"
+                        (click)="getRequests()"
+                    >
+                        <i id="camIcon" class="icon_vm_refresh"></i>
+                    </button>
+                </div>
+                <div style="clear:both;"></div>
+
+                <div class=".ps-rev" style="border: 0px solid black;">
+                    <div
+                        id="Loadingpage"
+                        [style.display]="visibilityLoginSpinner"
+                    >
+                        <div class="text-center">
+                            <div class="ptl pbm">
+                                <span class="vm-loader"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <span class="vm-loader center-loading" [style.visibility]="" ></span> -->
+                    <h6
+                        [style.display]="visibilitysessionmessage"
+                        class="nodata"
+                    >
+                        There are no sessions pending.
+                    </h6>
+                    <!-- Deffered Requests{ -->
+                    <div *ngFor="let request of request; let rowIndex = index">
+                        <div
+                            *ngIf="
+                                request.status == 'DeferredState' &&
+                                visibilityLoginSpinner != 'block'
+                            "
+                        >
+                            <div class="session-card3">
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="issue-type mll">
+                                            <i class="icon_vm_warning"></i
+                                            >{{
+                                                request.specialityName +
+                                                    " Call Pending"
+                                            }}
+                                        </div>
+                                        <div class="hospital-name mll">
+                                            {{ request.facilityName }}
+                                        </div>
+                                        <div class="hospital-name mll">
+                                            {{
+                                                request.pendingSince
+                                                    | split
+                                                    | date: "MMM d, y, h:mm a"
+                                            }}
+                                        </div>
+                                        <div class="hospital-name mll">
+                                            Reason for request:
+                                            {{ request.reasonForRequest }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 text-right">
+                                        <!-- <button *ngIf="msgDefer" (click)="chatBtn(request.id)" class="list-chat-btn">
+                                            <i class="icon_vm_chat"></i>
+                                        </button> -->
+                                        <button
+                                            class="list-btn list-btn-ico"
+                                            (click)="viewPACS(request)"
+                                        >
+                                            <i class="icon_vm_pacs"></i>View
+                                            PACS
+                                        </button>
+                                        <button
+                                            class="list-btn list-btn-ico"
+                                            (click)="callReject(request.id)"
+                                        >
+                                            <i class="icon_vm_phone_decline"></i
+                                            >Cancel
+                                        </button>
+                                        <button
+                                            class="list-btn list-btn-ico green-btn"
+                                            (click)="
+                                                callAccept(
+                                                    request.id,
+                                                    request.facilityName,
+                                                    request.reasonForRequest,
+                                                    request.specialityName,
+                                                    request.endPoint,
+                                                    request.endPointId
+                                                )
+                                            "
+                                        >
+                                            <i class="icon_vm_phone"></i>Start
+                                            call
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- ------------- -->
+                    <!-- Pending Requests{ -->
+                    <div *ngFor="let request of request; let rowIndex2 = index">
+                        <div
+                            *ngIf="
+                                request.status == 'Pending' &&
+                                visibilityLoginSpinner != 'block'
+                            "
+                        >
+                            <div
+                                class="session-card1"
+                                *ngIf="request.isHighPriority == true"
+                            >
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div class="issue-type show-ico mll">
+                                            <i class="icon_vm_warning"></i
+                                            >{{
+                                                request.specialityName +
+                                                    (request.isHighPriority
+                                                        ? " Call Waiting - URGENT"
+                                                        : "
+                                            Call Waiting....")
+                                            }}
+                                        </div>
+                                        <div
+                                            *ngIf="
+                                                request.isHighPriority == false
+                                            "
+                                            class="issue-type  mll"
+                                        >
+                                            <i class="icon_vm_warning"></i
+                                            >{{
+                                                request.specialityName +
+                                                    (request.isHighPriority
+                                                        ? " Call Waiting - URGENT"
+                                                        : "
+                                            Call Waiting....")
+                                            }}
+                                        </div>
+                                        <div class="hospital-name mll">
+                                            {{ request.facilityName }}
+                                        </div>
+                                        <div class="hospital-name mll">
+                                            {{
+                                                request.pendingSince
+                                                    | split
+                                                    | date: "MMM d, y, h:mm a"
+                                            }}
+                                        </div>
+                                        <div class="hospital-name mll">
+                                            Reason for request:
+                                            {{ request.reasonForRequest }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 text-right">
+                                        <button
+                                            class="list-btn list-btn-ico"
+                                            (click)="viewPACS(request)"
+                                        >
+                                            <i class="icon_vm_pacs"></i>View
+                                            PACS
+                                        </button>
+                                        <button
+                                            *ngIf="msgDefer"
+                                            class="list-btn list-btn-ico"
+                                            (click)="callDefere(request.id)"
+                                        >
+                                            <i class="icon_vm_time"></i>Defer
+                                            call
+                                        </button>
+                                        <button
+                                            class="list-btn-round decline-btn"
+                                            (click)="callReject(request.id)"
+                                        >
+                                            <i
+                                                class="icon_vm_phone_decline"
+                                            ></i>
+                                        </button>
+                                        <button
+                                            class="list-btn-round accept-btn"
+                                            (click)="
+                                                callAccept(
+                                                    request.id,
+                                                    request.facilityName,
+                                                    request.reasonForRequest,
+                                                    request.specialityName,
+                                                    request.endPoint,
+                                                    request.endPointId
+                                                )
+                                            "
+                                        >
+                                            <i class="icon_vm_phone"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div *ngFor="let request of request; let rowIndex2 = index">
+                        <div
+                            *ngIf="
+                                request.status == 'Pending' &&
+                                visibilityLoginSpinner != 'block'
+                            "
+                        >
+                            <div
+                                class="session-card1"
+                                *ngIf="request.isHighPriority != true"
+                            >
+                                <div class="row">
+                                    <div class="col-lg-6 col-md-6">
+                                        <div
+                                            *ngIf="
+                                                request.isHighPriority == false
+                                            "
+                                            class="issue-type  mll"
+                                        >
+                                            <i class="icon_vm_warning"></i
+                                            >{{
+                                                request.specialityName +
+                                                    (request.isHighPriority
+                                                        ? " Call Waiting - URGENT"
+                                                        : "
+                                            Call Waiting....")
+                                            }}
+                                        </div>
+                                        <div class="hospital-name mll">
+                                            {{ request.facilityName }}
+                                        </div>
+                                        <div class="hospital-name mll">
+                                            {{
+                                                request.pendingSince
+                                                    | split
+                                                    | date: "MMM d, y, h:mm a"
+                                            }}
+                                        </div>
+                                        <div class="hospital-name mll">
+                                            Reason for request:
+                                            {{ request.reasonForRequest }}
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-md-6 text-right">
+                                        <button
+                                            class="list-btn list-btn-ico"
+                                            (click)="viewPACS(request)"
+                                        >
+                                            <i class="icon_vm_pacs"></i>View
+                                            PACS
+                                        </button>
+                                        <button
+                                            *ngIf="msgDefer"
+                                            class="list-btn list-btn-ico"
+                                            (click)="callDefere(request.id)"
+                                        >
+                                            <i class="icon_vm_time"></i>Defer
+                                            call
+                                        </button>
+                                        <button
+                                            class="list-btn-round decline-btn"
+                                            (click)="callReject(request.id)"
+                                        >
+                                            <i
+                                                class="icon_vm_phone_decline"
+                                            ></i>
+                                        </button>
+                                        <button
+                                            class="list-btn-round accept-btn"
+                                            (click)="
+                                                callAccept(
+                                                    request.id,
+                                                    request.facilityName,
+                                                    request.reasonForRequest,
+                                                    request.specialityName,
+                                                    request.endPoint,
+                                                    request.endPointId
+                                                )
+                                            "
+                                        >
+                                            <i class="icon_vm_phone"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </mat-tab>
+        <mat-tab *ngIf="sessionHistory" label="Session History">
+            <sessionhistory></sessionhistory>
+        </mat-tab>
+        <mat-tab *ngIf="currentVirtualSessions" label="Unsigned Notes">
+            <unsigned-notes></unsigned-notes>
+        </mat-tab>
+        <mat-tab label="Invites">
+            <pending-invites></pending-invites>
+        </mat-tab>
+    </mat-tab-group>
+</div>
+
+<!-- }Deffered Requests -->
+<!-- <div *ngFor="let request of request | orderBy: 'isHighPriority': true" >
+                <div class="row">
+                        <div class="col-lg-7 col-md-7">
+                            <div *ngIf="request.isHighPriority == true" class="issue-type show-ico mll">
+                                <i class="icon_vm_warning"></i>{{request.specialityName + (request.isHighPriority ? " Call Waiting - URGENT":" Call Waiting....")}}
+                            </div>
+                            <div *ngIf="request.isHighPriority == false" class="issue-type  mll">
+                                    <i class="icon_vm_warning"></i>{{request.specialityName + (request.isHighPriority ? " Call Waiting - URGENT":" Call Waiting....")}}
+                                </div>
+                            <div class="hospital-name mll">{{request.facilityName}}</div>
+                            <div class="hospital-name mll">{{request.pendingSince | date:'MMM d, y, h:mm a'}}</div>
+                            <div class="hospital-name mll">{{request.id}}</div>
+                        </div>
+                        <div class="col-lg-5 col-md-5 text-right">
+                            <button class="list-btn list-btn-ico" (click)='callDefere(request.id)'>
+                                <i class="icon_vm_time"></i>Defer call
+                            </button>
+                            <button class="list-btn-round decline-btn" (click)='callReject(request.id)'>
+                                <i class="icon_vm_phone_decline"></i>
+                            </button>
+                            <button class="list-btn-round accept-btn" (click)='callAccept(request.id,request.facilityName,request.reasonForRequest)' >
+                                <i class="icon_vm_phone"></i>
+                            </button>
+                        </div>
+                    </div>
+         </div> -->
+<!-- Pending Requests{ -->
+<!-- <div *ngFor="let request of request  ; let rowIndex  = index  ">
+
+                <div *ngIf="request.status != 'DeferredState' ">
+                    <div *ngIf="rowIndex  % 2 !== 0" class="session-card1">
+
+
+
+                    </div>
+
+                    <div *ngIf="rowIndex  % 2 === 0" class="session-card2">
+
+                        <div class="row">
+                            <div class="col-lg-7 col-md-7">
+                                <div *ngIf="request.isHighPriority == true" class="issue-type show-ico mll">
+                                    <i class="icon_vm_warning"></i>{{request.specialityName + (request.isHighPriority ? " Call Waiting - URGENT":" Call Waiting....")}}
+                                </div>
+                                <div *ngIf="request.isHighPriority == false" class="issue-type  mll">
+                                        <i class="icon_vm_warning"></i>{{request.specialityName + (request.isHighPriority ? " Call Waiting - URGENT":" Call Waiting....")}}
+                                    </div>
+                                <div class="hospital-name mll">{{request.facilityName}}</div>
+                                <div class="hospital-name mll">{{request.pendingSince | date:'MMM d, y, h:mm a'}}</div>
+                                <div class="hospital-name mll">{{request.id}}</div>
+                            </div>
+                            <div class="col-lg-5 col-md-5 text-right">
+                                <button class="list-btn list-btn-ico" (click)='callDefere(request.id)'>
+                                    <i class="icon_vm_time"></i>Defer call
+                                </button>
+                                <button class="list-btn-round decline-btn" (click)='callReject(request.id)'>
+                                    <i class="icon_vm_phone_decline"></i>
+                                </button>
+                                <button class="list-btn-round accept-btn" (click)='callAccept(request.id,request.facilityName,request.reasonForRequest)'>
+                                    <i class="icon_vm_phone"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div> -->
+<!-- }Pending Requests -->

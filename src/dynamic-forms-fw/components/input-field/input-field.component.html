@@ -1,0 +1,15 @@
+<p>
+  input-field works!
+</p>
+
+<div *ngIf="uiElementData && form">
+  <!--Container to inject the corresponding template-->
+  <ng-container *ngTemplateOutlet='textinput'></ng-container>
+</div>
+
+<!--Templates-->
+<ng-template #textinput>
+  <div [formGroup]="form">
+    <input type="text" [formControlName]="uiElementData.bindTo" maxlength="512" />
+  </div>
+</ng-template>

@@ -1,0 +1,344 @@
+<style>
+        .table th {
+                padding-top: 0.35rem !important;
+                padding-bottom: 0.30rem !important;
+                font-weight: normal;
+                font-size: 0.9em;
+                color: white !important;
+        }
+
+        .table td {
+                /* padding-top: 0.35rem !important;
+        padding-bottom: 0.30rem !important;
+        font-weight: normal; */
+                font-size: 0.9em;
+                max-width: 250px;
+                word-break: break-all;
+        }
+
+        input[type="radio"]:focus {
+                outline: none;
+        }
+
+        .dotblue {
+                height: 12px;
+                width: 12px;
+                background-color: transparent;
+                border: 3px solid #00aecd;
+                border-radius: 50%;
+                display: inline-block;
+                margin-right: 5px;
+                margin-bottom: 30px;
+                -webkit-touch-callout: none;
+                /* iOS Safari */
+                -webkit-user-select: none;
+                /* Safari */
+                -khtml-user-select: none;
+                /* Konqueror HTML */
+                -moz-user-select: none;
+                /* Firefox */
+                -ms-user-select: none;
+                /* Internet Explorer/Edge */
+                user-select: none;
+                /* Non-prefixed version, currently
+                                    supported by Chrome and Opera */
+        }
+</style>
+<div style="padding: 25px;">
+        <div *ngIf="!data">
+                <p>{{ title }}</p>
+                <div *ngIf='showInput == "none"'>
+                        <p>{{ msg }}</p>
+                </div>
+
+                <div *ngIf='showInput == "addSpec"'>
+                        <div class="container">
+                                <mat-form-field class="example-full-width">
+                                        <input matInput placeholder="Specialist" aria-label="State"
+                                                [matAutocomplete]="auto" [formControl]="stateCtrl">
+                                        <mat-autocomplete #auto="matAutocomplete">
+                                                <mat-option *ngFor="let state of filteredStates | async"
+                                                        [value]="state.name"
+                                                        (onSelectionChange)="getSpecilistlist($event, state.id)">
+                                                        <!-- <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" /> -->
+                                                        <span>{{ state.name }}</span>
+                                                        <!-- <small>{{state.id}}</small> -->
+                                                </mat-option>
+                                        </mat-autocomplete>
+                                </mat-form-field>
+
+                        </div>
+                </div>
+                <div *ngIf='showInput == "scheduebox"'>
+
+                        <div class="container">
+                                <!-- <div *ngIf="Color">
+                          <p style="text-align: center">{{ selectedDatesWorkingDay.details[0].shiftStartTimeInUTC | date: 'MMMM dd , yyyy'}}</p>
+                        </div>
+                        <div *ngIf="!Color">
+                         <p style="text-align: center">{{ selectedDatesWorkingDay.details[0].shiftStartTime | date: 'MMMM dd , yyyy'}}</p>
+                        </div> -->
+                                <p style="float: left; color: #00aecc;">Schedule Details</p>
+                                <div *ngIf="timezoneoffset != 0" style="border :0px solid black; float:right; ">
+                                        <input type="radio" id="Color1" name="Color" [(ngModel)]="Color"
+                                                [checked]="Color" [value]="true" />
+                                        <label for="Color1" style="color: black;">Current Time Zone</label>
+
+                                        <input style="margin-left: 20px;" type="radio" id="Color2" name="Color"
+                                                [(ngModel)]="Color" [checked]="!Color" [value]="false" />
+                                        <label for="Color2" style="color: black;">{{TimeZone}} Time Zone</label>
+
+                                </div>
+                                <hr style="clear: both;">
+                                <div style="max-height: 40vh; overflow: auto;">
+                                        <table class="table table-striped" matSort (matSortChange)="sortData($event)"
+                                                matSortDisableClear>
+                                                <thead>
+                                                        <tr
+                                                                style="background: #00aecd; color: white; text-align: center; ">
+                                                                <th mat-sort-header="PARTNERSITE">Partner Site</th>
+                                                                <th mat-sort-header="FACILITY">Facility</th>
+                                                                <th mat-sort-header="DOCTOR">DOCTOR</th>
+                                                                <th mat-sort-header="CONTACT">CONTACT</th>
+                                                                <th mat-sort-header="PRIORITY">PRIORITY</th>
+                                                                <th mat-sort-header="START">START</th>
+                                                                <th mat-sort-header="END">END</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody *ngIf="Color">
+                                                        <tr *ngFor="let details of sortedData ">
+                                                                <td>{{details.partnerSiteName}}</td>
+                                                                <td>{{details.facilityName}}</td>
+                                                                <td>{{details.specialistName}}</td>
+                                                                <td>{{details.spcialistContactNumber}}</td>
+                                                                <td>{{details.priority }}</td>
+                                                                <td>{{details.shiftStartTimeInUTC+'.000Z' | date: 'MMM dd yy ,
+                                                                HH:mm'}}</td>
+                                                                <td>{{details.shiftEndTimeInUTC+'.000Z' | date: 'MMM dd yy ,
+                                                                HH:mm' }}</td>
+                                                        </tr>
+                                                </tbody>
+                                                <tbody *ngIf="!Color">
+                                                        <tr *ngFor="let details of sortedData">
+                                                                <td>{{details.partnerSiteName}}</td>
+                                                                <td>{{details.facilityName}}</td>
+                                                                <td>{{details.specialistName}}</td>
+                                                                <td>{{details.spcialistContactNumber}}</td>
+                                                                <td>{{details.priority }}</td>
+                                                                <td>{{details.shiftStartTime | date: 'MMM dd yy , HH:mm'}}
+                                                                </td>
+                                                                <td>{{details.shiftEndTime | date: 'MMM dd yy , HH:mm' }}
+                                                                </td>
+                                                        </tr>
+
+                                                </tbody>
+
+
+
+                                        </table>
+
+                                </div>
+
+                        </div>
+                </div>
+                <div *ngIf='showInput == "schedueboxRadiology"'>
+
+                        <div class="container">
+                                <!-- <div *ngIf="Color">
+                          <p style="text-align: center">{{ selectedDatesWorkingDay.details[0].shiftStartTimeInUTC | date: 'MMMM dd , yyyy'}}</p>
+                        </div>
+                        <div *ngIf="!Color">
+                         <p style="text-align: center">{{ selectedDatesWorkingDay.details[0].shiftStartTime | date: 'MMMM dd , yyyy'}}</p>
+                        </div> -->
+                                <p style="float: left; color: #00aecc;">Schedule Details</p>
+                                <div *ngIf="timezoneoffset != 0" style="border :0px solid black; float:right; ">
+                                        <input type="radio" id="Color1" name="Color" [(ngModel)]="Color"
+                                                [checked]="Color" [value]="true" />
+                                        <label for="Color1" style="color: black;">Current Time Zone</label>
+
+                                        <input style="margin-left: 20px;" type="radio" id="Color2" name="Color"
+                                                [(ngModel)]="Color" [checked]="!Color" [value]="false" />
+                                        <label for="Color2" style="color: black;">{{TimeZone}} Time Zone</label>
+
+                                </div>
+                                <hr style="clear: both;">
+                                <div style="max-height: 40vh; overflow: auto;">
+                                        <table class="table table-striped" matSort (matSortChange)="sortData($event)"
+                                                matSortDisableClear>
+                                                <thead>
+                                                        <tr
+                                                                style="background: #00aecd; color: white; text-align: center; ">
+                                                                <!-- <th mat-sort-header="PARTNERSITE">Partner Site</th>
+                                                        <th mat-sort-header="FACILITY">Facility</th> -->
+                                                                <th mat-sort-header="DOCTOR">DOCTOR</th>
+                                                                <th mat-sort-header="CONTACT">CONTACT</th>
+                                                                <!-- <th mat-sort-header="PRIORITY">PRIORITY</th> -->
+                                                                <th mat-sort-header="START">START</th>
+                                                                <th mat-sort-header="END">END</th>
+                                                        </tr>
+                                                </thead>
+                                                <tbody *ngIf="Color">
+                                                        <tr *ngFor="let details of sortedData ">
+                                                                <!-- <td>{{details.partnerSiteName}}</td>
+                                                        <td>{{details.facilityName}}</td> -->
+                                                                <td>{{details.specialistName}}</td>
+                                                                <td>{{details.spcialistContactNumber}}</td>
+                                                                <!-- <td>{{details.priority }}</td> -->
+                                                                <td>{{details.shiftStartTimeInUTC+'.000Z' | date: 'MMM dd yy ,
+                                                                HH:mm'}}</td>
+                                                                <td>{{details.shiftEndTimeInUTC+'.000Z' | date: 'MMM dd yy ,
+                                                                HH:mm' }}</td>
+                                                        </tr>
+                                                </tbody>
+                                                <tbody *ngIf="!Color">
+                                                        <tr *ngFor="let details of sortedData">
+                                                                <!-- <td>{{details.partnerSiteName}}</td>
+                                                        <td>{{details.facilityName}}</td> -->
+                                                                <td>{{details.specialistName}}</td>
+                                                                <td>{{details.spcialistContactNumber}}</td>
+                                                                <!-- <td>{{details.priority }}</td> -->
+                                                                <td>{{details.shiftStartTime | date: 'MMM dd yy , HH:mm'}}
+                                                                </td>
+                                                                <td>{{details.shiftEndTime | date: 'MMM dd yy , HH:mm' }}
+                                                                </td>
+                                                        </tr>
+
+                                                </tbody>
+
+
+
+                                        </table>
+
+                                </div>
+
+                        </div>
+                </div>
+
+                <div *ngIf='showInput == "loader"'>
+                        <div style="margin-left: auto; margin-right: auto; ">
+                                <div id="Loadingpage" [style.display]="LoadingPage">
+                                        <div class="text-center">
+                                                <div class="ptl pbm">
+                                                        <span class="vm-loader"></span>
+                                                </div>
+
+                                        </div>
+                                </div>
+                        </div>
+
+                </div>
+
+
+                <div *ngIf='showInput == "block"'>
+                        <p style="display: none;">{{ msg }}</p>
+                </div>
+
+                <div *ngIf='showInput == "endpoint"' style="width:400px; height:130px;">
+                        <div style="width: 80%; margin-left: auto; margin-right: auto;">
+                                <i class="icon_vm_laptop" style="font-size: 6em; color: #00aecd; margin-right:5px"></i>
+                                <!-- <i class="icon_vm_transmission_of_data" style="font-size: 6em; color: #00aecd;"></i> -->
+
+                                <span class="dotblue"></span>
+                                <span class="dotblue"></span>
+                                <span class="dotblue"></span>
+                                <span class="dotblue"></span>
+                                <span class="dotblue"></span>
+                                <i class="icon_vm_endpoints" style="font-size: 6em; color: #00aecd;"></i>
+                        </div>
+                </div>
+
+                <div *ngIf='showInput == "showImage"'
+                        style="overflow: auto;width: 800px; height: 600px; display: flex; flex-direction: column; justify-content: center; align-items: center;">
+
+                        <img [attr.src]="imageUrl" alt="loading">
+
+                   <!-- <div style=" display: flex; justify-content: center; align-items: center;">
+                             </div>
+                        <div style="display: flex; padding: 5px;">
+                             <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+                                <mat-icon>zoom_in</mat-icon>
+                             </button>
+                             <button mat-icon-button color="primary" aria-label="Example icon button with a home icon">
+                                <mat-icon>zoom_out</mat-icon>
+                             </button>
+                             <button mat-raised-button color="primary" (click)="close()">Close</button>
+                        </div> -->
+                </div>
+
+                <form #formCtrl="ngForm">
+                        <div *ngIf='showInput == "block"' style="width:400px; height:200px; margin-top:20px; ">
+
+                                <mat-form-field class="dialog" style="width:400px;">
+                                        <mat-icon matSuffix class="material-icons">mode_edit</mat-icon>
+                                        <textarea required rows="6" matInput #message maxlength="250"
+                                                placeholder="Message" name="inputMessage" [(ngModel)]="inputMessage"
+                                                style="resize: none;  font-size:1.3em;word-break: break-word; "></textarea>
+                                        <mat-hint align="end" style="font-size:1.3em;">
+                                                <strong>{{message.value.length}} </strong>/ 250</mat-hint>
+                                </mat-form-field>
+
+                        </div>
+                        <!-- <div class="button_row" style="border:0px solid black; width:50%; margin-left: auto;margin-right: auto;">
+<button type="button" mat-raised-button color="primary" (click)="dialogRef.close(inputMessage)">{{okBtnTitle}}</button>
+<button type="button" mat-raised-button color="warn" (click)="dialogRef.close()">{{cancelBtnTitle}}</button>
+</div> -->
+                        <div *ngIf='showInput == "none"'>
+                                <button type="button" mat-raised-button color="warn"
+                                        (click)="dialogRef.close(true)">{{okBtnTitle}}</button>
+                                <button style="float:right;" type="button" mat-raised-button color="primary"
+                                        (click)="dialogRef.close()">{{cancelBtnTitle}}</button>
+                        </div>
+                        <div *ngIf='showInput == "block"'>
+                                <button style="width:58%; font-size:1.3em;" type="button"
+                                        [disabled]="inputMessage.trim() == '' " mat-raised-button color="primary"
+                                        (click)="dialogRef.close(inputMessage)">{{okBtnTitle}}</button>
+                                <button style="width:40%; float:right;font-size:1.3em;" type="button" mat-raised-button
+                                        color="warn" (click)="dialogRef.close()">{{cancelBtnTitle}}</button>
+                        </div>
+                        <div *ngIf='showInput == "schedueboxRadiology"'
+                                style="width:85px; margin-left: auto; margin-right: auto; margin-top: 10px;">
+                                <!-- <hr> -->
+                                <button type="button" mat-raised-button color="primary"
+                                        (click)="dialogRef.close()">{{cancelBtnTitle}}</button>
+                        </div>
+                        <div *ngIf='showInput == "scheduebox"'
+                                style="width:85px; margin-left: auto; margin-right: auto; margin-top: 10px;">
+                                <!-- <hr> -->
+                                <button type="button" mat-raised-button color="primary"
+                                        (click)="dialogRef.close()">{{cancelBtnTitle}}</button>
+                        </div>
+
+                        <div *ngIf='showInput == "addSpec"'
+                                style="width:85px; margin-left: auto; margin-right: auto; margin-top: 10px;">
+                                <!-- <hr> -->
+                                <button type="button" mat-raised-button color="primary"
+                                        (click)="dialogRef.close()">{{cancelBtnTitle}}</button>
+                        </div>
+
+                        <div *ngIf='showInput == "endpoint"'>
+                                <button tabindex="-1" style="width:58%; font-size:1.3em;" type="button"
+                                        mat-raised-button color="primary"
+                                        (click)="dialogRef.close(true)">{{okBtnTitle}}</button>
+                                <button tabindex="-1" style="width:40%; float:right;font-size:1.3em;" type="button"
+                                        mat-raised-button color="warn"
+                                        (click)="dialogRef.close()">{{cancelBtnTitle}}</button>
+
+                        </div>
+                </form>
+        </div>
+        <div *ngIf="data">
+                <h1 mat-dialog-title>{{data.title }}</h1>
+                <mat-dialog-content>
+                        {{data.message}}
+                </mat-dialog-content>
+
+                <mat-dialog-actions>
+                        <div style="width: 100% ;text-align: right;">
+                                <button mat-button [mat-dialog-close]="true"
+                                        (click)="dialogRef.close(false)">No</button>
+                                <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+                                <button mat-raised-button color="primary" (click)="dialogRef.close(true)">Yes</button>
+                        </div>
+                </mat-dialog-actions>
+        </div>
+</div>

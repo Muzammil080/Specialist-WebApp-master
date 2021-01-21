@@ -1,0 +1,73 @@
+.toast-container {
+            overflow: auto;
+            /* background-color: #03A9F4; */
+            /* background-color: #00aecd;
+            color: #001114; */
+
+            background-color: #fff;
+            color: #333;
+            opacity: 0.9;
+            width: auto;
+            margin-top: 5px;
+            border-radius: 5px;
+            padding: 15px;
+            box-shadow: 10px 10px 8px rgba(0,0,0, .20);
+  }
+
+  /* .toast-container > * {
+    text-align: center;
+  } */
+
+  .toast-card {
+    z-index: 1;
+    position: relative;
+    text-align: left;
+  }
+
+  .toast-card i{
+      float: right;
+      cursor: pointer;
+  }
+
+  .toast-card .toast-message {
+    margin: 5px;
+    font-size: 14px;
+    font-weight: 400;
+  }
+
+  .toast-card .toast-title {
+    margin: 16px 16px 5px 0;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  button{
+      outline: none;
+      margin-left: 5px;
+      font-size: 12px;
+      line-height: 18px;
+      height: auto;
+      width: auto;
+      min-width: 50px;
+  }
+
+  .allow-btn{
+    background-color: #00aecc;
+    color:#fff;
+  }
+  .cancel-btn{
+    background-color: #e5e5e5;
+    color:#555;
+  }
+  .close{
+
+  }
+  .mat-button{
+    padding: 0px;
+  }
+
+  /*
+  Copyright 2016 JohnPapa.net, LLC. All Rights Reserved.
+  Use of this source code is governed by an MIT-style license that
+  can be found in the LICENSE file at http://bit.ly/l1cense
+  */

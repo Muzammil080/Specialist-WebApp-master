@@ -1,0 +1,21 @@
+section.quickApptSection{
+    width: 800px;
+    overflow-y: visible !important;
+    overflow-x: visible !important;
+}
+
+.mat-form-field{
+    width: 100%;
+    margin: 5px;
+}
+
+
+.dialog-box-heading h1{
+    margin-bottom: 0px;
+    color: #00aecc;
+    font-size: 24px;
+    margin-top: 10px;
+}
+
+
+

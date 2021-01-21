@@ -1,0 +1,28 @@
+<div id="container">
+        <br>
+        <table *ngIf="notes && notes.length > 0"  class="table">
+                <tr  class="table-custom-border">
+                        <th>Reference ID </th>
+                        <th>Partner Site </th>
+                        <th>Facility</th>
+                        <th>Endpoint </th>
+                        <th>Received On</th>
+                        <th>Call Duration</th>
+                        <th></th>
+
+                </tr>
+                <tr *ngFor="let sh of notes" [style.display]="visibilityLoginSpinnerdata">
+                        <td>{{sh.id}}</td>
+                        <td>{{sh.partnerSite}}</td>
+                        <td>{{sh.facilityName}}</td>
+                        <td>{{sh.endPoint}}</td>
+                        <td>{{sh.receivedOn | split | date:'MMM d y h:mm a'}}</td>
+                        <td>{{sh.durationInMinutes | myTime}}</td>
+                        <td>
+                                <button mat-stroked-button color="warn" (click)="openNote(sh)">Notes</button>
+                        </td>
+                </tr>
+        </table>
+        <h6 *ngIf="notes && notes.length == 0"  class="nodata">There are no unsigned notes</h6>
+        <!-- <dynamic-notes *ngIf="dynamicNotesData" [data]="dynamicNotesData" ></dynamic-notes> -->
+</div>

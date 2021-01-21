@@ -1,0 +1,21 @@
+export const environment = {
+    production: true,
+    // authBaseUrl: 'https://stage-aws.veemed.com/identity/connect/token',
+    // authRevokeUrl: 'https://stage-aws.veemed.com/identity/connect/revocation',
+    // apiBaseUrl: 'https://stage-aws.veemed.com/platform/api/',
+    // hubConnection: 'https://stage-aws.veemed.com/platform/',
+    authBaseUrl: 'https://stage-azure.veemed.io/identity/connect/token',
+    authRevokeUrl: 'https://stage-azure.veemed.io/identity/connect/revocation',
+    apiBaseUrl: 'https://stage-azure.veemed.io/platform/api/',
+    hubConnection: 'https://stage-azure.veemed.io/platform/',
+    pacsBaseUrl: 'https://pacsprd.veemed.com',
+    // pacsUserName:'VeemedP@cs',
+    // pacsUserPassword:'UWAh98rKS2CXV',
+    baseURL: '/web/',
+    endpointsUrl : '/web/#/endpoints',
+    device: 'web',
+    grant_type: 'password',
+    client_id: 'ro.web.client',
+    client_secret: '36309193-9701-4f9a-9dc0-d9c82b879505',
+    // scope:'API'
+};

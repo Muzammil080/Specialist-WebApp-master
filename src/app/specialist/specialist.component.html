@@ -1,0 +1,60 @@
+<div class="tab-container-box">
+    <br>
+
+    <mat-form-field>
+        <input matInput placeholder="Speciality" aria-label="State" [value]="defaultvalue" [matAutocomplete]="auto" [formControl]="stateCtrl">
+        <mat-autocomplete #auto="matAutocomplete">
+            <mat-option *ngFor="let state of filteredStates | async" [value]="state.name" (onSelectionChange)="getSpecilistlist($event, state.id)">
+                <!-- <img style="vertical-align:middle;" aria-hidden src="{{state.flag}}" height="25" /> -->
+                <span>{{ state.name }}</span>
+                <!-- <small>{{state.id}}</small> -->
+            </mat-option>
+        </mat-autocomplete>
+    </mat-form-field>
+    <!-- <mat-form-field class="example-full-width">
+        <input matInput placeholder="Specialist Filter" [value]="specilistserach">
+      </mat-form-field> -->
+    <mat-form-field>
+        <input matInput type="text" placeholder="Specialist Filter" [(ngModel)]="specilistserach" (keyup.enter)="specilistserachfilter()"
+        />
+        <button mat-button *ngIf="specilistserach" matSuffix mat-icon-button aria-label="Clear" (click)="specilistserachfilterclear()"
+            (keyup.enter)="'false'">
+            <mat-icon class="material-icons" style="font-size: 0.9em;">close</mat-icon>
+        </button>
+    </mat-form-field>
+
+    <div id="scrollbox">
+        <table class="table">
+            <tr style="border-bottom: 2px solid lightgray; border-top : 2px solid lightgray; ">
+                <th>First Name</th>
+                <th>Last Name</th>
+                <th>Email</th>
+                <th>Mobile Number</th>
+                <th>Practice Group</th>
+            </tr>
+            <tr>
+                <td [style.display]="zeroResults" colspan="5" style="text-align: center; color: lightgrey;">No Specialist Found</td>
+            </tr>
+            <!-- For Loading page -->
+            <tr *ngIf="Loadingpage == 'block' ">
+                <td colspan="5">
+                    <div id="Loadingpage" [style.display]="Loadingpage">
+                        <div class="text-center">
+                            <div class="ptl pbm">
+                                <span class="vm-loader"></span>
+                            </div>
+                           
+                        </div>
+                    </div>
+                </td>
+            </tr>
+            <tr *ngFor="let user of user">
+                <td style="width: 18%; word-break: break-all;">{{user.firstName}}</td>
+                <td style="width: 18%; word-break: break-all;">{{user.lastName}}</td>
+                <td>{{user.email }}</td>
+                <td style="width: 18%;">{{user.mobileNumber}}</td>
+                <td style="width: 18%; word-break: break-all;">{{user.practiceGroup}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

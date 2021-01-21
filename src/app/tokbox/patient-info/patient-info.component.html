@@ -1,0 +1,72 @@
+<div style="padding: 25px;">
+    <div mat-dialog-title class="clearfix">
+        <h2 class="float-left">
+            Patient Triage Information
+        </h2>
+    </div>
+    <mat-dialog-content class="home-dialog">
+        <mat-card class="border-box">
+            <mat-card-content>
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <label><b>Heart Rate: </b></label>
+                        <span>{{ patientInfo.heartRate }}</span>
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Blood Pressure: </b></label>
+                        <span
+                            >{{ patientInfo.topBloodPressure }} /
+                            {{ patientInfo.bottomBloodPressure }}</span
+                        >
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-md-6">
+                        <label><b>Temperature: </b></label>
+                        <span>{{ patientInfo.temperature }}</span>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <label><b>Current Medications: </b></label>
+                        <span>{{ patientInfo.currentMedications }}</span>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <label><b>History: </b></label>
+                        <span>{{ patientInfo.history }}</span>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <label><b>Allergies: </b></label>
+                        <span>{{ patientInfo.allergies }}</span>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <label><b>Comments: </b></label>
+                        <span>{{ patientInfo.comments }}</span>
+                    </div>
+                </div>
+                <div class="row align-items-center">
+                    <div class="col-md-12">
+                        <label><b>Habits: </b></label>
+                        <span>{{ patientInfo.habits }}</span>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </mat-dialog-content>
+
+    <mat-dialog-actions>
+        <div class="full-width">
+            <div class="pull-right">
+                <button mat-raised-button mat-dialog-close (click)="close()">
+                    Close
+                </button>
+            </div>
+        </div>
+    </mat-dialog-actions>
+</div>

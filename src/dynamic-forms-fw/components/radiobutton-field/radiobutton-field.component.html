@@ -1,0 +1,13 @@
+<div *ngIf="uiElementData && form" class="radiobuttonField" [formGroup]="form" 
+  [ngClass]="uiElementData.cssClass">
+  <!-- <input type="radio" [formControlName]="uiElementData.bindTo" [value]="opt.key" [id]="uiElementData.name" /> -->
+
+  <!--Caption, if available-->
+  <!-- <label *ngIf="uiElementData.caption" [for]="uiElementData.name">
+      {{opt.value}}
+    </label> -->
+  <div class="caption" *ngIf="uiElementData.caption">{{uiElementData.caption}}</div>
+  <mat-radio-group [formControlName]="uiElementData.bindTo" >
+    <mat-radio-button  (change)="radioOnChange($event)"  *ngFor="let opt of options" [value]="opt.key"> {{opt.value}}</mat-radio-button>
+  </mat-radio-group>
+</div>

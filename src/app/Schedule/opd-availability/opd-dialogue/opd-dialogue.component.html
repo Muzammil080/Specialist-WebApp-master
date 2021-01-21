@@ -1,0 +1,207 @@
+<div style="padding: 25px;">
+    <div mat-dialog-title class="clearfix">
+        <div class="row">
+            <div class="col-md-12">
+                <h2 class="float-left">Set Availability</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <label class="float-left">{{ daysInWeek[data.day] }}</label>
+                <div class="float-right time-zone">
+                    <label>Time Zone: </label>
+                    <!-- <mat-form-field class="mlm">
+                        <mat-select
+                            [(ngModel)]="defaultZone"
+                            (ngModelChange)="changeTimeZone()"
+                        >
+                            <mat-option [value]="1">Local Timezone</mat-option>
+                            <mat-option [value]="2">UTC</mat-option>
+                            <mat-option [value]="3"
+                                >Specialists Timezone</mat-option
+                            >
+                        </mat-select>
+                    </mat-form-field> -->
+                    <label>{{ timeZone }}</label>
+                </div>
+            </div>
+        </div>
+    </div>
+    <mat-dialog-content class="home-dialog">
+        <div style="margin: auto; margin-top: 100px;" [hidden]="hiddenLoader">
+            <mat-spinner [diameter]="80"></mat-spinner>
+        </div>
+        <div class="row align-items-center">
+            <div class="col-md-12">
+                <div
+                    malihu-scrollbar
+                    [scrollbarOptions]="scrollbarOptions"
+                    class="table-container"
+                >
+                    <div [hidden]="hiddenList" class="table-responsive">
+                        <table class="table vm-table">
+                            <tbody>
+                                <tr *ngFor="let event of events">
+                                    <td>Start Time</td>
+                                    <td>
+                                        <div>
+                                            <select
+                                                class="vm-select"
+                                                [(ngModel)]="
+                                                    event.startTime.hours
+                                                "
+                                                (ngModelChange)="
+                                                    changeStartTime(event.id)
+                                                "
+                                            >
+                                                <option
+                                                    selected
+                                                    disabled
+                                                    [value]="undefined"
+                                                    >HH</option
+                                                >
+                                                <option
+                                                    *ngFor="let hour of hours"
+                                                    [value]="hour"
+                                                    >{{
+                                                        hour.toLocaleString(
+                                                            "en-US",
+                                                            {
+                                                                minimumIntegerDigits: 2,
+                                                                useGrouping: false
+                                                            }
+                                                        )
+                                                    }}</option
+                                                >
+                                            </select>
+                                            <select
+                                                class="vm-select"
+                                                [(ngModel)]="
+                                                    event.startTime.minutes
+                                                "
+                                                (ngModelChange)="
+                                                    changeStartTime(event.id)
+                                                "
+                                            >
+                                                <option
+                                                    selected
+                                                    disabled
+                                                    [value]="undefined"
+                                                    >MM</option
+                                                >
+                                                <option
+                                                    *ngFor="
+                                                        let minute of minutes
+                                                    "
+                                                    [value]="minute"
+                                                    >{{
+                                                        minute.toLocaleString(
+                                                            "en-US",
+                                                            {
+                                                                minimumIntegerDigits: 2,
+                                                                useGrouping: false
+                                                            }
+                                                        )
+                                                    }}</option
+                                                >
+                                            </select>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <span>End Time</span>
+                                    </td>
+                                    <td>
+                                        <div>
+                                            <select
+                                                class="vm-select"
+                                                [(ngModel)]="
+                                                    event.endTime.hours
+                                                "
+                                                (ngModelChange)="
+                                                    changeEndTime(event.id)
+                                                "
+                                            >
+                                                <option
+                                                    selected
+                                                    disabled
+                                                    [value]="undefined"
+                                                    >HH</option
+                                                >
+                                                <option
+                                                    *ngFor="let hour of hours"
+                                                    [value]="hour"
+                                                    >{{
+                                                        hour.toLocaleString(
+                                                            "en-US",
+                                                            {
+                                                                minimumIntegerDigits: 2,
+                                                                useGrouping: false
+                                                            }
+                                                        )
+                                                    }}</option
+                                                >
+                                            </select>
+                                            <select
+                                                class="vm-select"
+                                                [(ngModel)]="
+                                                    event.endTime.minutes
+                                                "
+                                                (ngModelChange)="
+                                                    changeEndTime(event.id)
+                                                "
+                                            >
+                                                <option
+                                                    selected
+                                                    disabled
+                                                    [value]="undefined"
+                                                    >MM</option
+                                                >
+                                                <option
+                                                    *ngFor="
+                                                        let minute of minutes
+                                                    "
+                                                    [value]="minute"
+                                                    >{{
+                                                        minute.toLocaleString(
+                                                            "en-US",
+                                                            {
+                                                                minimumIntegerDigits: 2,
+                                                                useGrouping: false
+                                                            }
+                                                        )
+                                                    }}</option
+                                                >
+                                            </select>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </mat-dialog-content>
+    <mat-dialog-actions>
+        <div class="text-right full-width" [hidden]="hiddenSaveLoader">
+            <mat-spinner [diameter]="40"></mat-spinner>
+        </div>
+        <div class="text-right full-width" [hidden]="!hiddenSaveLoader">
+            <div class="float-left">
+                <button type="button" (click)="addEvent()" class="btn-vm-icon">
+                    <i class="material-icons">add_circle</i>
+                    <span>Add More</span>
+                </button>
+            </div>
+            <div class="float-right">
+                <button mat-button mat-dialog-close (click)="close()">
+                    Cancel
+                </button>
+                <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog. -->
+                <button mat-button color="primary" (click)="save()">
+                    Save
+                </button>
+            </div>
+        </div>
+    </mat-dialog-actions>
+</div>

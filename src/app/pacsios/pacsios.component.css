@@ -1,0 +1,151 @@
+h6
+{
+    cursor: pointer;
+}
+
+.item-box {
+  margin-left: 15px;
+  
+}
+
+
+.sidepanel
+{
+  height:calc(100% - 210px); width: 300px;float: left;
+  
+}
+
+.mainpanel
+{
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  background: white; 
+  width: 100%; 
+  height: 100vh;
+  padding: 0px;
+}
+.imgbox
+{
+  width: 100%;
+  height: 100vh;
+  /* position: fixed; */
+  /* top: 0px; */
+  float: right;
+  border: none;
+  border-radius: 0;
+}
+
+.back{
+  height: 75px;
+  padding: 10px;
+  cursor: pointer;
+}
+img
+{
+  width: 100%;
+  height: 100%;
+}
+#render
+{
+  /* position: absolute; */
+  /* -webkit-transition:width 300ms ease-in-out, height 300ms ease-in-out;
+  -moz-transition:width 300ms ease-in-out, height 300ms ease-in-out;
+  -o-transition:width 300ms ease-in-out, height 300ms ease-in-out; */
+  transition:width 500ms ease-in-out, height 500ms ease-in-out;
+}
+
+.minimize
+{
+  width: 300px;
+  font-size: 1em;
+  color: lightslategray;
+  position: fixed;
+  top: calc(100vh - 124px);
+  right: calc(100% - 400px);
+
+}
+.mat-button-toggle-checked
+{
+  background: lightgrey !important;
+  border: 0px solid black ; 
+}
+.mat-button-toggle-vertical .mat-button-toggle-label-content {
+ 
+  width: 100vh !important;
+}
+
+
+/* .pacs-left {
+  float: left;
+  width: 320px;
+}
+
+.pacs-right {
+  float: right;
+  width: calc(100% - 320px);
+} */
+
+/* .pacs-box {
+  margin-top: 75px;
+} */
+/* iframe {
+  width: 100%;
+  height: 100vh;
+  border: none;
+  box-shadow: none !important;
+  padding: 0 20px;
+} */
+
+/* Salman 12-march */
+
+p {
+  color: white !important;
+  background: #00aecd;
+  height: 70px;
+  padding: 20px 20px;
+  font-size: 20px;
+  font-weight: 500;
+  margin-bottom: 0px !important;
+}
+.left-panel {
+  width: 100%;
+  height: 100vh;
+  position: fixed;
+  /* top: 0px; */
+  float: left;
+  z-index: 2;
+  background: white;
+}
+.left-panel ul {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  height: calc(100vh - 340px); 
+  overflow-y: auto;
+}
+
+.left-panel ul li {
+  padding: 10px 20px;
+  font-size: 14px;
+  font-weight: 500;
+  border-bottom: 1px dashed #9e9e9e;
+  cursor: pointer;
+}
+.left-panel ul li:hover {
+  background-color: rgba(0,0,0,0.05);
+  color: #00aecd;
+}
+
+.left-panel p {
+  font-size: 20px;
+  font-weight: 500;
+  padding: 20px 20px 0;
+  color: #00aecd;
+}
+
+.left-panel ul li > .desc {
+  color: #666;
+  font-weight: 300;
+  font-size: 13px;
+}

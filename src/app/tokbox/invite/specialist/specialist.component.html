@@ -1,0 +1,83 @@
+<mat-dialog-content>
+    <div class="container"  *ngIf="!isLoading">
+        <div class="row">
+            <div class="col">
+                <h1>Invite Care Provider</h1>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <mat-select
+                        placeholder="Speciality"
+                        [(value)]="specialityId"
+                        (selectionChange) = "selectionChange($event)"
+                        disableOptionCentering
+                    >
+                        <mat-option
+                            [value]="0"
+                            >All
+                        </mat-option>
+                        <mat-option
+                            *ngFor="let speciality of specialities"
+                            [value]="speciality.id"
+                        >
+                            {{ speciality.name }}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col">
+                <mat-form-field class="full-width">
+                    <input
+                        matInput
+                        (change)="onSearchChange()"
+                        [(ngModel)]="filter"
+                        placeholder="Search By Name"
+                    />
+                </mat-form-field>
+            </div>
+        </div>
+        <div class="specialists">
+            <div class="row specialist" *ngFor = "let s of specialists">
+                <div class = "col-1">
+                    <i class="material-icons">person</i>
+                </div>
+                <div class = "col-6 wrapword text-left">
+                    {{s.firstName | titlecase }}{{' '}} {{s.lastName | titlecase}}
+                </div>
+                <div class = "col-5">
+                    <button mat-button (click) = "invite($event,s)">INVITE</button>
+                </div>
+                <!-- <div class="col-6"></div> -->
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <mat-paginator
+                    style="float:left"
+                    [length]="count"
+                    [pageSize]="pageSize"
+                    [pageIndex]="pageIndex"
+                    [pageSizeOptions]="pageSizeOptions"
+                    (page)="pageChanged($event)"
+                >
+                </mat-paginator>
+            </div>
+        </div>
+    </div>
+    <div id="Loadingpage" *ngIf="isLoading">
+        <div class="text-center">
+            <div class="ptl pbm">
+                <span class="vm-loader"></span>
+            </div>
+            <div class="pts loading-txt">Please Wait...</div>
+        </div>
+    </div>
+</mat-dialog-content>
+
+<mat-dialog-actions [hidden]="isLoading">
+    <button mat-raised-button color="primary" [mat-dialog-close]="false">
+        Done
+    </button>
+</mat-dialog-actions>

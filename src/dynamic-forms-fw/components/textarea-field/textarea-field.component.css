@@ -1,0 +1,23 @@
+.textareaField {
+    margin-bottom: 15px;
+}
+.textareaField textarea {
+    width: 60%;
+    /* height: 115px;
+    min-height: 115px;
+    max-height: 300px; */
+    resize: vertical;
+    word-break: break-word;
+    font-size: 1em;
+    padding: 5px;
+    border: 1px solid #bcbcbc;
+    color: #333;
+    outline: none;
+    /* line-height: 4; */
+}
+
+.textareaField label {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+}

@@ -1,0 +1,255 @@
+<!-- <div class="container"> -->
+
+<!-- <mwl-demo-utils-calendar-header
+       [(view)]="view"
+       [(viewDate)]="viewDate">
+       </mwl-demo-utils-calendar-header> -->
+<div class="row ">
+    <div class="col-md-4">
+        <!-- <div class="btn-group" >
+              <button class="btn btn-primary" (click)="decrement()" [disabled]="prevBtnDisabled">
+                Previous
+              </button>
+              <button class="btn btn-outline-secondary" (click)="today()">
+                Today
+              </button>
+              <button class="btn btn-primary" (click)="increment()" [disabled]="nextBtnDisabled">
+                Next
+              </button>
+            </div> -->
+    </div>
+
+    <div class="col-md-4 text-center">
+        <button
+            mat-icon-button
+            style="float: left;"
+            (click)="decrement()"
+            [disabled]="prevBtnDisabled"
+        >
+            <mat-icon
+                class="material-icons"
+                style="font-size: 3em;"
+                [style.color]="
+                    prevBtnDisabled ? 'rgb(213, 226, 228)' : 'rgb(0,174,204)'
+                "
+                [style.cursor]="prevBtnDisabled ? 'not-allowed' : 'pointer'"
+                >keyboard_arrow_left</mat-icon
+            >
+        </button>
+        <button
+            mat-icon-button
+            style="float: right;"
+            (click)="increment()"
+            [disabled]="nextBtnDisabled"
+        >
+            <mat-icon
+                class="material-icons"
+                style="font-size: 3em;"
+                [style.color]="
+                    nextBtnDisabled ? 'rgb(213, 226, 228)' : 'rgb(0,174,204)'
+                "
+                [style.cursor]="nextBtnDisabled ? 'not-allowed' : 'pointer'"
+                >keyboard_arrow_right</mat-icon
+            >
+        </button>
+        <h5 style="line-height:40px;">
+            {{ viewDate | calendarDate: view + 'ViewTitle':'en' }}
+        </h5>
+    </div>
+    <div class="col-md-4">
+        <!-- <div *ngIf="timezoneoffset != 0" >
+                <input  type="radio" id="Color1" name="Color"  [(ngModel)]="Color" [checked]="Color" [value]="true"  /> <label for="Color1" style="color: black;">Current Time Zone</label>
+
+                 <input style="margin-left: 20px;"  type="radio" id="Color2" name="Color" [(ngModel)]="Color" [checked]="!Color"  [value]="false" /> <label for="Color2" style="color: black;"  >{{TimeZone}} Time</label>
+
+            </div>    -->
+    </div>
+    <!-- <div class="col-md-4">
+            <div class="btn-group">
+              <div class="btn btn-primary" (click)="changeView('month')" [class.active]="view === 'month'">Month</div>
+              <div class="btn btn-primary" (click)="changeView('week')" [class.active]="view === 'week'">Week</div>
+              <div class="btn btn-primary" (click)="changeView('day')" [class.active]="view === 'day'">Day</div>
+            </div>
+          </div> -->
+</div>
+
+<br />
+<!-- <div class="alert alert-info">
+   Click on a day on the view.
+   <strong *ngIf="clickedDate">You clicked on this day: {{ clickedDate | date:'medium' }}</strong>
+   </div> -->
+<ng-template #customCellTemplate let-day="day" let-locale="locale">
+    <div class="cal-cell-top">
+        <span class="cal-day-badge" *ngIf="day.badgeTotal > 0">{{
+            day.badgeTotal
+        }}</span>
+        <span class="cal-day-number">{{
+            day.date | calendarDate: 'monthViewDayNumber':locale
+        }}</span>
+    </div>
+
+    <div *ngFor="let holidays of holidays" class="holidays">
+        <div
+            *ngIf="
+                holidays.holidayOn == (day.date | date: 'yyyy-MM-ddT00:00:00')
+            "
+            style="font-size: 0.9em;"
+        >
+            {{ holidays.holidayName }}
+        </div>
+    </div>
+    <div *ngFor="let offDays of offDays">
+        <div
+            *ngIf="offDays.offDay == (day.date | date: 'yyyy-MM-ddT00:00:00')"
+            style="width:100% ; height: 25px;"
+        >
+            <small
+                style="margin-left: 10px; margin-bottom:-10px; color: #ff2c55; font-weight: bold ;font-size: 0.9em;"
+                >OFF</small
+            >
+        </div>
+    </div>
+    <div *ngIf="Color">
+        <div *ngFor="let selectedDatesWorkingDay of selectedDatesWorkingDay">
+            <div
+                *ngIf="
+                    (selectedDatesWorkingDay.scheduleDate
+                        | date: 'yyyy-MM-dd') == (day.date | date: 'yyyy-MM-dd')
+                "
+                style="width:100% ; height: 45px; cursor: pointer;"
+            >
+                <!-- <div *ngFor="let details of selectedDatesWorkingDay.details"  >
+              <div> -->
+                <small
+                    style="margin-left: 10px; margin-top: 10px; color: #00aecc;font-size: 0.9em;"
+                >
+                    {{ selectedDatesWorkingDay.details[0].partnerSiteName }}
+                </small>
+                <br />
+                <small
+                    style="margin-left: 10px; margin-top: 10px; color: black;"
+                >
+                    {{
+                        selectedDatesWorkingDay.details[0].shiftStartTimeInUTC +
+                            '.000Z' | date: 'HH:mm'
+                    }}
+                    -
+                    {{
+                        selectedDatesWorkingDay.details[0].shiftEndTimeInUTC +
+                            '.000Z' | date: 'HH:mm'
+                    }}</small
+                >
+                <!-- </div>
+            </div> -->
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!Color">
+        <div
+            *ngFor="
+                let selectedDatesWorkingDay of selectedDatesWorkingDay;
+                let rowIndex = index
+            "
+        >
+            <div
+                *ngIf="
+                    (selectedDatesWorkingDay.scheduleDate
+                        | date: 'yyyy-MM-dd') == (day.date | date: 'yyyy-MM-dd')
+                "
+                style="width:100% ; height: 55px;  cursor: pointer;"
+            >
+                <!-- <div *ngFor="let details of selectedDatesWorkingDay.details"  > -->
+                <!-- <div **ngIf="Property">
+
+                </div>  -->
+
+                <div class="partnersitename">
+                    {{ selectedDatesWorkingDay.details[0].partnerSiteName }}
+                </div>
+                <!-- <br>  -->
+                <small
+                    style="margin-left: 10px; margin-top: 10px; color: black;"
+                >
+                    {{
+                        selectedDatesWorkingDay.details[0].shiftStartTime
+                            | date: 'HH:mm'
+                    }}
+                    -
+                    {{
+                        selectedDatesWorkingDay.details[0].shiftEndTime
+                            | date: 'HH:mm'
+                    }}</small
+                >
+                <br />
+                <small
+                    *ngIf="selectedDatesWorkingDay.details.length > 1"
+                    style="
+                float: left;
+                margin-top: 0px;
+                margin-left: 10px;
+                /* position: relative; */
+                /* top:  0px; */
+                "
+                    >more >></small
+                >
+                <!-- <mat-icon *ngIf="selectedDatesWorkingDay.details.length > 1" class="material-icons">ic_more_horiz</mat-icon> -->
+                <!-- <span *ngIf="selectedDatesWorkingDay.details.length > 1" class="glyphicon glyphicon-option-horizontal"></span> -->
+
+                <!-- </div> -->
+            </div>
+        </div>
+    </div>
+</ng-template>
+<!-- For Loading page -->
+<div id="Loadingpage" [style.display]="LoadingPage">
+    <div class="text-center">
+        <div class="ptl pbm">
+            <span class="vm-loader"></span>
+        </div>
+        <div class="pts loading-txt">Please Wait...</div>
+    </div>
+</div>
+
+<div id="Loadingpage" [style.display]="LoadingPageload">
+    <div class="text-center">
+        <div class="ptl pbm">
+            <span class="vm-loader"></span>
+        </div>
+        <div class="pts loading-txt">Please Wait...</div>
+    </div>
+</div>
+
+<div [ngSwitch]="view" [style.display]="calenderView" class="unselectablediv">
+    <mwl-calendar-month-view
+        *ngSwitchCase="'month'"
+        [viewDate]="viewDate"
+        [events]="events"
+        (beforeViewRender)="beforeMonthViewRender($event)"
+        (dayClicked)="dayClicked($event.day)"
+        [cellTemplate]="customCellTemplate"
+        [refresh]="refresh"
+    >
+    </mwl-calendar-month-view>
+    <!-- <mwl-calendar-week-view
+ *ngSwitchCase="'week'"
+ [viewDate]="viewDate"
+ [events]="events"
+ (dayHeaderClicked)="clickedDate = $event.day.date">
+</mwl-calendar-week-view>
+<mwl-calendar-day-view
+ *ngSwitchCase="'day'"
+ [viewDate]="viewDate"
+ [events]="events">
+</mwl-calendar-day-view> -->
+</div>
+<!-- <div class="auth-card-btn-box text-center">
+           <div class="text-center">
+                 <button type="submit" [style.cursor]="!form.valid ? 'not-allowed' : 'pointer' " [disabled]="!form.valid || !avialableEmail" class="btn-vm-auth" >Register</button>
+                 <button type="button"  class="btn-vm-auth" >Done</button>
+
+               </div>
+
+       </div> -->
+<!-- </div> -->
+<br />

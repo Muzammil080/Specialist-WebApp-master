@@ -1,0 +1,13 @@
+.yesnoradioField .yesnoradioFieldLabel {
+    display: block;
+    font-size: 15px;
+    font-weight: 600;
+    margin-bottom: 10px;
+}
+
+.yesnoradioField {
+    display: inline-block;
+    width: 100%;
+    max-width: 280px;
+    margin: 0 20px 20px 0;
+}

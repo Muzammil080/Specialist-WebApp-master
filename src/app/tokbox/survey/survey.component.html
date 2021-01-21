@@ -1,0 +1,110 @@
+<div style="padding: 25px;">
+    <mat-card class="example-card">
+        <mat-card-header>
+            <mat-card-title>
+                <h5>Your Feedback</h5>
+            </mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+            <div [style.display]="visibilityLoginSpinner">
+                <div id="Loadingpage">
+                    <div class="text-center">
+                        <div class="ptl pbm">
+                            <span class="vm-loader"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <form [formGroup]="surveyForm">
+                <table
+                    class="table table-borderless table-condensed"
+                    [style.display]="
+                        visibilityLoginSpinner === 'none' ? 'block' : 'none'
+                    "
+                >
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col" *ngFor="let choice of choices" class="customCell">
+                                {{ choice }}
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <ng-container formArrayName="survey">
+                            <tr
+                                *ngFor="
+                                    let ques of surveyQues.controls;
+                                    let i = index
+                                "
+                            >
+                                <td>
+                                    {{ questionsModel[i].question }}
+                                </td>
+                                <td
+                                    [attr.colspan]="choices.length"
+                                    class="survey-radio-col"
+                                >
+                                    <mat-radio-group
+                                        class="example-radio-group"
+                                        [formControl]="ques"
+                                    >
+                                        <mat-radio-button
+                                            class="example-radio-button radio-survey"
+                                            *ngFor="
+                                                let choice of choices;
+                                                let i = index
+                                            "
+                                            [value]="choice"
+                                            [attr.data-index]="i"
+                                            class="customCell"
+                                        >
+                                        </mat-radio-button>
+                                    </mat-radio-group>
+                                </td>
+                            </tr>
+                        </ng-container>
+                    </tbody>
+                </table>
+            </form>
+
+            <form
+                [formGroup]="form"
+                class="example-form"
+                [style.display]="
+                    visibilityLoginSpinner === 'none' ? 'block' : 'none'
+                "
+            >
+                <mat-form-field
+                    class="example-full-width"
+                    [hidden]="isFeedbackHidden"
+                >
+                    <input
+                        matInput
+                        #message
+                        maxlength="512"
+                        placeholder="Please provide any other comments you wish to share"
+                        formControlName="SQ005Feedback"
+                    />
+                    <mat-hint align="end"
+                        >{{ message.value.length }} / 512</mat-hint
+                    >
+                </mat-form-field>
+            </form>
+        </mat-card-content>
+        <mat-card-actions>
+            <button
+                class="mat-primary pull-right"
+                mat-button
+                (click)="submitFeedback()"
+                ng-disabled="!choice"
+                [disabled]="!surveyForm.valid"
+            >
+                Submit
+            </button>
+            <button class="pull-right" mat-button (click)="redirectToHome()">
+                Skip
+            </button>
+        </mat-card-actions>
+    </mat-card>
+</div>
